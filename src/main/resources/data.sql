@@ -1,6 +1,6 @@
 insert into product
-values(1,'Car', 'Very expensive vehicle');
+values(1, 'Very expensive vehicle','Car');
 
 insert into product
-values(2,'iPhone', 'The most convenient mobile phone');
+values(2,'The most convenient mobile phone','iPhone');
 

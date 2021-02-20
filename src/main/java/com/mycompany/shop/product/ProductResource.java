@@ -1,6 +1,7 @@
 package com.mycompany.shop.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -25,8 +26,8 @@ public class ProductResource {
     public Product retrieveProduct(@PathVariable long id) {
         Optional<Product> product = productRepository.findById(id);
 
-        if (!product.isPresent()) {
-            throw new NoSuchElementException("id-" + id);
+        if (product.isEmpty()) {
+            throw new ProductNotFoundException("id: " + id);
         }
         return  product.get();
     }
@@ -51,7 +52,7 @@ public class ProductResource {
 
         Optional<Product> productOptional = productRepository.findById(id);
 
-        if (!productOptional.isPresent())
+        if (productOptional.isEmpty())
             return ResponseEntity.notFound().build();
 
         product.setId(id);
