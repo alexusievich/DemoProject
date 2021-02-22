@@ -43,7 +43,7 @@ public class ShopApplicationTests {
                         .content(objectMapper.writeValueAsString(product))
                         .contentType(MediaType.APPLICATION_JSON)
         )
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNumber())
                 .andExpect(jsonPath("$.name").value("Headphones"))
                 .andExpect(jsonPath("$.description").value("Device for listening to music"));

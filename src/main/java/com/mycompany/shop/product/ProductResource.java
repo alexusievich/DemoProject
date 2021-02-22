@@ -1,8 +1,10 @@
 package com.mycompany.shop.product;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -31,12 +33,13 @@ public class ProductResource {
     }
 
     @PostMapping("/products")
-    public Product createProduct(@RequestBody Product product) {
-        return productRepository.save(product);
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
+        productRepository.save(product);
+        return ResponseEntity.status(201).body(product);
     }
 
     @PutMapping("/products/{id}")
-    public Product updateProduct(@RequestBody Product product, @PathVariable long id) {
+    public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable long id) {
 
         if (productRepository.findById(id).isEmpty())
            throw new ProductNotFoundException("The product with id: " + id + " is not found");
@@ -44,7 +47,8 @@ public class ProductResource {
         Product newProduct = productRepository.findById(id).get();
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
+        productRepository.save(newProduct);
 
-        return productRepository.save(newProduct);
+        return ResponseEntity.ok().body(newProduct);
     }
 }
