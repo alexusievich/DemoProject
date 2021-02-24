@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ProductResource {
@@ -41,10 +42,13 @@ public class ProductResource {
     @PutMapping("/products/{id}")
     public ResponseEntity<Product> updateProduct(@RequestBody Product product, @PathVariable long id) {
 
-        if (productRepository.findById(id).isEmpty())
-           throw new ProductNotFoundException("The product with id: " + id + " is not found");
+        Optional<Product> pr = productRepository.findById(id);
 
-        Product newProduct = productRepository.findById(id).get();
+        if (pr.isEmpty()) {
+            throw new ProductNotFoundException("The product with id: " + id + " is not found");
+        }
+
+        Product newProduct = pr.get();
         newProduct.setName(product.getName());
         newProduct.setDescription(product.getDescription());
         productRepository.save(newProduct);

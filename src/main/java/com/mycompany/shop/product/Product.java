@@ -18,13 +18,11 @@ public class Product {
     }
 
     public Product(String name, String description) {
-        super();
         this.name = name;
         this.description = description;
     }
 
     public Product(Long id, String name, String description) {
-        super();
         this.id = id;
         this.name = name;
         this.description = description;
