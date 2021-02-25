@@ -130,6 +130,7 @@
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>
+							<outputDirectory>src/main/react/static</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/react/build</directory>
