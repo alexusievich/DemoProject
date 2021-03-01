@@ -15,8 +15,6 @@
 	<description>Final project for NC</description>
 	<properties>
 		<java.version>11</java.version>
-		<frontend-src-dir>src/main/react</frontend-src-dir>
-		<frontend-maven-plugin.version>1.7.6</frontend-maven-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -82,8 +80,7 @@
 				<version>1.7.6</version>
 
 				<configuration>
-					<nodeVersion>v12.3.1</nodeVersion>
-					<yarnVersion>v1.16.0</yarnVersion>
+					<nodeVersion>v14.16.0</nodeVersion>
 					<workingDirectory>src/main/webapp</workingDirectory>
 				</configuration>
 
@@ -112,7 +109,7 @@
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>
-							<arguments>build</arguments>
+							<arguments>run build</arguments>
 						</configuration>
 					</execution>
 				</executions>
@@ -128,10 +125,10 @@
 						</goals>
 						<phase>prepare-package</phase>
 						<configuration>
-							<outputDirectory>src/main/react/static</outputDirectory>
+							<outputDirectory>src\main\resources\static</outputDirectory>
 							<resources>
 								<resource>
-									<directory>src/main/react/build</directory>
+									<directory>src/main/webapp/build</directory>
 									<filtering>false</filtering>
 								</resource>
 							</resources>
