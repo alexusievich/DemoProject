@@ -5,10 +5,10 @@ import {Layout} from 'antd';
 
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import AppHeader from "./сomponents/AppHeader";
-import AppFooter from "./сomponents/AppFooter";
-import Phones from "./сomponents/Phones";
-import MainPage from "./сomponents/MainPage";
+import AppHeader from "./components/AppHeader";
+import AppFooter from "./components/AppFooter";
+import Phones from "./components/Phones";
+import MainPage from "./components/MainPage";
 
 const {Header, Footer, Content} = Layout;
 
@@ -21,8 +21,8 @@ function App() {
                     <AppHeader/>
                 </Header>
                 <Content>
-                    <Redirect from={"/"} to={"/main"}/>
-                    <Route path={"/main"}>
+                    <Redirect from="/" to="/main"/>
+                    <Route path="/main">
                         <MainPage/>
                     </Route>
                     <Route path={"/phones"}>

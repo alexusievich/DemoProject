@@ -3,7 +3,7 @@ import React from "react";
 
 function MainPage() {
     return (
-        <img src={banner} alt={"main banner"} width={"100%"}/>
+        <img src={banner} alt="main banner" width="100%"/>
     )
 }
 
