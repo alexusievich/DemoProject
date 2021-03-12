@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import 'antd/dist/antd.css';
+import {Layout} from 'antd';
+
+import {Switch, Route, Redirect} from 'react-router-dom';
+
+import AppHeader from "./components/AppHeader";
+import AppFooter from "./components/AppFooter";
+import Phones from "./components/Phones";
+import MainPage from "./components/MainPage";
+
+const {Header, Footer, Content} = Layout;
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <Switch>
+            <Layout className="mainLayout">
+                <Header>
+                    <AppHeader/>
+                </Header>
+                <Content>
+                    <Redirect from="/" to="/main"/>
+                    <Route path="/main">
+                        <MainPage/>
+                    </Route>
+                    <Route path={"/phones"}>
+                        <Phones/>
+                    </Route>
+                </Content>
+                <Footer>
+                    <AppFooter/>
+                </Footer>
+            </Layout>
+        </Switch>
+    );
 }
 
 export default App;
