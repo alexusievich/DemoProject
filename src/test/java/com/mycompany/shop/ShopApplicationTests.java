@@ -13,6 +13,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -36,7 +37,7 @@ public class ShopApplicationTests {
     @Test
     public void addNewProductTest() throws Exception {
 
-        Product product = new Product("Headphones", "Device for listening to music");
+        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000);
 
         mockMvc.perform(
                 post("/products")
@@ -45,28 +46,34 @@ public class ShopApplicationTests {
         )
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.name").value("Headphones"))
-                .andExpect(jsonPath("$.description").value("Device for listening to music"));
+                .andExpect(jsonPath("$.name").value("Samsung"))
+                .andExpect(jsonPath("$.rating").value(4))
+                .andExpect(jsonPath("$.popularity").value(3))
+                .andExpect(jsonPath("$.description").value("Android mobile phone"))
+                .andExpect(jsonPath("$.price").value(20000));
     }
 
 
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Headphones", "Device for listening to music").getId();
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000).getId();
 
         mockMvc.perform(
                 get("/products/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.name").value("Headphones"))
-                .andExpect(jsonPath("$.description").value("Device for listening to music"));
+                .andExpect(jsonPath("$.name").value("Samsung"))
+                .andExpect(jsonPath("$.rating").value(4))
+                .andExpect(jsonPath("$.popularity").value(3))
+                .andExpect(jsonPath("$.description").value("Android mobile phone"))
+                .andExpect(jsonPath("$.price").value(20000));
     }
 
     @Test
     public void deleteProductTest() throws Exception {
 
-        Product product = createTestProduct("Headphones", "Device for listening to music");
+        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000);
 
         mockMvc.perform(
                 delete("/products/{id}", product.getId()))
@@ -76,21 +83,25 @@ public class ShopApplicationTests {
     @Test
     public void updateProductTest() throws Exception {
 
-        long id = createTestProduct("Headphones", "Device for listening to music").getId();
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000).getId();
+        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000);
 
         mockMvc.perform(
                 put("/products/{id}", id)
-                        .content(objectMapper.writeValueAsString(new Product(id,"PC", "Personal Computer")))
+                        .content(objectMapper.writeValueAsString(newProduct))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.name").value("PC"))
-                .andExpect(jsonPath("$.description").value("Personal Computer"));
+                .andExpect(jsonPath("$.name").value("iPhone 12"))
+                .andExpect(jsonPath("$.rating").value(5))
+                .andExpect(jsonPath("$.popularity").value(4))
+                .andExpect(jsonPath("$.description").value("Apple iPhone 12 128GB"))
+                .andExpect(jsonPath("$.price").value(30000));
     }
 
 
-    private Product createTestProduct(String name, String description) {
-        Product product = new Product(name, description);
+    private Product createTestProduct(String name, Integer rating, Integer popularity, String description, Integer price) {
+        Product product = new Product(name, rating, popularity, description, price);
         return repository.save(product);
     }
 
