@@ -11,21 +11,30 @@ public class Product {
     @GeneratedValue
     private Long id;
     private String name;
+    private Integer rating;
+    private Integer popularity;
     private String description;
+    private Integer price;
 
-    public Product() {
-        super();
-    }
 
-    public Product(String name, String description) {
+    public Product(String name, Integer rating, Integer popularity, String description, Integer price) {
         this.name = name;
+        this.rating = rating;
+        this.popularity = popularity;
         this.description = description;
+        this.price = price;
     }
 
-    public Product(Long id, String name, String description) {
+    public Product(Long id, String name, Integer rating, Integer popularity, String description, Integer price) {
         this.id = id;
         this.name = name;
+        this.rating = rating;
+        this.popularity = popularity;
         this.description = description;
+        this.price = price;
+    }
+
+    public Product() {
     }
 
     public Long getId() {
@@ -44,11 +53,35 @@ public class Product {
         this.name = name;
     }
 
+    public Integer getRating() {
+        return rating;
+    }
+
+    public void setRating(Integer rating) {
+        this.rating = rating;
+    }
+
+    public Integer getPopularity() {
+        return popularity;
+    }
+
+    public void setPopularity(Integer popularity) {
+        this.popularity = popularity;
+    }
+
     public String getDescription() {
         return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
     }
 }

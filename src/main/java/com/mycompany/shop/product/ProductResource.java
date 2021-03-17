@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +28,7 @@ public class ProductResource {
     }
 
     @DeleteMapping("/products/{id}")
-    public void deleteStudent(@PathVariable long id) {
+    public void deleteProduct(@PathVariable long id) {
         productRepository.deleteById(id);
     }
 
@@ -50,7 +49,10 @@ public class ProductResource {
 
         Product newProduct = pr.get();
         newProduct.setName(product.getName());
+        newProduct.setRating(product.getRating());
+        newProduct.setPopularity(product.getPopularity());
         newProduct.setDescription(product.getDescription());
+        newProduct.setPrice(product.getPrice());
         productRepository.save(newProduct);
 
         return ResponseEntity.ok().body(newProduct);
