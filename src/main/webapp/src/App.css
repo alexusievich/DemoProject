@@ -18,3 +18,46 @@
     flex-basis: 50%;
     text-align: center;
 }
+
+.cardWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.myCard {
+    display: flex;
+    width: 250px;
+    border-radius: 5%;
+    margin: 10px;
+}
+
+.myCard:hover {
+    box-shadow: 0 0 5px #666666;
+}
+
+.myCard div {
+    width: 100%;
+}
+
+.priceCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-weight: bold;
+    padding-top: 10px;
+    color: black;
+}
+
+.price:hover {
+    color: black;
+}
+
+.cart {
+    padding-top: 10px;
+    font-size: 20px;
+}

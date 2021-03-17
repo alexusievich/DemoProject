@@ -25,8 +25,9 @@ function App() {
                     <Route path="/main">
                         <MainPage/>
                     </Route>
-                    <Route path={"/phones"}>
+                    <Route path="/phones">
                         <Phones/>
+                        <hr/>
                     </Route>
                 </Content>
                 <Footer>
