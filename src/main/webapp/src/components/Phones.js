@@ -14,7 +14,7 @@ class Phones extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('/products').then(response => {
+        axios.get('/api/products').then(response => {
             const phones = response.data;
             this.setState({phones})
         })
