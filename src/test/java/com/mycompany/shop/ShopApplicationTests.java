@@ -37,10 +37,10 @@ public class ShopApplicationTests {
     @Test
     public void addNewProductTest() throws Exception {
 
-        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000);
+        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000, "href");
 
         mockMvc.perform(
-                post("/products")
+                post("/api/products")
                         .content(objectMapper.writeValueAsString(product))
                         .contentType(MediaType.APPLICATION_JSON)
         )
@@ -50,44 +50,46 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.rating").value(4))
                 .andExpect(jsonPath("$.popularity").value(3))
                 .andExpect(jsonPath("$.description").value("Android mobile phone"))
-                .andExpect(jsonPath("$.price").value(20000));
+                .andExpect(jsonPath("$.price").value(20000))
+                .andExpect(jsonPath("$.img").value("href"));
     }
 
 
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000).getId();
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href").getId();
 
         mockMvc.perform(
-                get("/products/{id}", id))
+                get("/api/products/{id}", id))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value("Samsung"))
                 .andExpect(jsonPath("$.rating").value(4))
                 .andExpect(jsonPath("$.popularity").value(3))
                 .andExpect(jsonPath("$.description").value("Android mobile phone"))
-                .andExpect(jsonPath("$.price").value(20000));
+                .andExpect(jsonPath("$.price").value(20000))
+                .andExpect(jsonPath("$.img").value("href"));
     }
 
     @Test
     public void deleteProductTest() throws Exception {
 
-        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000);
+        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href");
 
         mockMvc.perform(
-                delete("/products/{id}", product.getId()))
+                delete("/api/products/{id}", product.getId()))
                 .andExpect(status().isOk());
     }
 
     @Test
     public void updateProductTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000).getId();
-        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000);
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000,"href").getId();
+        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000, "href1");
 
         mockMvc.perform(
-                put("/products/{id}", id)
+                put("/api/products/{id}", id)
                         .content(objectMapper.writeValueAsString(newProduct))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -96,12 +98,13 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.rating").value(5))
                 .andExpect(jsonPath("$.popularity").value(4))
                 .andExpect(jsonPath("$.description").value("Apple iPhone 12 128GB"))
-                .andExpect(jsonPath("$.price").value(30000));
+                .andExpect(jsonPath("$.price").value(30000))
+                .andExpect(jsonPath("$.img").value("href1"));
     }
 
 
-    private Product createTestProduct(String name, Integer rating, Integer popularity, String description, Integer price) {
-        Product product = new Product(name, rating, popularity, description, price);
+    private Product createTestProduct(String name, Integer rating, Integer popularity, String description, Integer price, String img) {
+        Product product = new Product(name, rating, popularity, description, price, img);
         return repository.save(product);
     }
 

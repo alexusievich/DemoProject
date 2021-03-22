@@ -54,6 +54,7 @@ public class ProductResource {
         newProduct.setPopularity(product.getPopularity());
         newProduct.setDescription(product.getDescription());
         newProduct.setPrice(product.getPrice());
+        newProduct.setImg(product.getImg());
         productRepository.save(newProduct);
 
         return ResponseEntity.ok().body(newProduct);
