@@ -1,7 +1,28 @@
+hr {
+    margin: 0px;
+}
+
+.ant-menu {
+}
+
+.header {
+    background-color: white;
+}
+
 .footer {
     display: flex;
     flex-wrap: wrap;
+    background-color: white;
 }
+
+
+.ant-layout-footer {
+    background-color: white !important;
+    padding: 0px !important;
+    border: solid white;
+    border-width: 30px 20px 30px 20px;
+}
+
 .socials {
     display: flex;
     flex-direction: row;
@@ -24,13 +45,18 @@
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 .myCard {
-    display: flex;
+    text-align: center;
     width: 250px;
     border-radius: 5% !important;
-    margin: 10px !important;
+    margin: 20px 30px !important;
+    border: 1px solid lightgray !important;
+}
+
+.ant-card {
 }
 
 .myCard:hover {
@@ -39,6 +65,13 @@
 
 .myCard div {
     width: 100%;
+}
+
+.myCard img {
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 20px;
 }
 
 .priceCart {
@@ -64,7 +97,7 @@
 
 .pagination {
     text-align: center;
-    padding-top: 20px;
+    padding: 20px 0px;
 }
 
 

@@ -10,7 +10,7 @@ const {Meta} = Card;
 class Phones extends React.Component {
 
     pageSize = () => {
-        return 4;
+        return 6;
     }
 
 
@@ -41,7 +41,7 @@ class Phones extends React.Component {
 
 
     componentDidMount() {
-        axios.get('/api/products').then(response => {
+        axios.get('/api/products/').then(response => {
             const phones = response.data;
             this.setState({phones})
         })
@@ -53,8 +53,14 @@ class Phones extends React.Component {
 
         const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map(phone => {
             return (
-                <Card bordered={true}
-                      className="myCard">
+                <Card hoverable
+                      className="myCard"
+                      cover={
+                          <img
+                              alt={phone.name}
+                              src={phone.img}
+                          />
+                      }>
                     <a href="/#">
                         <Meta
                             title={phone.name}
@@ -69,7 +75,7 @@ class Phones extends React.Component {
                     </div>
                 </Card>
             )
-        });
+        })
 
 
        return (

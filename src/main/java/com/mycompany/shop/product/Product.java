@@ -1,8 +1,11 @@
 package com.mycompany.shop.product;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.mycompany.shop.image.Image;
+import com.mycompany.shop.techspec.TechSpec;
+
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Product {
@@ -10,15 +13,29 @@ public class Product {
     @Id
     @GeneratedValue
     private Long id;
+
     private String name;
+
     private Integer rating;
+
     private Integer popularity;
+
     private String description;
+
     private Integer price;
+
     private String img;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Set<Image> images = new HashSet<>();
 
-    public Product(String name, Integer rating, Integer popularity, String description, Integer price, String img) {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    private Set<TechSpec> techSpec = new HashSet<>();
+
+
+
+    public Product(String name, Integer rating, Integer popularity, String description, Integer price,
+                   String img) {
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
@@ -94,5 +111,29 @@ public class Product {
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    public Set<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Image> images) {
+        this.images = images;
+
+        for (Image image: images) {
+            image.setProduct(this);
+        }
+    }
+
+    public Set<TechSpec> getTechSpec() {
+        return techSpec;
+    }
+
+    public void setTechSpec(Set<TechSpec> techSpecs) {
+        this.techSpec = techSpecs;
+
+        for (TechSpec techSpec: techSpecs) {
+            techSpec.setProduct(this);
+        }
     }
 }
