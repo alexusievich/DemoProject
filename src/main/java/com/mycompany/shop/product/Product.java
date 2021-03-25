@@ -15,23 +15,26 @@ public class Product {
     private Integer popularity;
     private String description;
     private Integer price;
+    private String img;
 
 
-    public Product(String name, Integer rating, Integer popularity, String description, Integer price) {
+    public Product(String name, Integer rating, Integer popularity, String description, Integer price, String img) {
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
         this.description = description;
         this.price = price;
+        this.img = img;
     }
 
-    public Product(Long id, String name, Integer rating, Integer popularity, String description, Integer price) {
+    public Product(Long id, String name, Integer rating, Integer popularity, String description, Integer price, String img) {
         this.id = id;
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
         this.description = description;
         this.price = price;
+        this.img = img;
     }
 
     public Product() {
@@ -83,5 +86,13 @@ public class Product {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }
