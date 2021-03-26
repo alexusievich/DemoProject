@@ -3,12 +3,13 @@ import React from 'react';
 import 'antd/dist/antd.css';
 import {Layout} from 'antd';
 
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 
 import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
 import Phones from "./components/Phones";
 import MainPage from "./components/MainPage";
+import PhoneDetails from "./components/PhoneDetails";
 
 const {Header, Footer, Content} = Layout;
 
@@ -21,13 +22,10 @@ function App() {
                     <AppHeader/>
                 </Header>
                 <Content>
-                    <Redirect from="/" to="/main"/>
-                    <Route path="/main">
-                        <MainPage/>
-                    </Route>
-                    <Route path="/phones/">
-                        <Phones/>
-                    </Route>
+                    <Route exact path="/" component={MainPage} />
+                    <Route path="/phones" component={Phones} />
+                    {/*<Route path="/products/1001" component={PhoneDetails} />*/}
+                <Route exact path="/phones/1001" component={PhoneDetails} />
                 </Content>
                 <Footer>
                     <AppFooter/>

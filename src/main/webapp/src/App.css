@@ -81,6 +81,7 @@ hr {
 }
 
 .price {
+    text-align: left;
     font-weight: bold;
     padding-top: 10px;
     color: black;
