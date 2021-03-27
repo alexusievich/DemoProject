@@ -1,4 +1,4 @@
-import banner from "../images/banner1.jpg";
+import banner from "../images/banner.jpg";
 import React from "react";
 
 function MainPage() {

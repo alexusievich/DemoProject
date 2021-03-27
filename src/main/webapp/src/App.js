@@ -23,9 +23,9 @@ function App() {
                 </Header>
                 <Content>
                     <Route exact path="/" component={MainPage} />
-                    <Route path="/phones" component={Phones} />
+                    <Route exact path="/phones" component={Phones} />
                     {/*<Route path="/products/1001" component={PhoneDetails} />*/}
-                <Route exact path="/phones/1001" component={PhoneDetails} />
+                    <Route exact path="/phones/1001" component={PhoneDetails} />
                 </Content>
                 <Footer>
                     <AppFooter/>
