@@ -78,11 +78,12 @@ public class ProductController {
         newProduct.setName(product.getName());
         newProduct.setRating(product.getRating());
         newProduct.setPopularity(product.getPopularity());
-        newProduct.setDescription(product.getDescription());
+        newProduct.setConfig(product.getConfig());
         newProduct.setPrice(product.getPrice());
         newProduct.setImg(product.getImg());
         newProduct.setImages(product.getImages());
         newProduct.setTechSpec(product.getTechSpec());
+        newProduct.setDescription(product.getDescription());
         productRepository.save(newProduct);
 
         return ResponseEntity.ok().body(newProduct);

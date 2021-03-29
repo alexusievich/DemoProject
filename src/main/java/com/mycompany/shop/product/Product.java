@@ -20,11 +20,13 @@ public class Product {
 
     private Integer popularity;
 
-    private String description;
+    private String config;
 
     private Integer price;
 
     private String img;
+
+    private String description;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Image> images = new HashSet<>();
@@ -34,24 +36,27 @@ public class Product {
 
 
 
-    public Product(String name, Integer rating, Integer popularity, String description, Integer price,
-                   String img) {
+    public Product(String name, Integer rating, Integer popularity, String config, Integer price,
+                   String img, String description) {
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
-        this.description = description;
+        this.config = config;
         this.price = price;
         this.img = img;
+        this.description = description;
     }
 
-    public Product(Long id, String name, Integer rating, Integer popularity, String description, Integer price, String img) {
+    public Product(Long id, String name, Integer rating, Integer popularity, String config, Integer price, String img,
+                   String description) {
         this.id = id;
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
-        this.description = description;
+        this.config = config;
         this.price = price;
         this.img = img;
+        this.description = description;
     }
 
     public Product() {
@@ -89,12 +94,12 @@ public class Product {
         this.popularity = popularity;
     }
 
-    public String getDescription() {
-        return description;
+    public String getConfig() {
+        return config;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setConfig(String description) {
+        this.config = description;
     }
 
     public Integer getPrice() {
@@ -115,6 +120,14 @@ public class Product {
 
     public Set<Image> getImages() {
         return images;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setImages(Set<Image> images) {

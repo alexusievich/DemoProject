@@ -37,7 +37,7 @@ public class ShopApplicationTests {
     @Test
     public void addNewProductTest() throws Exception {
 
-        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000, "href");
+        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000, "href", "description");
 
         mockMvc.perform(
                 post("/api/products")
@@ -49,16 +49,17 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.name").value("Samsung"))
                 .andExpect(jsonPath("$.rating").value(4))
                 .andExpect(jsonPath("$.popularity").value(3))
-                .andExpect(jsonPath("$.description").value("Android mobile phone"))
+                .andExpect(jsonPath("$.config").value("Android mobile phone"))
                 .andExpect(jsonPath("$.price").value(20000))
-                .andExpect(jsonPath("$.img").value("href"));
+                .andExpect(jsonPath("$.img").value("href"))
+                .andExpect(jsonPath("$description").value("description"));
     }
 
 
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href").getId();
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href", "description").getId();
 
         mockMvc.perform(
                 get("/api/products/{id}", id))
@@ -67,15 +68,16 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.name").value("Samsung"))
                 .andExpect(jsonPath("$.rating").value(4))
                 .andExpect(jsonPath("$.popularity").value(3))
-                .andExpect(jsonPath("$.description").value("Android mobile phone"))
+                .andExpect(jsonPath("$.config").value("Android mobile phone"))
                 .andExpect(jsonPath("$.price").value(20000))
-                .andExpect(jsonPath("$.img").value("href"));
+                .andExpect(jsonPath("$.img").value("href"))
+                .andExpect(jsonPath("$.description").value("description"));
     }
 
     @Test
     public void deleteProductTest() throws Exception {
 
-        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href");
+        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href", "description");
 
         mockMvc.perform(
                 delete("/api/products/{id}", product.getId()))
@@ -85,8 +87,8 @@ public class ShopApplicationTests {
     @Test
     public void updateProductTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000,"href").getId();
-        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000, "href1");
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000,"href", "description").getId();
+        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000, "href1", "description1");
 
         mockMvc.perform(
                 put("/api/products/{id}", id)
@@ -97,14 +99,15 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.name").value("iPhone 12"))
                 .andExpect(jsonPath("$.rating").value(5))
                 .andExpect(jsonPath("$.popularity").value(4))
-                .andExpect(jsonPath("$.description").value("Apple iPhone 12 128GB"))
+                .andExpect(jsonPath("$.config").value("Apple iPhone 12 128GB"))
                 .andExpect(jsonPath("$.price").value(30000))
-                .andExpect(jsonPath("$.img").value("href1"));
+                .andExpect(jsonPath("$.img").value("href1"))
+                .andExpect(jsonPath("$.description").value("description1"));
     }
 
 
-    private Product createTestProduct(String name, Integer rating, Integer popularity, String description, Integer price, String img) {
-        Product product = new Product(name, rating, popularity, description, price, img);
+    private Product createTestProduct(String name, Integer rating, Integer popularity, String config, Integer price, String img, String description) {
+        Product product = new Product(name, rating, popularity, config, price, img, description);
         return repository.save(product);
     }
 
