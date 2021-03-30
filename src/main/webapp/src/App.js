@@ -10,6 +10,7 @@ import Phones from "./components/Phones";
 import MainPage from "./components/MainPage";
 import PhoneDetails from "./components/PhoneDetails";
 import NotFoundPage from './components/NotFoundPage';
+import {Redirect} from "react-router";
 
 const {Header, Footer, Content} = Layout;
 
@@ -26,7 +27,10 @@ function App() {
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/phones" component={Phones}/>
                     <Route exact path="/phones/:id" component={PhoneDetails} />
-                    <Route component={NotFoundPage} />
+                    <Route exact path="/404" component={NotFoundPage} />
+                    <Route>
+                        <Redirect to="/404"/>
+                    </Route>
                     </Switch>
                 </Content>
                 <Footer>

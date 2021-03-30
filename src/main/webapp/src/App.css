@@ -15,7 +15,7 @@
 
 .ant-layout-footer {
     background-color: white !important;
-    padding: 0px !important;
+    padding: 0 !important;
     border: solid white;
     border-width: 30px 20px 30px 20px;
 }

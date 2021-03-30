@@ -3,6 +3,7 @@ import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css'
+import {Redirect} from "react-router";
 
 class PhoneDetails extends React.Component {
 
@@ -10,14 +11,17 @@ class PhoneDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            phoneDetails: []
+            phoneDetails: null,
         };
+        this.status = 0;
     }
+
 
     componentDidMount() {
         const id = this.props.match.params.id;
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
+            this.status = response.status;
             this.setState({phoneDetails});
         })
     };
@@ -25,7 +29,7 @@ class PhoneDetails extends React.Component {
 
     render() {
 
-        const renderImages = this.state.phoneDetails.images?.sort((a,b) => a.id - b.id).map(image => {
+        const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
             return (
                 <Card key={image.id} className="image"
                       cover={
@@ -36,7 +40,7 @@ class PhoneDetails extends React.Component {
             )
         })
 
-        const renderTechSpecs = this.state.phoneDetails.techSpec?.sort((a,b) => a.id - b.id).map(techspec => {
+        const renderTechSpecs = this.state.phoneDetails?.techSpec.sort((a, b) => a.id - b.id).map(techspec => {
             return (
                 <div className="techspecrow">
                     <div className="techspecname">
@@ -50,43 +54,51 @@ class PhoneDetails extends React.Component {
             )
         })
 
+        //  <div>
+        //     <Redirect to="/404" />
+        // </div>
+
+
         return (
-            <div>
-                <div className="phonedetails">
-                    <div className="images">
-                        <Carousel autoplay>
-                            {renderImages}
-                        </Carousel>
+            <div> {console.log(this.status)}
+                {this.status === 200 &&
+                    <div className="phonedetails">
+                        <div className="images">
+                            <Carousel autoplay>
+                                {renderImages}
+                            </Carousel>
+                        </div>
+                        <div className="information">
+                            <div className="name">
+                                {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
+                            </div>
+                            <div className="rating">
+                                {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
+                            </div>
+                            <div className="description">
+                                {this.state.phoneDetails?.description}
+                            </div>
+                            <div className="pricee">
+                                {this.state.phoneDetails?.price} RUB
+                            </div>
+                            <div className="cartt">
+                                <a href="/#">
+                                    <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
+                                        Add to cart
+                                    </Button>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="techspecs">
+                            <div className="techspectitle">Technical Specifications</div>
+                            {renderTechSpecs}
+                        </div>
                     </div>
-                    <div className="information">
-                        <div className="name">
-                            {this.state.phoneDetails.name} {this.state.phoneDetails.config}
-                        </div>
-                        <div className="rating">
-                            {this.state.phoneDetails.rating}  <StarFilled style={{color: "#1890ff"}}/>
-                        </div>
-                        <div className="description">
-                            {this.state.phoneDetails.description}
-                        </div>
-                        <div className="pricee">
-                            {this.state.phoneDetails.price} RUB
-                        </div>
-                        <div className="cartt">
-                            <a href="/#">
-                            <Button type="primary" shape="round" icon={<ShoppingCartOutlined />} size="large">
-                            Add to cart
-                            </Button>
-                            </a>
-                        </div>
-                    </div>
-                    <div className="techspecs">
-                        <div className="techspectitle">Technical Specifications</div>
-                        {renderTechSpecs}
-                    </div>
-                </div>
+                }
             </div>
         )
     }
 }
+
 
 export default PhoneDetails
