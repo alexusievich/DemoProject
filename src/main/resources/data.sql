@@ -2,7 +2,7 @@ insert into product
 values(1001, '128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4);
 
 insert into product
-values(1002, '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://pngimg.com/uploads/iphone_12/iphone_12_PNG3.png', 'iPhone 12', 5, 70000, 5);
+values(1002, '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://my-apple-store.ru/wa-data/public/shop/products/73/12/11273/images/16089/16089.970.png', 'iPhone 12', 5, 70000, 5);
 
 insert into product
 values(1003, '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4);

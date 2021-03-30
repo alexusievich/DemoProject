@@ -11,7 +11,7 @@ function AppHeader() {
         <div className="header">
             <Menu mode="horizontal" triggerSubMenuAction="click">
                 <Menu.Item key="icon" style={{float:'left'}}>
-                    <Link to="/main">
+                    <Link to="/">
                     <img src={logo} alt="logo"/>
                     </Link>
                 </Menu.Item>
