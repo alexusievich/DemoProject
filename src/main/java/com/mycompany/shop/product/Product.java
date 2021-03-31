@@ -34,8 +34,6 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<TechSpec> techSpec = new HashSet<>();
 
-
-
     public Product(String name, Integer rating, Integer popularity, String config, Integer price,
                    String img, String description) {
         this.name = name;
@@ -129,6 +127,7 @@ public class Product {
     public void setDescription(String description) {
         this.description = description;
     }
+
 
     public void setImages(Set<Image> images) {
         this.images = images;

@@ -10,7 +10,7 @@ class PhoneDetails extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            phoneDetails: []
+            phoneDetails: null
         };
     }
 
@@ -25,18 +25,18 @@ class PhoneDetails extends React.Component {
 
     render() {
 
-        const renderImages = this.state.phoneDetails.images?.sort((a,b) => a.id - b.id).map(image => {
+        const renderImages = this.state.phoneDetails?.images.sort((a,b) => a.id - b.id).map(image => {
             return (
                 <Card key={image.id} className="image"
                       cover={
                           <img src={image.imageLink}
-                               alt={this.state.phoneDetails.name}/>
+                               alt={this.state.phoneDetails?.name}/>
                       }>
                 </Card>
             )
         })
 
-        const renderTechSpecs = this.state.phoneDetails.techSpec?.sort((a,b) => a.id - b.id).map(techspec => {
+        const renderTechSpecs = this.state.phoneDetails?.techSpec.sort((a,b) => a.id - b.id).map(techspec => {
             return (
                 <div className="techspecrow">
                     <div className="techspecname">
@@ -50,8 +50,10 @@ class PhoneDetails extends React.Component {
             )
         })
 
+
         return (
-            <div>
+            <div> {console.log(this.state.phoneDetails)}
+                {this.state.phoneDetails &&
                 <div className="phonedetails">
                     <div className="images">
                         <Carousel autoplay>
@@ -73,9 +75,9 @@ class PhoneDetails extends React.Component {
                         </div>
                         <div className="cartt">
                             <a href="/#">
-                            <Button type="primary" shape="round" icon={<ShoppingCartOutlined />} size="large">
-                            Add to cart
-                            </Button>
+                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined />} size="large">
+                                    Add to cart
+                                </Button>
                             </a>
                         </div>
                     </div>
@@ -83,7 +85,8 @@ class PhoneDetails extends React.Component {
                         <div className="techspectitle">Technical Specifications</div>
                         {renderTechSpecs}
                     </div>
-                </div>
+                </div>}
+
             </div>
         )
     }
