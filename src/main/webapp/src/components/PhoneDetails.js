@@ -3,7 +3,7 @@ import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css'
-import {Redirect} from "react-router";
+//import {Redirect} from "react-router";
 
 class PhoneDetails extends React.Component {
 
@@ -13,15 +13,14 @@ class PhoneDetails extends React.Component {
         this.state = {
             phoneDetails: null,
         };
-        this.status = 0;
     }
 
 
     componentDidMount() {
+        console.log(this.state.phoneDetails)
         const id = this.props.match.params.id;
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
-            this.status = response.status;
             this.setState({phoneDetails});
         })
     };
@@ -60,8 +59,8 @@ class PhoneDetails extends React.Component {
 
 
         return (
-            <div> {console.log(this.status)}
-                {this.status === 200 &&
+            <div>
+                {this.state.phoneDetails &&
                     <div className="phonedetails">
                         <div className="images">
                             <Carousel autoplay>
