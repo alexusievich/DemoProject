@@ -1,0 +1,109 @@
+h2 {
+    text-align: center;
+}
+.phonedetails {
+    margin: 50px auto;
+    flex-wrap: wrap;
+    display: flex;
+    width: 80%;
+    border-radius: 10px;
+    align-items: flex-start;
+}
+
+.image {
+    background-color: #f0f2f5;
+    border-radius: 10px;
+}
+
+.image img {
+    max-height: 500px;
+    width: auto;
+}
+
+
+.images {
+    width: 50%;
+}
+
+.images img {
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    color: black !important;
+    background-color: black !important;
+}
+.ant-carousel .slick-dots li button {
+    color: black !important;
+    background-color: black !important;
+}
+
+.information {
+    width: 50%;
+}
+
+.name {
+    margin-top: 20px;
+    text-align: left;
+    font-size: 30px;
+}
+
+.rating {
+    margin-top: 30px;
+    text-align: left;
+    font-size: 20px;
+}
+
+
+.description {
+    margin-top: 40px;
+    text-align: left;
+    font-size: 15px;
+    color: gray;
+}
+
+.pricee {
+    font-weight: bold;
+    margin-top: 40px;
+    text-align: left;
+    font-size: 30px;
+}
+
+
+
+.cartt {
+    margin-top: 40px;
+}
+
+.techspecs {
+    margin-top: 50px;
+    width: 100%;
+    text-align: left;
+}
+
+.techspectitle {
+    font-weight: bold;
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+
+.techspecrow {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    padding: 5px 0px;
+}
+
+.techspecname {
+    color: #787878;
+    width: 30%;
+}
+
+.techspecvalue {
+    width: 70%;
+    font-weight: 400;
+}
+
