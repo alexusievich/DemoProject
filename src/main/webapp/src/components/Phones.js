@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from "axios";
-import {Card, Pagination} from 'antd'
+import {Card, Pagination, Input} from 'antd'
 import {ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {Redirect} from "react-router";
 
 
 const {Meta} = Card;
@@ -21,10 +22,10 @@ class Phones extends React.Component {
             phones: [],
             minValue: 0,
             maxValue: this.pageSize(),
-            current: 1
+            current: 1,
+            searchTerm: '',
         };
     }
-
 
     handleChange = value => {
         this.setState({current: value});
@@ -41,6 +42,18 @@ class Phones extends React.Component {
         }
     };
 
+    handleChangeSearch = (event) => {
+        let phones = [];
+        this.setState({searchTerm: event.target.value})
+        axios.get('/api/products/').then(response => {
+            phones = response.data;
+            const result = phones.filter(phone =>
+                phone.name.toLowerCase().includes(this.state.searchTerm)
+            );
+            this.setState({phones: result})
+        })
+    }
+
 
     componentDidMount() {
         axios.get('/api/products/').then(response => {
@@ -48,9 +61,6 @@ class Phones extends React.Component {
             this.setState({phones})
         })
     };
-
-
-
 
 
     render() {
@@ -61,16 +71,16 @@ class Phones extends React.Component {
                       key={phone.id}
                       className="myCard"
                       cover={
-                          <Link to = {"/phones/" + phone.id}>
-                          <img alt={phone.name}
-                              src={phone.img}
-                          />
+                          <Link to={"/phones/" + phone.id}>
+                              <img alt={phone.name}
+                                   src={phone.img}
+                              />
                           </Link>
                       }>
-                        <Meta
-                            title={phone.name}
-                            description={phone.config}
-                        />
+                    <Meta
+                        title={phone.name}
+                        description={phone.config}
+                    />
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
                         <a href="/#" className="cart">
@@ -82,14 +92,20 @@ class Phones extends React.Component {
         });
 
 
-       return (
+        return (
             <div>
+                <div>
+                    <div className="search">
+                        <Input type="text" placeholder="Search"
+                               onChange={this.handleChangeSearch} value={this.state.searchTerm}/>
+                    </div>
+                </div>
                 <div className="cardWrapper">
                     {renderPhones}
                 </div>
-                <div className = "pagination">
+                <div className="pagination">
                     <Pagination
-                        current = {this.state.current}
+                        current={this.state.current}
                         defaultPageSize={this.pageSize()}
                         onChange={this.handleChange}
                         total={this.state.phones.length}
