@@ -27,19 +27,20 @@ class PhoneDetails extends React.Component {
 
 
     render() {
-
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
+
             return (
                 <Card key={image.id} className="image"
                       cover={
                           <img src={image.imageLink}
-                               alt={this.state.phoneDetails.name}/>
+                               alt={this.state.phoneDetails?.name}/>
                       }>
                 </Card>
             )
         })
 
         const renderTechSpecs = this.state.phoneDetails?.techSpec.sort((a, b) => a.id - b.id).map(techspec => {
+
             return (
                 <div className="techspecrow">
                     <div className="techspecname">
@@ -52,6 +53,7 @@ class PhoneDetails extends React.Component {
 
             )
         })
+
 
         return (
             <div>
@@ -89,6 +91,7 @@ class PhoneDetails extends React.Component {
                         </div>
                     </div>
                 }
+
             </div>
         )
     }
