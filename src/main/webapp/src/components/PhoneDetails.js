@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
 import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
-import '../styles/PhoneDetails.css'
-
+import '../styles/PhoneDetails.css';
 
 class PhoneDetails extends React.Component {
 
@@ -17,11 +16,12 @@ class PhoneDetails extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.state.phoneDetails)
         const id = this.props.match.params.id;
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
+        }).catch( error => {
+            this.props.history.push("/404");
         })
     };
 
@@ -53,42 +53,41 @@ class PhoneDetails extends React.Component {
             )
         })
 
-
         return (
             <div>
                 {this.state.phoneDetails &&
-                <div className="phonedetails">
-                    <div className="images">
-                        <Carousel autoplay>
-                            {renderImages}
-                        </Carousel>
+                    <div className="phonedetails">
+                        <div className="images">
+                            <Carousel autoplay>
+                                {renderImages}
+                            </Carousel>
+                        </div>
+                        <div className="information">
+                            <div className="name">
+                                {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
+                            </div>
+                            <div className="rating">
+                                {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
+                            </div>
+                            <div className="description">
+                                {this.state.phoneDetails?.description}
+                            </div>
+                            <div className="pricee">
+                                {this.state.phoneDetails?.price} RUB
+                            </div>
+                            <div className="cartt">
+                                <a href="/#">
+                                    <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
+                                        Add to cart
+                                    </Button>
+                                </a>
+                            </div>
+                        </div>
+                        <div className="techspecs">
+                            <div className="techspectitle">Technical Specifications</div>
+                            {renderTechSpecs}
+                        </div>
                     </div>
-                    <div className="information">
-                        <div className="name">
-                            {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
-                        </div>
-                        <div className="rating">
-                            {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
-                        </div>
-                        <div className="description">
-                            {this.state.phoneDetails?.description}
-                        </div>
-                        <div className="pricee">
-                            {this.state.phoneDetails?.price} RUB
-                        </div>
-                        <div className="cartt">
-                            <a href="/#">
-                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
-                                    Add to cart
-                                </Button>
-                            </a>
-                        </div>
-                    </div>
-                    <div className="techspecs">
-                        <div className="techspectitle">Technical Specifications</div>
-                        {renderTechSpecs}
-                    </div>
-                </div>
                 }
             </div>
         )

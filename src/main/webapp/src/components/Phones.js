@@ -3,8 +3,7 @@ import axios from "axios";
 import {Card, Pagination, Input} from 'antd'
 import {ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
-import {Link, useHistory} from "react-router-dom";
-import {Redirect} from "react-router";
+import {Link} from "react-router-dom";
 
 
 const {Meta} = Card;
@@ -48,17 +47,16 @@ class Phones extends React.Component {
         axios.get('/api/products/').then(response => {
             phones = response.data;
             const result = phones.filter(phone =>
-                phone.name.toLowerCase().includes(this.state.searchTerm)
+                phone.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
             );
             this.setState({phones: result})
         })
     }
 
-
     componentDidMount() {
         axios.get('/api/products/').then(response => {
             const phones = response.data;
-            this.setState({phones})
+            this.setState({phones});
         })
     };
 
@@ -96,7 +94,7 @@ class Phones extends React.Component {
             <div>
                 <div>
                     <div className="search">
-                        <Input type="text" placeholder="Search"
+                        <Input type="text" placeholder="Search by name"
                                onChange={this.handleChangeSearch} value={this.state.searchTerm}/>
                     </div>
                 </div>
