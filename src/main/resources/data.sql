@@ -2,7 +2,7 @@ insert into product
 values(1001, '128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4);
 
 insert into product
-values(1002, '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://pngimg.com/uploads/iphone_12/iphone_12_PNG3.png', 'iPhone 12', 5, 70000, 5);
+values(1002, '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/343/x343751fba0fee3c215c23a21edf95b83.png,q1605099576.pagespeed.ic.H7MHgemQwv.webp', 'Apple iPhone 12', 5, 70000, 5);
 
 insert into product
 values(1003, '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4);
@@ -14,13 +14,13 @@ insert into product
 values(1005, '128 GB Black', 'The cutting-edge Kirin 990 5G chipset changes your experience of speed. The Ultra Vision Leica Triple Camera with upgraded AI capability revolutionizes the way of photography. Embrace the power of images and videos and let them speak for you.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/p40pro/huawei-p40-pro-black-1-800x800.png', 'Huawei P40', 3, 40000, 4);
 
 insert into product
-values(1006, '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'iPhone 11', 4, 50000, 4.5);
+values(1006, '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'Apple iPhone 11', 4, 50000, 4.5);
 
 insert into product
 values(1007, '128 GB Green', 'Huawei P40 Lite smartphone runs on Android v10 (Q) operating system. The phone is powered by Octa core processor. The smartphone has a IPS LCD display, it has a resolution of 1080 x 2340 pixels and 403 ppi pixel density.', 'https://m.onlinetrade.ru/img/items/m/smartfon_huawei_p40_lite_crush_green_1315359_1.png', 'HUAWEI P40 lite', 3, 20000, 4.5);
 
 insert into product
-values(1008, '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://thegoodguys.sirv.com/products/50074193/50074193_755455.PNG?scale.height=505&scale.width=773&canvas.height=505&canvas.width=773&canvas.opacity=0&q=90', 'Samsung Galaxy S21 Ultra', 3, 100000, 4);
+values(1008, '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://dvsota.ru/uploads/media/product/0001/60/thumb_59225_product_big.png', 'Samsung Galaxy S21 Ultra', 3, 100000, 4);
 
 insert into product
 values(1009, '128 GB Silver', '108MP/64MP AI triple camera. 144Hz AdaptiveSync display with TrueColor. 144Hz ultra-high refresh rate can show up to 144 frames per second. Qualcomm® Snapdragon™ 865 with 5G. 5000 mAh (typ) battery with 33W fast charging.', 'https://i01.appmifile.com/webfile/globalimg/Cindy/J3SSilvery.png', 'Xiaomi Mi 10T', 3, 40000, 4);

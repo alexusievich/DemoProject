@@ -9,27 +9,35 @@ import AppFooter from "./components/AppFooter";
 import Phones from "./components/Phones";
 import MainPage from "./components/MainPage";
 import PhoneDetails from "./components/PhoneDetails";
+import NotFoundPage from './components/NotFoundPage';
+import {Redirect} from "react-router";
 
 const {Header, Footer, Content} = Layout;
 
 
 function App() {
     return (
-        <Switch>
+
             <Layout className="mainLayout">
                 <Header>
                     <AppHeader/>
                 </Header>
                 <Content>
+                    <Switch>
                     <Route exact path="/" component={MainPage} />
                     <Route exact path="/phones" component={Phones}/>
                     <Route exact path="/phones/:id" component={PhoneDetails} />
+                    <Route exact path="/404" component={NotFoundPage} />
+                    <Route>
+                        <Redirect to="/404"/>
+                    </Route>
+                    </Switch>
                 </Content>
                 <Footer>
                     <AppFooter/>
                 </Footer>
             </Layout>
-        </Switch>
+
     );
 }
 
