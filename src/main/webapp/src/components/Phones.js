@@ -42,10 +42,9 @@ class Phones extends React.Component {
     };
 
     handleChangeSearch = (event) => {
-        let phones = [];
         this.setState({searchTerm: event.target.value})
         axios.get('/api/products/').then(response => {
-            phones = response.data;
+            const phones = response.data;
             const result = phones.filter(phone =>
                 phone.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
             );
@@ -95,7 +94,8 @@ class Phones extends React.Component {
                 <div>
                     <div className="search">
                         <Input type="text" placeholder="Search by name"
-                               onChange={this.handleChangeSearch} value={this.state.searchTerm}/>
+                               onChange={this.handleChangeSearch} value={this.state.searchTerm}
+                        size={"large"}/>
                     </div>
                 </div>
                 <div className="cardWrapper">
