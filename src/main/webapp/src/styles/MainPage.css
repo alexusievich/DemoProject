@@ -1,31 +1,27 @@
-.cardWrapper {
+.wrapper {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
-.myCard {
-    text-align: center;
-    width: 250px;
+.text {
+    margin: 20px 0 0 30px;
+}
+
+.recentCards {
+    text-align: center ;
     border-radius: 5% !important;
     margin: 20px 30px !important;
     border: 1px solid lightgray !important;
 }
 
-.ant-card {
-}
-
-.myCard:hover {
-    box-shadow: 0 0 5px #1890ff;
-}
-
-.myCard div {
+.recentCards div {
     width: 100%;
 }
 
-.myCard img {
+.recentCards img {
     width: 200px;
     height: 200px;
     padding: 20px;
@@ -54,7 +50,3 @@
     font-size: 20px;
 }
 
-.pagination {
-    text-align: center;
-    padding: 20px 0px;
-}

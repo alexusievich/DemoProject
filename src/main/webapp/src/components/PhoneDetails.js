@@ -20,13 +20,16 @@ class PhoneDetails extends React.Component {
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
-        }).catch( error => {
+        }).catch(error => {
             this.props.history.push("/404");
         })
     };
 
 
     render() {
+
+        this.state.phoneDetails ? document.cookie += " " + this.state.phoneDetails.id: document.cookie += '';
+
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
 
             return (
@@ -58,38 +61,38 @@ class PhoneDetails extends React.Component {
         return (
             <div>
                 {this.state.phoneDetails &&
-                    <div className="phonedetails">
-                        <div className="images">
-                            <Carousel autoplay>
-                                {renderImages}
-                            </Carousel>
+                <div className="phonedetails">
+                    <div className="images">
+                        <Carousel autoplay>
+                            {renderImages}
+                        </Carousel>
+                    </div>
+                    <div className="information">
+                        <div className="name">
+                            {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
                         </div>
-                        <div className="information">
-                            <div className="name">
-                                {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
-                            </div>
-                            <div className="rating">
-                                {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
-                            </div>
-                            <div className="description">
-                                {this.state.phoneDetails?.description}
-                            </div>
-                            <div className="pricee">
-                                {this.state.phoneDetails?.price} RUB
-                            </div>
-                            <div className="cartt">
-                                <a href="/#">
-                                    <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
-                                        Add to cart
-                                    </Button>
-                                </a>
-                            </div>
+                        <div className="rating">
+                            {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
                         </div>
-                        <div className="techspecs">
-                            <div className="techspectitle">Technical Specifications</div>
-                            {renderTechSpecs}
+                        <div className="description">
+                            {this.state.phoneDetails?.description}
+                        </div>
+                        <div className="pricee">
+                            {this.state.phoneDetails?.price} RUB
+                        </div>
+                        <div className="cartt">
+                            <a href="/#">
+                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
+                                    Add to cart
+                                </Button>
+                            </a>
                         </div>
                     </div>
+                    <div className="techspecs">
+                        <div className="techspectitle">Technical Specifications</div>
+                        {renderTechSpecs}
+                    </div>
+                </div>
                 }
 
             </div>
