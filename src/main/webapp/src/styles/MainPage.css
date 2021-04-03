@@ -1,0 +1,52 @@
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.text {
+    margin: 20px 0 0 30px;
+}
+
+.recentCards {
+    text-align: center ;
+    border-radius: 5% !important;
+    margin: 20px 30px !important;
+    border: 1px solid lightgray !important;
+}
+
+.recentCards div {
+    width: 100%;
+}
+
+.recentCards img {
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    margin: 20px;
+}
+
+.priceCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    text-align: left;
+    font-weight: bold;
+    padding-top: 10px;
+    color: black;
+}
+
+.price:hover {
+    color: black;
+}
+
+.cart {
+    padding-top: 10px;
+    font-size: 20px;
+}
+

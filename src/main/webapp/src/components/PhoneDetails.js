@@ -20,13 +20,16 @@ class PhoneDetails extends React.Component {
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
-        }).catch( error => {
+        }).catch(error => {
             this.props.history.push("/404");
         })
     };
 
 
     render() {
+
+        this.state.phoneDetails ? document.cookie += " " + this.state.phoneDetails.id: document.cookie += '';
+
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
 
             return (
