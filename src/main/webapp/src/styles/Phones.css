@@ -14,9 +14,6 @@
     border: 1px solid lightgray !important;
 }
 
-.ant-card {
-}
-
 .myCard:hover {
     box-shadow: 0 0 5px #1890ff;
 }

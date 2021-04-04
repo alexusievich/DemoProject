@@ -6,14 +6,12 @@ import '../styles/PhoneDetails.css';
 
 class PhoneDetails extends React.Component {
 
-
     constructor(props) {
         super(props);
         this.state = {
             phoneDetails: null,
         };
     }
-
 
     componentDidMount() {
         const id = this.props.match.params.id;
@@ -25,10 +23,27 @@ class PhoneDetails extends React.Component {
         })
     };
 
-
     render() {
 
-        this.state.phoneDetails ? document.cookie += " " + this.state.phoneDetails.id: document.cookie += '';
+        this.state.phoneDetails ? document.cookie += " " + this.state.phoneDetails.id : document.cookie += '';
+
+        let id1 = '';
+        let id2 = '';
+        let str = '';
+
+        document.cookie.lastIndexOf(' ') === -1 ? id1 = document.cookie
+            : id1 = document.cookie.slice(document.cookie.lastIndexOf(' ') + 1);
+        str = document.cookie.substring(0, document.cookie.lastIndexOf(' '));
+        str.lastIndexOf(' ') === -1 ? id2 = str : id2 = str.slice(str.lastIndexOf(' ') + 1);
+
+        if (id2 === id1) {
+            document.cookie = document.cookie.substring(0, document.cookie.lastIndexOf(id2));
+            document.cookie = document.cookie.substring(0, document.cookie.lastIndexOf(id2));
+            id2 === document.cookie ? id2 = '' : id2 = document.cookie.substring(document.cookie.lastIndexOf(' ') + 1)
+        }
+
+        document.cookie = id1 + " " + id2;
+
 
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
 
