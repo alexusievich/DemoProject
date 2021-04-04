@@ -1,3 +1,7 @@
+.banner {
+    width: 100%;
+}
+
 .wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -12,9 +16,14 @@
 
 .recentCards {
     text-align: center ;
+    width: 200px;
     border-radius: 5% !important;
     margin: 20px 30px !important;
     border: 1px solid lightgray !important;
+}
+
+.recentCards:hover{
+    box-shadow: 0 0 5px #1890ff;
 }
 
 .recentCards div {
@@ -22,10 +31,10 @@
 }
 
 .recentCards img {
-    width: 200px;
-    height: 200px;
-    padding: 20px;
-    margin: 20px;
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .priceCart {
@@ -34,8 +43,8 @@
     align-items: center;
 }
 
-.price {
-    text-align: left;
+.priceRecent {
+    text-align: center;
     font-weight: bold;
     padding-top: 10px;
     color: black;
