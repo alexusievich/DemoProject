@@ -54,7 +54,6 @@ class PhoneDetails extends React.Component {
             )
         })
 
-
         return (
             <div>
                 {this.state.phoneDetails &&
@@ -66,16 +65,16 @@ class PhoneDetails extends React.Component {
                         </div>
                         <div className="information">
                             <div className="name">
-                                {this.state.phoneDetails?.name} {this.state.phoneDetails?.config}
+                                {this.state.phoneDetails.name} {this.state.phoneDetails.config}
                             </div>
                             <div className="rating">
-                                {this.state.phoneDetails?.rating} <StarFilled style={{color: "#1890ff"}}/>
+                                {this.state.phoneDetails.rating} <StarFilled style={{color: "#1890ff"}}/>
                             </div>
                             <div className="description">
-                                {this.state.phoneDetails?.description}
+                                {this.state.phoneDetails.description}
                             </div>
                             <div className="pricee">
-                                {this.state.phoneDetails?.price} RUB
+                                {this.state.phoneDetails.price} RUB
                             </div>
                             <div className="cartt">
                                 <a href="/#">
