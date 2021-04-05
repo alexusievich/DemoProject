@@ -3,7 +3,6 @@ import React from "react";
 import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
-import {ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/MainPage.css'
 
 const {Meta} = Card;
