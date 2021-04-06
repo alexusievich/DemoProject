@@ -3,6 +3,10 @@ import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css';
+import SetCookie from "./SetCookie";
+import GetCookie from "./GetCookie"
+
+let array = []
 
 class PhoneDetails extends React.Component {
 
@@ -23,27 +27,36 @@ class PhoneDetails extends React.Component {
         })
     };
 
-    render() {
+    createCookies() {
 
-        this.state.phoneDetails ? document.cookie += " " + this.state.phoneDetails.id : document.cookie += '';
+        this.state.phoneDetails && SetCookie('currentPhoneId', this.state.phoneDetails.id);
 
-        let id1 = '';
-        let id2 = '';
-        let str = '';
+        if (this.state.phoneDetails) {
 
-        document.cookie.lastIndexOf(' ') === -1 ? id1 = document.cookie
-            : id1 = document.cookie.slice(document.cookie.lastIndexOf(' ') + 1);
-        str = document.cookie.substring(0, document.cookie.lastIndexOf(' '));
-        str.lastIndexOf(' ') === -1 ? id2 = str : id2 = str.slice(str.lastIndexOf(' ') + 1);
-
-        if (id2 === id1) {
-            document.cookie = document.cookie.substring(0, document.cookie.lastIndexOf(id2));
-            document.cookie = document.cookie.substring(0, document.cookie.lastIndexOf(id2));
-            id2 === document.cookie ? id2 = '' : id2 = document.cookie.substring(document.cookie.lastIndexOf(' ') + 1)
+            if (array.length < 1) {
+                array[0] = GetCookie('currentPhoneId')
+            } else if (array.length === 1) {
+                if (array[0] === GetCookie('currentPhoneId')) {
+                    array[0] = GetCookie('currentPhoneId');
+                } else {
+                    array[1] = GetCookie('currentPhoneId');
+                }
+            } else if (array.length === 2) {
+                if (array[1] === GetCookie('currentPhoneId')) {
+                    array[1] = GetCookie('currentPhoneId');
+                } else {
+                    array[0] = array[1];
+                    array[1] = GetCookie('currentPhoneId');
+                }
+            }
         }
 
-        document.cookie = id1 + " " + id2;
+        SetCookie('phoneIds', JSON.stringify(array))
+    }
 
+    render() {
+
+        this.createCookies();
 
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
 
@@ -75,38 +88,38 @@ class PhoneDetails extends React.Component {
         return (
             <div>
                 {this.state.phoneDetails &&
-                    <div className="phonedetails">
-                        <div className="images">
-                            <Carousel autoplay>
-                                {renderImages}
-                            </Carousel>
+                <div className="phonedetails">
+                    <div className="images">
+                        <Carousel autoplay>
+                            {renderImages}
+                        </Carousel>
+                    </div>
+                    <div className="information">
+                        <div className="name">
+                            {this.state.phoneDetails.name} {this.state.phoneDetails.config}
                         </div>
-                        <div className="information">
-                            <div className="name">
-                                {this.state.phoneDetails.name} {this.state.phoneDetails.config}
-                            </div>
-                            <div className="rating">
-                                {this.state.phoneDetails.rating} <StarFilled style={{color: "#1890ff"}}/>
-                            </div>
-                            <div className="description">
-                                {this.state.phoneDetails.description}
-                            </div>
-                            <div className="pricee">
-                                {this.state.phoneDetails.price} RUB
-                            </div>
-                            <div className="cartt">
-                                <a href="/#">
-                                    <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
-                                        Add to cart
-                                    </Button>
-                                </a>
-                            </div>
+                        <div className="rating">
+                            {this.state.phoneDetails.rating} <StarFilled style={{color: "#1890ff"}}/>
                         </div>
-                        <div className="techspecs">
-                            <div className="techspectitle">Technical Specifications</div>
-                            {renderTechSpecs}
+                        <div className="description">
+                            {this.state.phoneDetails.description}
+                        </div>
+                        <div className="pricee">
+                            {this.state.phoneDetails.price} RUB
+                        </div>
+                        <div className="cartt">
+                            <a href="/#">
+                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
+                                    Add to cart
+                                </Button>
+                            </a>
                         </div>
                     </div>
+                    <div className="techspecs">
+                        <div className="techspectitle">Technical Specifications</div>
+                        {renderTechSpecs}
+                    </div>
+                </div>
                 }
 
             </div>
