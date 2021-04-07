@@ -1,6 +1,6 @@
 import banner from "../images/banner.jpg";
 import React from "react";
-import '../styles/MainPage.css'
+import '../styles/Main&RecentPages.css'
 import RecentProducts from "./RecentProducts";
 import GetCookie from "./GetCookie";
 

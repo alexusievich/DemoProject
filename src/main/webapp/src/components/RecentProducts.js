@@ -3,6 +3,7 @@ import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
 import GetCookie from "./GetCookie";
+import '../styles/Main&RecentPages.css'
 
 const {Meta} = Card;
 
