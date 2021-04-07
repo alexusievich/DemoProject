@@ -71,11 +71,10 @@ class RecentProducts extends React.Component {
 
         return (
             <div>
-                {this.state.phones.length > 0 &&
                 <div className="recentProducts">
                     <div className="text">Recently viewed</div>
                     <div className="wrapper">{renderPhones}</div>
-                </div>}
+                </div>
             </div>
 
         )
