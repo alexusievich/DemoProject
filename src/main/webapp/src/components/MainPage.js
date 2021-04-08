@@ -2,7 +2,6 @@ import banner from "../images/banner.jpg";
 import React from "react";
 import '../styles/Main&RecentPages.css'
 import RecentProducts from "./RecentProducts";
-import GetCookie from "./GetCookie";
 
 class MainPage extends React.Component {
 
@@ -11,7 +10,7 @@ class MainPage extends React.Component {
         return (
             <div>
                 <img src={banner} alt="main banner" className="banner"/>
-                {GetCookie('currentPhoneId') && <RecentProducts />}
+                <RecentProducts />
             </div>
 
         )

@@ -3,10 +3,7 @@ import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css';
-import SetCookie from "./SetCookie";
-import GetCookie from "./GetCookie"
-
-let array = []
+import Cookie from "./Cookie";
 
 class PhoneDetails extends React.Component {
 
@@ -22,41 +19,30 @@ class PhoneDetails extends React.Component {
         axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
+            if (Cookie.getCookie('phoneIds') === '') {
+                let arr = [];
+                arr[0] = this.state.phoneDetails.id;
+                Cookie.setCookie('phoneIds', JSON.stringify(arr));
+            } else {
+                let arr = JSON.parse(Cookie.getCookie('phoneIds'));
+                if (arr.length === 1) {
+                    if (arr[0] !== this.state.phoneDetails.id) {
+                        arr[1] = this.state.phoneDetails.id;
+                    }
+                } else {
+                    if (arr[1] !== this.state.phoneDetails.id) {
+                        arr[0] = arr[1];
+                        arr[1] = this.state.phoneDetails.id;
+                    }
+                }
+                Cookie.setCookie('phoneIds', JSON.stringify(arr));
+            }
         }).catch(error => {
             this.props.history.push("/404");
         })
     };
 
-    createCookies() {
-
-        this.state.phoneDetails && SetCookie('currentPhoneId', this.state.phoneDetails.id);
-
-        if (this.state.phoneDetails) {
-
-            if (array.length < 1) {
-                array[0] = GetCookie('currentPhoneId')
-            } else if (array.length === 1) {
-                if (array[0] === GetCookie('currentPhoneId')) {
-                    array[0] = GetCookie('currentPhoneId');
-                } else {
-                    array[1] = GetCookie('currentPhoneId');
-                }
-            } else if (array.length === 2) {
-                if (array[1] === GetCookie('currentPhoneId')) {
-                    array[1] = GetCookie('currentPhoneId');
-                } else {
-                    array[0] = array[1];
-                    array[1] = GetCookie('currentPhoneId');
-                }
-            }
-        }
-
-        SetCookie('phoneIds', JSON.stringify(array))
-    }
-
     render() {
-
-        this.createCookies();
 
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
 

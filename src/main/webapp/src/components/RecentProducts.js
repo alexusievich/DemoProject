@@ -2,8 +2,8 @@ import React from 'react'
 import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
-import GetCookie from "./GetCookie";
 import '../styles/Main&RecentPages.css'
+import Cookie from "./Cookie";
 
 const {Meta} = Card;
 
@@ -18,32 +18,22 @@ class RecentProducts extends React.Component {
 
     componentDidMount() {
 
-        let id1 = '';
-        let id2 = '';
+        let ids = [];
 
-        let arrayId = JSON.parse(GetCookie('phoneIds'));
-
-        id1 = arrayId[1];
-        id2 = arrayId[0];
-
-        if (id1 !== '') {
-            axios.get('/api/products/' + id1).then(response => {
-                const phone = response.data;
-                this.setState(prevState => ({
-                    phones: [...prevState.phones, phone]
-                }))
-            })
+        if (Cookie.getCookie('phoneIds')) {
+            ids = JSON.parse(Cookie.getCookie('phoneIds'));
         }
 
-        if (id2 !== '') {
-            axios.get('/api/products/' + id2).then(response => {
-                const phone = response.data;
-                this.setState(prevState => ({
-                    phones: [...prevState.phones, phone]
-                }))
-            })
-        }
-
+        ids.reverse().map(id => {
+            if (id !== '') {
+                axios.get('/api/products/' + id).then(response => {
+                    const phone = response.data;
+                    this.setState(prevState => ({
+                        phones: [...prevState.phones, phone]
+                    }))
+                })
+            }
+        })
     };
 
     render() {
@@ -72,14 +62,16 @@ class RecentProducts extends React.Component {
 
         return (
             <div>
+                {this.state.phones.length > 0 &&
                 <div className="recentProducts">
                     <div className="text">Recently viewed</div>
                     <div className="wrapper">{renderPhones}</div>
-                </div>
+                </div>}
             </div>
-
         )
     }
+
 }
+
 
 export default RecentProducts
