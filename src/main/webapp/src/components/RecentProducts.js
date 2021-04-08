@@ -24,16 +24,18 @@ class RecentProducts extends React.Component {
             ids = JSON.parse(Cookie.getCookie('phoneIds'));
         }
 
-        ids.reverse().map(id => {
-            if (id !== '') {
-                axios.get('/api/products/' + id).then(response => {
-                    const phone = response.data;
-                    this.setState(prevState => ({
-                        phones: [...prevState.phones, phone]
-                    }))
-                })
-            }
-        })
+        if (ids.length > 0) {
+            ids.reverse().map(id => {
+                if (id !== '') {
+                    axios.get('/api/products/' + id).then(response => {
+                        const phone = response.data;
+                        this.setState(prevState => ({
+                            phones: [...prevState.phones, phone]
+                        }))
+                    })
+                }
+            })
+        }
     };
 
     render() {
