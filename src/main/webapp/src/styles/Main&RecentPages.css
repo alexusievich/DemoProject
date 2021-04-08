@@ -1,32 +1,40 @@
-.cardWrapper {
+.banner {
+    width: 100%;
+}
+
+.wrapper {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
-.myCard {
-    text-align: center;
-    width: 250px;
+.text {
+    margin: 20px 0 0 30px;
+}
+
+.recentCards {
+    text-align: center ;
+    width: 200px;
     border-radius: 5% !important;
     margin: 20px 30px !important;
     border: 1px solid lightgray !important;
 }
 
-.myCard:hover {
+.recentCards:hover{
     box-shadow: 0 0 5px #1890ff;
 }
 
-.myCard div {
+.recentCards div {
     width: 100%;
 }
 
-.myCard img {
-    width: 200px;
-    height: 200px;
-    padding: 20px;
-    margin: 20px;
+.recentCards img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
 }
 
 .priceCart {
@@ -35,8 +43,8 @@
     align-items: center;
 }
 
-.price {
-    text-align: left;
+.priceRecent {
+    text-align: center;
     font-weight: bold;
     padding-top: 10px;
     color: black;
@@ -51,18 +59,3 @@
     font-size: 20px;
 }
 
-.pagination {
-    text-align: center;
-    padding: 20px 0px;
-}
-
-
-.search {
-    width: 250px;
-    padding-top: 20px;
-    margin: auto;
-
-}
-.ant-input-lg {
-    border-radius: 5px;
-}
