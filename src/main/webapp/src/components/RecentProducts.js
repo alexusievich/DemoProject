@@ -24,8 +24,8 @@ class RecentProducts extends React.Component {
             ids = JSON.parse(Cookie.getCookie('phoneIds'));
         }
 
-        if (ids.length > 0) {
-            ids.reverse().map(id => {
+
+            ids.reverse().forEach(id => {
                 if (id !== '') {
                     axios.get('/api/products/' + id).then(response => {
                         const phone = response.data;
@@ -35,7 +35,7 @@ class RecentProducts extends React.Component {
                     })
                 }
             })
-        }
+
     };
 
     render() {
