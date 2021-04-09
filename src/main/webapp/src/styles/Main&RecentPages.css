@@ -1,0 +1,61 @@
+.banner {
+    width: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.text {
+    margin: 20px 0 0 30px;
+}
+
+.recentCards {
+    text-align: center ;
+    width: 200px;
+    border-radius: 5% !important;
+    margin: 20px 30px !important;
+    border: 1px solid lightgray !important;
+}
+
+.recentCards:hover{
+    box-shadow: 0 0 5px #1890ff;
+}
+
+.recentCards div {
+    width: 100%;
+}
+
+.recentCards img {
+    width: 100px;
+    height: 100px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.priceCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceRecent {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+    color: black;
+}
+
+.price:hover {
+    color: black;
+}
+
+.cart {
+    padding-top: 10px;
+    font-size: 20px;
+}
+
