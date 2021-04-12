@@ -1,38 +1,38 @@
 insert into product
-values(1001, '128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4);
+values(1001, 'Samsung', '128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4);
 
 insert into product
-values(1002, '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/343/x343751fba0fee3c215c23a21edf95b83.png,q1605099576.pagespeed.ic.H7MHgemQwv.webp', 'Apple iPhone 12', 5, 70000, 5);
+values(1002, 'Apple', '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/343/x343751fba0fee3c215c23a21edf95b83.png,q1605099576.pagespeed.ic.H7MHgemQwv.webp', 'Apple iPhone 12', 5, 70000, 5);
 
 insert into product
-values(1003, '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4);
+values(1003, 'Honor', '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4);
 
 insert into product
-values (1004, '64 GB Gray', 'Redmi 9 smartphone was launched on 27th August 2020. The phone comes with a 6.53-inch touchscreen display with a resolution of 720x1600 pixels and an aspect ratio of 20:9. Redmi 9 is powered by an octa-core MediaTek Helio G35 processor.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/800/redmi-9-Grey.png', 'Xiaomi Redmi 9', 2, 20000, 3);
+values (1004, 'Xiaomi', '64 GB Gray', 'Redmi 9 smartphone was launched on 27th August 2020. The phone comes with a 6.53-inch touchscreen display with a resolution of 720x1600 pixels and an aspect ratio of 20:9. Redmi 9 is powered by an octa-core MediaTek Helio G35 processor.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/800/redmi-9-Grey.png', 'Xiaomi Redmi 9', 2, 20000, 3);
 
 insert into product
-values(1005, '128 GB Black', 'The cutting-edge Kirin 990 5G chipset changes your experience of speed. The Ultra Vision Leica Triple Camera with upgraded AI capability revolutionizes the way of photography. Embrace the power of images and videos and let them speak for you.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/p40pro/huawei-p40-pro-black-1-800x800.png', 'Huawei P40', 3, 40000, 4);
+values(1005, 'Huawei', '128 GB Black', 'The cutting-edge Kirin 990 5G chipset changes your experience of speed. The Ultra Vision Leica Triple Camera with upgraded AI capability revolutionizes the way of photography. Embrace the power of images and videos and let them speak for you.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/p40pro/huawei-p40-pro-black-1-800x800.png', 'Huawei P40', 3, 40000, 4);
 
 insert into product
-values(1006, '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'Apple iPhone 11', 4, 50000, 4.5);
+values(1006, 'Apple', '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'Apple iPhone 11', 4, 50000, 4.5);
 
 insert into product
-values(1007, '128 GB Green', 'Huawei P40 Lite smartphone runs on Android v10 (Q) operating system. The phone is powered by Octa core processor. The smartphone has a IPS LCD display, it has a resolution of 1080 x 2340 pixels and 403 ppi pixel density.', 'https://m.onlinetrade.ru/img/items/m/smartfon_huawei_p40_lite_crush_green_1315359_1.png', 'HUAWEI P40 lite', 3, 20000, 4.5);
+values(1007, 'Huawei', '128 GB Green', 'Huawei P40 Lite smartphone runs on Android v10 (Q) operating system. The phone is powered by Octa core processor. The smartphone has a IPS LCD display, it has a resolution of 1080 x 2340 pixels and 403 ppi pixel density.', 'https://m.onlinetrade.ru/img/items/m/smartfon_huawei_p40_lite_crush_green_1315359_1.png', 'HUAWEI P40 lite', 3, 20000, 4.5);
 
 insert into product
-values(1008, '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://dvsota.ru/uploads/media/product/0001/60/thumb_59225_product_big.png', 'Samsung Galaxy S21 Ultra', 3, 100000, 4);
+values(1008, 'Samsung', '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://dvsota.ru/uploads/media/product/0001/60/thumb_59225_product_big.png', 'Samsung Galaxy S21 Ultra', 3, 100000, 4);
 
 insert into product
-values(1009, '128 GB Silver', '108MP/64MP AI triple camera. 144Hz AdaptiveSync display with TrueColor. 144Hz ultra-high refresh rate can show up to 144 frames per second. Qualcomm® Snapdragon™ 865 with 5G. 5000 mAh (typ) battery with 33W fast charging.', 'https://i01.appmifile.com/webfile/globalimg/Cindy/J3SSilvery.png', 'Xiaomi Mi 10T', 3, 40000, 4);
+values(1009, 'Xiaomi', '128 GB Silver', '108MP/64MP AI triple camera. 144Hz AdaptiveSync display with TrueColor. 144Hz ultra-high refresh rate can show up to 144 frames per second. Qualcomm® Snapdragon™ 865 with 5G. 5000 mAh (typ) battery with 33W fast charging.', 'https://i01.appmifile.com/webfile/globalimg/Cindy/J3SSilvery.png', 'Xiaomi Mi 10T', 3, 40000, 4);
 
 insert into product
-values (10010, '512 GB Graphite', '5G goes Pro. A14 Bionic rockets past every other smartphone chip. The Pro camera system takes low-light photography to the next level — with an even bigger jump on iPhone 12 Pro Max. And Ceramic Shield delivers four times better drop performance. ', 'https://spb-mobil.ru/wp-content/uploads/2019/09/11-black-720x720.png', 'Apple iPhone 12 Pro Max', 4, 120000, 5);
+values (10010, 'Apple', '512 GB Graphite', '5G goes Pro. A14 Bionic rockets past every other smartphone chip. The Pro camera system takes low-light photography to the next level — with an even bigger jump on iPhone 12 Pro Max. And Ceramic Shield delivers four times better drop performance. ', 'https://spb-mobil.ru/wp-content/uploads/2019/09/11-black-720x720.png', 'Apple iPhone 12 Pro Max', 4, 120000, 5);
 
 insert into product
-values(10011, '128 Green', 'Honor 30 is all set to introduce the HiSilicon Kirin 985 5G processor which is an upgraded version that was released last year. The smartphone comes with a 6.53 inches OLED capacitive touchscreen and 1080 x 2400 pixels resolution.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/honor30/green/honor-30-green-1-800x800.png', 'Honor 30', 4, 30000, 4);
+values(10011, 'Honor', '128 Green', 'Honor 30 is all set to introduce the HiSilicon Kirin 985 5G processor which is an upgraded version that was released last year. The smartphone comes with a 6.53 inches OLED capacitive touchscreen and 1080 x 2400 pixels resolution.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/honor30/green/honor-30-green-1-800x800.png', 'Honor 30', 4, 30000, 4);
 
 insert into product
-values(10012, '256 GB Blue', 'Speak for yourself with the Ultra Vision Leica Quad Camera by capturing photos and videos anytime and anywhere you want. Revolutionize your experience of speed and power with the cutting-edge Kirin 990 5G Chipset.', 'https://ogo1.ru/upload/iblock/3db/3db0ea8967bf3edcf08c765ae3a528d8.png', 'Huawei P40 Pro', 2, 60000, 4);
+values(10012, 'Huawei', '256 GB Blue', 'Speak for yourself with the Ultra Vision Leica Quad Camera by capturing photos and videos anytime and anywhere you want. Revolutionize your experience of speed and power with the cutting-edge Kirin 990 5G Chipset.', 'https://ogo1.ru/upload/iblock/3db/3db0ea8967bf3edcf08c765ae3a528d8.png', 'Huawei P40 Pro', 2, 60000, 4);
 
 
 
