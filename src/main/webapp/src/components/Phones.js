@@ -123,6 +123,7 @@ class Phones extends React.Component {
                     case '9':
                         this.setState({sortName: 'Sorting'});
                         break;
+                    default:
                 }
             }
             this.setState({phones: result});
