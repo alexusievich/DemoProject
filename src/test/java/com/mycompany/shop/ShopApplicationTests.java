@@ -34,32 +34,12 @@ public class ShopApplicationTests {
         repository.deleteAll();
     }
 
-    @Test
-    public void addNewProductTest() throws Exception {
-
-        Product product = new Product("Samsung", 4 , 3, "Android mobile phone",20000, "href", "description");
-
-        mockMvc.perform(
-                post("/api/products")
-                        .content(objectMapper.writeValueAsString(product))
-                        .contentType(MediaType.APPLICATION_JSON)
-        )
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.id").isNumber())
-                .andExpect(jsonPath("$.name").value("Samsung"))
-                .andExpect(jsonPath("$.rating").value(4))
-                .andExpect(jsonPath("$.popularity").value(3))
-                .andExpect(jsonPath("$.config").value("Android mobile phone"))
-                .andExpect(jsonPath("$.price").value(20000))
-                .andExpect(jsonPath("$.img").value("href"))
-                .andExpect(jsonPath("$description").value("description"));
-    }
-
 
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href", "description").getId();
+        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone",
+                20000, "href", "description", "Samsung").getId();
 
         mockMvc.perform(
                 get("/api/products/{id}", id))
@@ -71,43 +51,13 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.config").value("Android mobile phone"))
                 .andExpect(jsonPath("$.price").value(20000))
                 .andExpect(jsonPath("$.img").value("href"))
-                .andExpect(jsonPath("$.description").value("description"));
+                .andExpect(jsonPath("$.description").value("description"))
+                .andExpect(jsonPath("$.brand").value("Samsung"));
     }
 
-    @Test
-    public void deleteProductTest() throws Exception {
-
-        Product product = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000, "href", "description");
-
-        mockMvc.perform(
-                delete("/api/products/{id}", product.getId()))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    public void updateProductTest() throws Exception {
-
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone", 20000,"href", "description").getId();
-        Product newProduct = new Product("iPhone 12", 5, 4, "Apple iPhone 12 128GB", 30000, "href1", "description1");
-
-        mockMvc.perform(
-                put("/api/products/{id}", id)
-                        .content(objectMapper.writeValueAsString(newProduct))
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(id))
-                .andExpect(jsonPath("$.name").value("iPhone 12"))
-                .andExpect(jsonPath("$.rating").value(5))
-                .andExpect(jsonPath("$.popularity").value(4))
-                .andExpect(jsonPath("$.config").value("Apple iPhone 12 128GB"))
-                .andExpect(jsonPath("$.price").value(30000))
-                .andExpect(jsonPath("$.img").value("href1"))
-                .andExpect(jsonPath("$.description").value("description1"));
-    }
-
-
-    private Product createTestProduct(String name, Integer rating, Integer popularity, String config, Integer price, String img, String description) {
-        Product product = new Product(name, rating, popularity, config, price, img, description);
+    private Product createTestProduct(String name, Integer rating, Integer popularity,
+                                      String config, Integer price, String img, String description, String brand) {
+        Product product = new Product(name, rating, popularity, config, price, img, description, brand);
         return repository.save(product);
     }
 

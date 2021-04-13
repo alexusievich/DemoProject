@@ -56,13 +56,49 @@
     padding: 20px 0px;
 }
 
+.filterSearch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .search {
-    width: 250px;
-    padding-top: 20px;
-    margin: auto;
-
+    padding: 20px;
 }
+
+.sorting {
+    padding: 20px;
+}
+
+.ant-btn-lg {
+    border-radius: 5px;
+    width: 250px;
+}
+
 .ant-input-lg {
     border-radius: 5px;
+    width: 250px;
+}
+.btnName {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pricer {
+    display: flex;
+    padding-top: 10px;
+    align-items: center;
+}
+
+.priceText {
+    padding-right: 10px;
+}
+.prices {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priceFilter {
+    width: 45%;
+    border-radius: 1px;
 }
