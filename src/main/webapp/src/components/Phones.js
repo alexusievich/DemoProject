@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from "axios";
 import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, notification} from 'antd'
-import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined, CheckCircleFilled} from '@ant-design/icons'
+import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
 
