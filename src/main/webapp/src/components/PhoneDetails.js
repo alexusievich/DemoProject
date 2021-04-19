@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Card, Carousel, Button} from "antd";
+import {Card, Carousel, Button, notification} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css';
 import Cookie from "./Cookie";
@@ -43,14 +43,13 @@ class PhoneDetails extends React.Component {
     };
 
     addToCart = () => {
-        if (Cookie.getCookie('numberItems') === '0') {
-            Cookie.setCookie('numberItems',1);
-        } else {
-            let value = +Cookie.getCookie('numberItems');
-            value += 1;
-            Cookie.setCookie('numberItems', value);
-        }
-        axios.post("/api/basket", this.state.phoneDetails);
+        axios.post("/api/basket", this.state.phoneDetails).then( response => {
+                notification.open({
+                    message: `The ${this.state.phoneDetails.name} successfully added to cart!`,
+                    duration: 1.5
+                });
+            }
+        );
     }
 
     render() {

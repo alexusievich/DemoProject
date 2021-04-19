@@ -1,10 +1,9 @@
 import React from 'react';
 import axios from "axios";
-import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination} from 'antd'
-import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
+import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, notification} from 'antd'
+import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined, CheckCircleFilled} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
-import Cookie from "./Cookie";
 
 const {Meta} = Card;
 
@@ -37,6 +36,7 @@ class Phones extends React.Component {
             appliedPrice: [],
             sortKey: '',
             sortCheckArrowUp: undefined,
+            showItemAddResult: false,
         };
     }
 
@@ -161,14 +161,19 @@ class Phones extends React.Component {
     }
 
     addToCart = (index) => {
-        if (Cookie.getCookie('numberItems') === '0') {
-            Cookie.setCookie('numberItems',1);
-        } else {
-            let value = +Cookie.getCookie('numberItems');
-            value += 1;
-            Cookie.setCookie('numberItems', value);
+        let currentPhone = null;
+        this.state.phones.forEach( phone => {
+            if (phone.id === index) {
+                currentPhone = phone;
+            }
+        })
+        currentPhone && axios.post("/api/basket", currentPhone).then( response => {
+                notification.open({
+                    message: `The ${currentPhone.name} successfully added to cart!`,
+                    duration: 1.5
+                });
         }
-        axios.post("/api/basket", this.state.phones[index]);
+        );
     }
 
     componentDidMount() {
@@ -182,6 +187,7 @@ class Phones extends React.Component {
     render() {
 
         const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone, index) => {
+            index = phone.id;
             return (
                 <Card hoverable
                       key={phone.id}
@@ -200,9 +206,9 @@ class Phones extends React.Component {
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
                             <div className="cart">
-                               <a href="/#" onClick={() => this.addToCart(index)}>
+                               <span onClick={() => this.addToCart(index)}>
                                    <ShoppingCartOutlined />
-                               </a>
+                               </span>
                             </div>
                     </div>
                 </Card>
