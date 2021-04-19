@@ -42,6 +42,17 @@ class PhoneDetails extends React.Component {
         })
     };
 
+    addToCart = () => {
+        if (Cookie.getCookie('numberItems') === '0') {
+            Cookie.setCookie('numberItems',1);
+        } else {
+            let value = +Cookie.getCookie('numberItems');
+            value += 1;
+            Cookie.setCookie('numberItems', value);
+        }
+        axios.post("/api/basket", this.state.phoneDetails);
+    }
+
     render() {
 
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
@@ -94,11 +105,10 @@ class PhoneDetails extends React.Component {
                             {this.state.phoneDetails.price} RUB
                         </div>
                         <div className="cartt">
-                            <a href="/#">
-                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
-                                    Add to cart
-                                </Button>
-                            </a>
+                            <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"
+                                    onClick={this.addToCart}>
+                                Add to cart
+                            </Button>
                         </div>
                     </div>
                     <div className="techspecs">
@@ -110,7 +120,7 @@ class PhoneDetails extends React.Component {
 
             </div>
         )
-    }
+    };
 }
 
 

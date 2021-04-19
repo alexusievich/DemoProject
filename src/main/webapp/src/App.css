@@ -97,4 +97,6 @@
     padding: 20px 0px;
 }
 
-
+.ant-badge-count {
+    background-color: #1890ff !important;
+}

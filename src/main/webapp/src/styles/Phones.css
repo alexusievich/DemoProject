@@ -47,8 +47,11 @@
 }
 
 .cart {
+    color: #1890ff;
+    text-align: right;
     padding-top: 10px;
     font-size: 20px;
+    border-radius: 50%;
 }
 
 .pagination {
@@ -70,7 +73,7 @@
     padding: 20px;
 }
 
-.ant-btn-lg {
+.sortButton{
     border-radius: 5px;
     width: 250px;
 }

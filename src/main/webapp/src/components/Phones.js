@@ -4,6 +4,7 @@ import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination} from 'antd'
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
+import Cookie from "./Cookie";
 
 const {Meta} = Card;
 
@@ -159,6 +160,17 @@ class Phones extends React.Component {
         this.applyFilters();
     }
 
+    addToCart = (index) => {
+        if (Cookie.getCookie('numberItems') === '0') {
+            Cookie.setCookie('numberItems',1);
+        } else {
+            let value = +Cookie.getCookie('numberItems');
+            value += 1;
+            Cookie.setCookie('numberItems', value);
+        }
+        axios.post("/api/basket", this.state.phones[index]);
+    }
+
     componentDidMount() {
         axios.get('/api/products/').then(response => {
             const phones = response.data;
@@ -169,7 +181,7 @@ class Phones extends React.Component {
 
     render() {
 
-        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map(phone => {
+        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone, index) => {
             return (
                 <Card hoverable
                       key={phone.id}
@@ -187,9 +199,11 @@ class Phones extends React.Component {
                     />
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
-                        <a href="/#" className="cart">
-                            <ShoppingCartOutlined/>
-                        </a>
+                            <div className="cart">
+                               <a href="#" onClick={() => this.addToCart(index)}>
+                                   <ShoppingCartOutlined />
+                               </a>
+                            </div>
                     </div>
                 </Card>
             )
@@ -261,7 +275,7 @@ class Phones extends React.Component {
                     </div>
                     <div className="sorting">
                         <Dropdown overlay={menu} trigger='click'>
-                            <Button size={"large"}>
+                            <Button className = "sortButton" size={"large"}>
                                 <div className="btnName">
                                     <div>{this.state.sortName} {(this.state.sortName !== 'Sorting') ?
                                         this.state.sortCheckArrowUp ? <ArrowUpOutlined/> : <ArrowDownOutlined/>
