@@ -200,7 +200,7 @@ class Phones extends React.Component {
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
                             <div className="cart">
-                               <a href="#" onClick={() => this.addToCart(index)}>
+                               <a href="/#" onClick={() => this.addToCart(index)}>
                                    <ShoppingCartOutlined />
                                </a>
                             </div>
