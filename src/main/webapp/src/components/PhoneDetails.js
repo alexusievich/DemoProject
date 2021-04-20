@@ -43,10 +43,10 @@ class PhoneDetails extends React.Component {
     };
 
     addToCart = () => {
-        axios.post("/api/basket", this.state.phoneDetails).then( response => {
+        axios.post("/api/basket", {id:this.state.phoneDetails.id}).then( response => {
                 notification.open({
                     message: `The ${this.state.phoneDetails.name} successfully added to cart!`,
-                    duration: 1.5
+                    duration: 1.5,
                 });
             }
         );

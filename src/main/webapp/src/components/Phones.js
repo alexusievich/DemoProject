@@ -160,17 +160,11 @@ class Phones extends React.Component {
         this.applyFilters();
     }
 
-    addToCart = (index) => {
-        let currentPhone = null;
-        this.state.phones.forEach( phone => {
-            if (phone.id === index) {
-                currentPhone = phone;
-            }
-        })
-        currentPhone && axios.post("/api/basket", currentPhone).then( response => {
+    addToCart = (id, name)=> {
+        axios.post("/api/basket",{id:id}).then( response => {
                 notification.open({
-                    message: `The ${currentPhone.name} successfully added to cart!`,
-                    duration: 1.5
+                    message: `The ${name} successfully added to cart!`,
+                    duration: 1.5,
                 });
         }
         );
@@ -186,8 +180,7 @@ class Phones extends React.Component {
 
     render() {
 
-        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone, index) => {
-            index = phone.id;
+        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone) => {
             return (
                 <Card hoverable
                       key={phone.id}
@@ -206,7 +199,7 @@ class Phones extends React.Component {
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
                             <div className="cart">
-                               <span onClick={() => this.addToCart(index)}>
+                               <span onClick={() => this.addToCart(phone.id, phone.name)}>
                                    <ShoppingCartOutlined />
                                </span>
                             </div>

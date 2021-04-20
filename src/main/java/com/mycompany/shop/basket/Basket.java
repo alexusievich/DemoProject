@@ -13,6 +13,10 @@ public class Basket {
     @GeneratedValue
     private Long id;
 
+    private Integer totalPrice = 0;
+
+    private Integer numberItems = 0;
+
     @OneToMany
     private List<Item> items = new ArrayList<>();
 
@@ -27,7 +31,39 @@ public class Basket {
         this.id = id;
     }
 
-        public List<Item> getItems() {
+    public Integer getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Integer totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public void addItemPrice(Integer price) {
+        this.totalPrice += price;
+    }
+
+    public void removeItemPrice(Integer price) {
+        this.totalPrice -= price;
+    }
+
+    public Integer getNumberItems() {
+        return numberItems;
+    }
+
+    public void setNumberItems(Integer numberItems) {
+        this.numberItems = numberItems;
+    }
+
+    public void addItem() {
+        this.numberItems ++;
+    }
+
+    public void removeItem() {
+        this.numberItems --;
+    }
+
+    public List<Item> getItems() {
         return items;
     }
 
