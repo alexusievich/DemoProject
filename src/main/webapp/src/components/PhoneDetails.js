@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Card, Carousel, Button, notification} from "antd";
+import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/PhoneDetails.css';
 import Cookie from "./Cookie";
@@ -42,15 +42,15 @@ class PhoneDetails extends React.Component {
         })
     };
 
-    addToCart = () => {
-        axios.post("/api/basket", {id:this.state.phoneDetails.id}).then( response => {
-                notification.open({
-                    message: `The ${this.state.phoneDetails.name} successfully added to cart!`,
-                    duration: 1.5,
-                });
-            }
-        );
-    }
+    // addToCart = () => {
+    //     axios.post("/api/basket", {id:this.state.phoneDetails.id}).then( response => {
+    //             notification.open({
+    //                 message: `The ${this.state.phoneDetails.name} successfully added to cart!`,
+    //                 duration: 1.5,
+    //             });
+    //         }
+    //     );
+    // }
 
     render() {
 
@@ -105,7 +105,7 @@ class PhoneDetails extends React.Component {
                         </div>
                         <div className="cartt">
                             <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"
-                                    onClick={this.addToCart}>
+                                    onClick={() => this.props.addToCart(this.state.phoneDetails.id, this.state.phoneDetails.name)}>
                                 Add to cart
                             </Button>
                         </div>

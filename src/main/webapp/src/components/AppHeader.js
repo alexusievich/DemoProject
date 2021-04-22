@@ -25,13 +25,18 @@ class AppHeader extends React.Component {
                         <Menu.Item key="accessories"><a href="/#">Accessories</a></Menu.Item>
                         <Menu.Item key="phones"><Link to="/phones">Phones</Link></Menu.Item>
                     </SubMenu>
-                    <Menu.Item key="cart" style={{float: 'right'}}><Link to="/basket">
-                        <Badge count={this.props.numberItems} offset={[0, 25]}>
-                            <ShoppingCartOutlined style={{fontSize: '120%'}}/>
-                        </Badge>
-                    </Link></Menu.Item>
-                    <Menu.Item key="user" style={{float: 'right'}}><a href="/#">
-                        <UserOutlined style={{fontSize: '120%'}}/></a></Menu.Item>
+                    <Menu.Item key="cart" style={{float: 'right'}}>
+                        <Link to="/basket">
+                            <Badge count={this.props.numberItems} offset={[0, 25]}>
+                                <ShoppingCartOutlined className="cartLink" style={{fontSize: '120%'}}/>
+                            </Badge>
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="user" style={{float: 'right'}}>
+                        <a href="/#">
+                            <UserOutlined style={{fontSize: '120%'}}/>
+                        </a>
+                    </Menu.Item>
                 </Menu>
             </div>
         )

@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Layout} from 'antd';
+import {Layout, notification} from 'antd';
 import {Switch, Route} from 'react-router-dom';
 
 import AppHeader from "./components/AppHeader";
@@ -23,33 +23,51 @@ class App extends React.Component {
         super(props);
         this.state = {
             basket: null,
-            numberItems: 0,
         }
     }
+
+
 
     componentDidMount() {
         axios.get('/api/basket').then(response => {
             const basket = response.data;
             this.setState({basket});
-            this.setState({numberItems: basket.numberItems});
         })
     };
 
+    addToCart = (id, name) => {
+        axios.post("/api/basket", {id: id}).then(response => {
+                const basket = response.data;
+                this.setState({basket});
+                notification.open({
+                    message: `The ${name} successfully added to cart!`,
+                    duration: 1.5,
+                });
+            }
+        );
+    }
+
+    setBasket = (basket) => {
+        this.setState({basket});
+    }
 
     render() {
 
         return (
             <Layout className="mainLayout">
                 <Header>
-                    <AppHeader numberItems={this.state.numberItems}/>
+                    <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}/>
                 </Header>
                 <Content>
                     <Switch>
                         <Route exact path="/" component={MainPage}/>
-                        <Route exact path="/phones" component={Phones}/>
-                        <Route exact path="/phones/:id" component={PhoneDetails}/>
+                        <Route exact path="/phones" render={(props) =>
+                            (<Phones {...props} addToCart={this.addToCart}/>)}/>
+                        <Route exact path="/phones/:id" render={(props) =>
+                            (<PhoneDetails {...props} addToCart={this.addToCart}/>)}/>
                         <Route exact path="/404" component={NotFoundPage}/>
-                        <Route exact path="/basket" component={Basket}/>
+                        <Route exact path="/basket" render={(props) =>
+                            (<Basket {...props} basket={this.state.basket} setBasket={this.setBasket}/>)}/>
                         <Route>
                             <Redirect to="/404"/>
                         </Route>

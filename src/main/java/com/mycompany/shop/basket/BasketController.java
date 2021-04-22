@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -60,8 +61,7 @@ public class BasketController {
             item.setProduct(existingProduct.get());
             itemRepository.save(item);
             basket.getItems().add(item);
-            basket.addItemPrice(item.getProduct().getPrice());
-            basket.addItem();
+            basket.recalculateTotalPrice();
             basket = basketRepository.save(basket);
             sessionBean.setBasket(basket);
             return ResponseEntity.ok(basket);
@@ -74,21 +74,22 @@ public class BasketController {
     public void clearBasket() {
         Basket basket = sessionBean.getBasket();
         if (basket != null) {
-            basket.setTotalPrice(0);
-            basket.setNumberItems(0);
             basketRepository.delete(basket);
         }
         sessionBean.setBasket(null);
     }
 
-    @DeleteMapping("/removeitem/{index}")
-    public ResponseEntity<Basket> removeItem(@PathVariable int index) {
+    @DeleteMapping("/removeitem/{id}")
+    public ResponseEntity<Basket> removeItem(@PathVariable long id) {
         Basket basket = sessionBean.getBasket();
         List<Item> items = basket.getItems();
-        if (items.size() > 0) {
-            basket.removeItemPrice(items.get(index).getProduct().getPrice());
-            basket.removeItem();
-            items.remove(index);
+        items = items.stream().filter(item1 -> item1.getId() != id).collect(Collectors.toList());
+        if (items.size() == 0) {
+            basketRepository. delete(basket);
+            sessionBean.setBasket(null);
+        } else {
+            basket.setItems(items);
+            basket.recalculateTotalPrice();
             basketRepository.save(basket);
         }
         return ResponseEntity.ok(sessionBean.getBasket());

@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, notification} from 'antd'
+import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination} from 'antd'
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
@@ -160,15 +160,15 @@ class Phones extends React.Component {
         this.applyFilters();
     }
 
-    addToCart = (id, name)=> {
-        axios.post("/api/basket",{id:id}).then( response => {
-                notification.open({
-                    message: `The ${name} successfully added to cart!`,
-                    duration: 1.5,
-                });
-        }
-        );
-    }
+    // addToCart = (id, name)=> {
+    //     axios.post("/api/basket",{id:id}).then( response => {
+    //             notification.open({
+    //                 message: `The ${name} successfully added to cart!`,
+    //                 duration: 1.5,
+    //             });
+    //     }
+    //     );
+    // }
 
     componentDidMount() {
         axios.get('/api/products/').then(response => {
@@ -199,7 +199,7 @@ class Phones extends React.Component {
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
                             <div className="cart">
-                               <span onClick={() => this.addToCart(phone.id, phone.name)}>
+                               <span onClick={() => this.props.addToCart(phone.id, phone.name)}>
                                    <ShoppingCartOutlined />
                                </span>
                             </div>

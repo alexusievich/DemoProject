@@ -15,8 +15,6 @@ public class Basket {
 
     private Integer totalPrice = 0;
 
-    private Integer numberItems = 0;
-
     @OneToMany
     private List<Item> items = new ArrayList<>();
 
@@ -39,28 +37,9 @@ public class Basket {
         this.totalPrice = totalPrice;
     }
 
-    public void addItemPrice(Integer price) {
-        this.totalPrice += price;
-    }
-
-    public void removeItemPrice(Integer price) {
-        this.totalPrice -= price;
-    }
-
-    public Integer getNumberItems() {
-        return numberItems;
-    }
-
-    public void setNumberItems(Integer numberItems) {
-        this.numberItems = numberItems;
-    }
-
-    public void addItem() {
-        this.numberItems ++;
-    }
-
-    public void removeItem() {
-        this.numberItems --;
+    public void recalculateTotalPrice() {
+        this.totalPrice = 0;
+        items.forEach(item -> this.totalPrice += item.getProduct().getPrice());
     }
 
     public List<Item> getItems() {

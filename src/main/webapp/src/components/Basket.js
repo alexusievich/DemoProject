@@ -10,47 +10,23 @@ class Basket extends React.Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            basket: null,
-            phones: [],
-            numberItems: 0,
-            totalPrice: 0,
-        };
     }
 
     componentDidMount() {
-        axios.get('/api/basket').then(response => {
-            const basket = response.data;
-            this.setState({basket});
-            this.setState({phones: basket.items})
-            let totalPrice;
-            basket ? totalPrice = basket.totalPrice : totalPrice = 0;
-            this.setState({totalPrice});
-            let numberItems;
-            basket ? numberItems = basket.numberItems : numberItems = 0;
-            this.setState({numberItems});
-        })
+        axios.get('/api/basket').then();
     };
 
     clearBasket = () => {
         axios.delete("/api/basket/clear").then(response => {
-            axios.get('/api/basket').then(response => {
-                const basket = response.data;
-                this.setState({phones: basket.items});
-                this.setState({totalPrice: 0})
-                this.setState({numberItems: 0});
-            });
+            this.props.setBasket(undefined);
         });
     }
 
-    removeItems = (index) => {
-        console.log(index)
-        axios.delete(`/api/basket/removeitem/${index}`).then(response => {
+    removeItems = (id) => {
+        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
                 axios.get('/api/basket').then(response => {
                     const basket = response.data;
-                    this.setState({phones: basket.items});
-                    this.setState({totalPrice: basket.totalPrice})
-                    this.setState({numberItems: basket.numberItems});
+                    this.props.setBasket(basket);
                 });
             }
         );
@@ -59,7 +35,8 @@ class Basket extends React.Component {
 
     render() {
 
-        const renderItems = this.state.phones?.map((phone, index) => {
+
+        const renderItems = this.props.basket?.items?.map(phone => {
             return (
                 <div className="itemCard">
                     <div className="itemImage">
@@ -79,7 +56,8 @@ class Basket extends React.Component {
                         {phone.product.price} RUB
                     </div>
                     <div className="itemRemove">
-                        <Button type="primary" shape="round" size="large" onClick={() => this.removeItems(index)}>
+                        <Button type="primary" shape="round" size="large"
+                                onClick={() => this.removeItems(phone.id)}>
                             Remove item
                         </Button>
                     </div>
@@ -90,11 +68,11 @@ class Basket extends React.Component {
 
         return (
             <div>
-                {this.state.totalPrice > 0 &&
+                {this.props.basket &&
                 <div>
                     <div className="basketTitle">
-                        <div className="basketName">Shopping cart - {this.state.numberItems} items</div>
-                        <div className="basketTotal">Total: {this.state.totalPrice / 1000}.000 RUB</div>
+                        <div className="basketName">Shopping cart - {this.props.basket.items.length} items</div>
+                        <div className="basketTotal">Total: {this.props.basket.totalPrice / 1000}.000 RUB</div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
                                     onClick={this.clearBasket}>
@@ -108,7 +86,7 @@ class Basket extends React.Component {
                 </div>
                 }
 
-                {this.state.totalPrice === 0 &&
+                {!(this.props.basket) &&
                 <div className="notfound">
                     <div className="error">
                         <div className="text">The shopping cart is empty right now <ShoppingOutlined/></div>
