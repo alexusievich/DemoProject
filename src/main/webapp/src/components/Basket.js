@@ -8,10 +8,6 @@ import {Link} from "react-router-dom";
 
 class Basket extends React.Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         axios.get('/api/basket').then();
     };
