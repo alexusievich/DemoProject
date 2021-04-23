@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination} from 'antd'
+import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, InputNumber} from 'antd'
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
@@ -160,16 +160,6 @@ class Phones extends React.Component {
         this.applyFilters();
     }
 
-    // addToCart = (id, name)=> {
-    //     axios.post("/api/basket",{id:id}).then( response => {
-    //             notification.open({
-    //                 message: `The ${name} successfully added to cart!`,
-    //                 duration: 1.5,
-    //             });
-    //     }
-    //     );
-    // }
-
     componentDidMount() {
         axios.get('/api/products/').then(response => {
             const phones = response.data;
@@ -257,11 +247,11 @@ class Phones extends React.Component {
                                 Price:
                             </div>
                             <div className="prices">
-                                <div className="priceFilter"><Input type="number" id={"1"} size={"small"}
+                                <div className="priceFilter"><InputNumber min={0} id={"1"} size={"small"}
                                                                     placeholder="Minimum"
                                                                     onBlur={this.handleChangePrice}/></div>
                                 <div><MinusOutlined/></div>
-                                <div className="priceFilter"><Input type="number" id={"2"} size={"small"}
+                                <div className="priceFilter"><InputNumber min={0} id={"2"} size={"small"}
                                                                     placeholder="Maximum"
                                                                     onBlur={this.handleChangePrice}/></div>
                             </div>

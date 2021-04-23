@@ -4,6 +4,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    padding: 0 70px;
 }
 
 .myCard {
@@ -77,11 +78,16 @@
     border-radius: 5px;
     width: 250px;
 }
+.ant-input-number {
+    border-radius: 3px;
+    width: 100%;
+}
 
 .ant-input-lg {
     border-radius: 5px;
     width: 250px;
 }
+
 .btnName {
     display: flex;
     justify-content: space-between;

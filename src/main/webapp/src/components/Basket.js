@@ -1,5 +1,4 @@
 import React from "react";
-import axios from "axios";
 import {Button} from "antd";
 import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import '../styles/Basket.css'
@@ -8,39 +7,21 @@ import {Link} from "react-router-dom";
 
 class Basket extends React.Component {
 
-    componentDidMount() {
-        axios.get('/api/basket').then();
-    };
-
-    clearBasket = () => {
-        axios.delete("/api/basket/clear").then(response => {
-            this.props.setBasket(undefined);
-        });
-    }
-
-    removeItems = (id) => {
-        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
-                axios.get('/api/basket').then(response => {
-                    const basket = response.data;
-                    this.props.setBasket(basket);
-                });
-            }
-        );
-
+    clickItem = (id) => {
+        this.props.history.push("/phones/" + id);
     }
 
     render() {
 
-
         const renderItems = this.props.basket?.items?.map(phone => {
             return (
                 <div className="itemCard">
-                    <div className="itemImage">
+                    <div className="itemImage" onClick={() => this.clickItem(phone.product.id)}>
                         <img alt={phone.product.name}
                              src={phone.product.img}
                         />
                     </div>
-                    <div className="itemNameConfig">
+                    <div className="itemNameConfig" onClick={() => this.clickItem(phone.product.id)}>
                         <div className="itemName">
                             {phone.product.name}
                         </div>
@@ -53,7 +34,7 @@ class Basket extends React.Component {
                     </div>
                     <div className="itemRemove">
                         <Button type="primary" shape="round" size="large"
-                                onClick={() => this.removeItems(phone.id)}>
+                                onClick={() => this.props.removeItem(phone.id)}>
                             Remove item
                         </Button>
                     </div>
@@ -71,7 +52,7 @@ class Basket extends React.Component {
                         <div className="basketTotal">Total: {this.props.basket.totalPrice / 1000}.000 RUB</div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
-                                    onClick={this.clearBasket}>
+                                    onClick={this.props.clearBasket}>
                                 <DeleteFilled/> Clear basket
                             </Button>
                         </div>

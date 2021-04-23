@@ -85,7 +85,7 @@ public class BasketController {
         List<Item> items = basket.getItems();
         items = items.stream().filter(item1 -> item1.getId() != id).collect(Collectors.toList());
         if (items.size() == 0) {
-            basketRepository. delete(basket);
+            basketRepository.delete(basket);
             sessionBean.setBasket(null);
         } else {
             basket.setItems(items);

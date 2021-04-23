@@ -51,6 +51,23 @@ class App extends React.Component {
         this.setState({basket});
     }
 
+
+    clearBasket = () => {
+        axios.delete("/api/basket/clear").then(response => {
+            this.setState({basket: undefined});
+        });
+    }
+
+    removeItem = (id) => {
+        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
+                axios.get('/api/basket').then(response => {
+                    const basket = response.data;
+                    this.setState({basket});
+                });
+            }
+        );
+    }
+
     render() {
 
         return (
@@ -67,7 +84,8 @@ class App extends React.Component {
                             (<PhoneDetails {...props} addToCart={this.addToCart}/>)}/>
                         <Route exact path="/404" component={NotFoundPage}/>
                         <Route exact path="/basket" render={(props) =>
-                            (<Basket {...props} basket={this.state.basket} setBasket={this.setBasket}/>)}/>
+                            (<Basket {...props} basket={this.state.basket} setBasket={this.setBasket}
+                            clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
                         <Route>
                             <Redirect to="/404"/>
                         </Route>

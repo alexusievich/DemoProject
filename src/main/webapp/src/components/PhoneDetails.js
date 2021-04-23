@@ -42,16 +42,6 @@ class PhoneDetails extends React.Component {
         })
     };
 
-    // addToCart = () => {
-    //     axios.post("/api/basket", {id:this.state.phoneDetails.id}).then( response => {
-    //             notification.open({
-    //                 message: `The ${this.state.phoneDetails.name} successfully added to cart!`,
-    //                 duration: 1.5,
-    //             });
-    //         }
-    //     );
-    // }
-
     render() {
 
         const renderImages = this.state.phoneDetails?.images.sort((a, b) => a.id - b.id).map(image => {
