@@ -25,16 +25,16 @@ class RecentProducts extends React.Component {
         }
 
 
-            ids.reverse().forEach(id => {
-                if (id !== '') {
-                    axios.get('/api/products/' + id).then(response => {
-                        const phone = response.data;
-                        this.setState(prevState => ({
-                            phones: [...prevState.phones, phone]
-                        }))
-                    })
-                }
-            })
+        ids.reverse().forEach(id => {
+            if (id !== '') {
+                axios.get('/api/products/' + id).then(response => {
+                    const phone = response.data;
+                    this.setState(prevState => ({
+                        phones: [...prevState.phones, phone]
+                    }))
+                })
+            }
+        })
 
     };
 
@@ -42,22 +42,22 @@ class RecentProducts extends React.Component {
 
         const renderPhones = (this.state.phones.map(phone => {
                 return (
-                    <Card hoverable
-                          key={phone.id}
-                          className="recentCards"
-                          cover={
-                              <Link to={"/phones/" + phone.id}>
+                    <Link to={"/phones/" + phone.id}>
+                        <Card hoverable
+                              key={phone.id}
+                              className="recentCards"
+                              cover={
                                   <img alt={phone.name}
                                        src={phone.img}
                                   />
-                              </Link>
-                          }>
-                        <Meta
-                            title={phone.name}
-                            description={phone.config}
-                        />
-                        <div className="priceRecent">{phone.price} RUB</div>
-                    </Card>
+                              }>
+                            <Meta
+                                title={phone.name}
+                                description={phone.config}
+                            />
+                            <div className="priceRecent">{phone.price} RUB</div>
+                        </Card>
+                    </Link>
                 )
             })
         )

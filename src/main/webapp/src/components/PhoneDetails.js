@@ -94,11 +94,10 @@ class PhoneDetails extends React.Component {
                             {this.state.phoneDetails.price} RUB
                         </div>
                         <div className="cartt">
-                            <a href="/#">
-                                <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large">
-                                    Add to cart
-                                </Button>
-                            </a>
+                            <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"
+                                    onClick={() => this.props.addToCart(this.state.phoneDetails.id, this.state.phoneDetails.name)}>
+                                Add to cart
+                            </Button>
                         </div>
                     </div>
                     <div className="techspecs">
@@ -110,7 +109,7 @@ class PhoneDetails extends React.Component {
 
             </div>
         )
-    }
+    };
 }
 
 

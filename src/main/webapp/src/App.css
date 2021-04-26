@@ -37,64 +37,11 @@
     text-align: center;
 }
 
-.cardWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.cartLink:hover {
+    color: #1890ff;
 }
 
-.myCard {
-    text-align: center;
-    width: 250px;
-    border-radius: 5% !important;
-    margin: 20px 30px !important;
-    border: 1px solid lightgray !important;
+.ant-badge-count {
+    background-color: #1890ff !important;
 }
-
-.ant-card {
-}
-
-.myCard:hover {
-    box-shadow: 0 0 5px #666666;
-}
-
-.myCard div {
-    width: 100%;
-}
-
-.myCard img {
-    width: 200px;
-    height: 200px;
-    padding: 20px;
-    margin: 20px;
-}
-
-.priceCart {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.price {
-    font-weight: bold;
-    padding-top: 10px;
-    color: black;
-}
-
-.price:hover {
-    color: black;
-}
-
-.cart {
-    padding-top: 10px;
-    font-size: 20px;
-}
-
-.pagination {
-    text-align: center;
-    padding: 20px 0px;
-}
-
 

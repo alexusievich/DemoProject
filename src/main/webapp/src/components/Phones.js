@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from "axios";
-import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination} from 'antd'
+import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, InputNumber} from 'antd'
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Phones.css'
 import {Link} from "react-router-dom";
@@ -36,6 +36,7 @@ class Phones extends React.Component {
             appliedPrice: [],
             sortKey: '',
             sortCheckArrowUp: undefined,
+            showItemAddResult: false,
         };
     }
 
@@ -169,7 +170,7 @@ class Phones extends React.Component {
 
     render() {
 
-        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map(phone => {
+        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone) => {
             return (
                 <Card hoverable
                       key={phone.id}
@@ -187,9 +188,11 @@ class Phones extends React.Component {
                     />
                     <div className="priceCart">
                         <div className="price">{phone.price} RUB</div>
-                        <a href="/#" className="cart">
-                            <ShoppingCartOutlined/>
-                        </a>
+                            <div className="cart">
+                               <span onClick={() => this.props.addToCart(phone.id, phone.name)}>
+                                   <ShoppingCartOutlined />
+                               </span>
+                            </div>
                     </div>
                 </Card>
             )
@@ -244,11 +247,11 @@ class Phones extends React.Component {
                                 Price:
                             </div>
                             <div className="prices">
-                                <div className="priceFilter"><Input type="number" id={"1"} size={"small"}
+                                <div className="priceFilter"><InputNumber min={0} id={"1"} size={"small"}
                                                                     placeholder="Minimum"
                                                                     onBlur={this.handleChangePrice}/></div>
                                 <div><MinusOutlined/></div>
-                                <div className="priceFilter"><Input type="number" id={"2"} size={"small"}
+                                <div className="priceFilter"><InputNumber min={0} id={"2"} size={"small"}
                                                                     placeholder="Maximum"
                                                                     onBlur={this.handleChangePrice}/></div>
                             </div>
@@ -261,7 +264,7 @@ class Phones extends React.Component {
                     </div>
                     <div className="sorting">
                         <Dropdown overlay={menu} trigger='click'>
-                            <Button size={"large"}>
+                            <Button className = "sortButton" size={"large"}>
                                 <div className="btnName">
                                     <div>{this.state.sortName} {(this.state.sortName !== 'Sorting') ?
                                         this.state.sortCheckArrowUp ? <ArrowUpOutlined/> : <ArrowDownOutlined/>
