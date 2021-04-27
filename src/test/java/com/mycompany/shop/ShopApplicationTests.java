@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -22,8 +21,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @AutoConfigureMockMvc
 public class ShopApplicationTests {
 
-    @Autowired
-    private ObjectMapper objectMapper;
     @Autowired
     private ProductRepository repository;
     @Autowired
@@ -39,7 +36,7 @@ public class ShopApplicationTests {
     public void getByIdTest() throws Exception {
 
         long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone",
-                20000, "href", "description", "Samsung").getId();
+                20000, "href", "description", "Samsung", "phone").getId();
 
         mockMvc.perform(
                 get("/api/products/{id}", id))
@@ -52,12 +49,13 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.price").value(20000))
                 .andExpect(jsonPath("$.img").value("href"))
                 .andExpect(jsonPath("$.description").value("description"))
-                .andExpect(jsonPath("$.brand").value("Samsung"));
+                .andExpect(jsonPath("$.brand").value("Samsung"))
+                .andExpect(jsonPath("$.category").value("phone"));
     }
 
     private Product createTestProduct(String name, Integer rating, Integer popularity,
-                                      String config, Integer price, String img, String description, String brand) {
-        Product product = new Product(name, rating, popularity, config, price, img, description, brand);
+                                      String config, Integer price, String img, String description, String brand, String category) {
+        Product product = new Product(name, rating, popularity, config, price, img, description, brand, category);
         return repository.save(product);
     }
 

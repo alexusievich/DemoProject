@@ -1,4 +1,4 @@
-import banner from "../images/banner.jpg";
+import mainBanner from "../images/banner.jpg";
 import React from "react";
 import '../styles/Main&RecentPages.css'
 import RecentProducts from "./RecentProducts";
@@ -9,7 +9,7 @@ class MainPage extends React.Component {
 
         return (
             <div>
-                <img src={banner} alt="main banner" className="banner"/>
+                <img src={mainBanner} alt="main banner" className="banner"/>
                 <RecentProducts />
             </div>
 

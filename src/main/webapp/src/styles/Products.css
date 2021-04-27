@@ -97,6 +97,7 @@
     display: flex;
     padding-top: 10px;
     align-items: center;
+    justify-content: center;
 }
 
 .priceText {
@@ -110,4 +111,14 @@
 .priceFilter {
     width: 45%;
     border-radius: 1px;
+}
+
+.checkboxes {
+    display: flex;
+    justify-content: center;
+}
+.checkboxesName {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 3px;
 }

@@ -40,6 +40,10 @@ h2 {
     background-color: black !important;
 }
 
+.ant-card-cover img{
+    max-width: 100%;
+}
+
 .information {
     width: 50%;
 }
@@ -77,33 +81,49 @@ h2 {
     margin-top: 40px;
 }
 
-.techspecs {
+.underImage {
     margin-top: 50px;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.prodDetBanner {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prodDetBanner img {
+    max-width: 100%;
+}
+
+.techspecs {
+    width: 45%;
     text-align: left;
 }
 
 .techspectitle {
     font-weight: bold;
     font-size: 30px;
-    margin-bottom: 50px;
+    margin-bottom: 25px;
 }
 
 .techspecrow {
-    font-size: 15px;
+    font-size: 17px;
     display: flex;
     justify-content: center;
-    width: 70%;
     padding: 5px 0px;
 }
 
 .techspecname {
     color: #787878;
-    width: 30%;
+    width: 50%;
 }
 
 .techspecvalue {
-    width: 70%;
+    width: 50%;
     font-weight: 400;
 }
 

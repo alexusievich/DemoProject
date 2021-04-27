@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/products")
@@ -25,10 +26,9 @@ public class ProductController {
         this.techSpecRepository = techSpecRepository;
     }
 
-    @GetMapping("/")
-    public ResponseEntity<List<Product>> retrieveAllProducts() {
-
-        return ResponseEntity.ok(productRepository.findAll());
+    @GetMapping()
+    public ResponseEntity<List<Product>> retrieveAllProducts(@RequestParam("category") String category) {
+        return ResponseEntity.ok(productRepository.findAll().stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
