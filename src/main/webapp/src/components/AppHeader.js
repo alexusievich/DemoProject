@@ -1,6 +1,6 @@
 import React from 'react';
 import {Badge, Menu} from "antd";
-import {MenuOutlined, ShoppingCartOutlined} from "@ant-design/icons";
+import {MenuOutlined, ShoppingCartOutlined, UserOutlined} from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import logo from '../images/logo.png';
 import {Link} from 'react-router-dom';
@@ -20,7 +20,7 @@ class AppHeader extends React.Component {
                     </Menu.Item>
                     <SubMenu key="catalog" icon={<MenuOutlined/>} title="Catalog"
                              style={{float: 'left', fontSize: '120%'}}>
-                        <Menu.Item key="phones"><Link to= {"/products/phones"}>Phones</Link></Menu.Item>
+                        <Menu.Item key="phones"><Link to={"/products/phones"}>Phones</Link></Menu.Item>
                         <Menu.Item key="tablets"><Link to={"/products/tablets"}>Tablets</Link></Menu.Item>
                         <Menu.Item key="accessories"><Link to={"/products/accessories"}>Accessories</Link></Menu.Item>
                     </SubMenu>
@@ -30,6 +30,9 @@ class AppHeader extends React.Component {
                                 <ShoppingCartOutlined className="cartLink" style={{fontSize: '120%'}}/>
                             </Badge>
                         </Link>
+                    </Menu.Item>
+                    <Menu.Item key="user" style={{float: 'right'}}>
+                        <UserOutlined style={{fontSize: '120%'}}/>
                     </Menu.Item>
                 </Menu>
             </div>
