@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 class Basket extends React.Component {
 
     clickItem = (id) => {
-        this.props.history.push("/phones/" + id);
+        this.props.history.push("/productdetails/" + id);
     }
 
     render() {
@@ -69,9 +69,9 @@ class Basket extends React.Component {
                         <div className="text">The shopping cart is empty right now <ShoppingOutlined/></div>
                     </div>
                     <div className="button">
-                        <Link to="/phones">
+                        <Link to="/">
                             <Button type="primary" shape="round" size="large">
-                                Continue shopping
+                                Return to main page
                             </Button>
                         </Link>
                     </div>

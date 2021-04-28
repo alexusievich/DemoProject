@@ -42,7 +42,7 @@ class RecentProducts extends React.Component {
 
         const renderPhones = (this.state.phones.map(phone => {
                 return (
-                    <Link to={"/phones/" + phone.id}>
+                    <Link to={"/productdetails/" + phone.id}>
                         <Card hoverable
                               key={phone.id}
                               className="recentCards"
@@ -66,8 +66,12 @@ class RecentProducts extends React.Component {
             <div>
                 {this.state.phones.length > 0 &&
                 <div className="recentProducts">
-                    <div className="text">Recently viewed</div>
-                    <div className="wrapper">{renderPhones}</div>
+                    <div className="text">
+                        Recently viewed
+                    </div>
+                    <div className="wrapper">
+                        {renderPhones}
+                    </div>
                 </div>}
             </div>
         )

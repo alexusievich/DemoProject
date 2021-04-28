@@ -2,10 +2,11 @@ import React from 'react';
 import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
-import '../styles/PhoneDetails.css';
+import '../styles/ProductDetails.css';
 import Cookie from "./Cookie";
+import productDetailsBanner from '../images/prodDetailsBanner.png'
 
-class PhoneDetails extends React.Component {
+class ProductDetails extends React.Component {
 
     constructor(props) {
         super(props);
@@ -100,9 +101,14 @@ class PhoneDetails extends React.Component {
                             </Button>
                         </div>
                     </div>
+                    <div className="underImage">
                     <div className="techspecs">
                         <div className="techspectitle">Technical Specifications</div>
                         {renderTechSpecs}
+                    </div>
+                        <div className="prodDetBanner">
+                            <img src={productDetailsBanner} alt="discount 30%"/>
+                        </div>
                     </div>
                 </div>
                 }
@@ -113,4 +119,4 @@ class PhoneDetails extends React.Component {
 }
 
 
-export default PhoneDetails
+export default ProductDetails

@@ -2,12 +2,12 @@ import React from 'react';
 import axios from "axios";
 import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, InputNumber} from 'antd'
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
-import '../styles/Phones.css'
+import '../styles/Products.css'
 import {Link} from "react-router-dom";
 
 const {Meta} = Card;
 
-class Phones extends React.Component {
+class Products extends React.Component {
 
     pageSize = () => {
         return 6;
@@ -17,7 +17,8 @@ class Phones extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            phones: [],
+            products: [],
+            category: '',
             minValue: 0,
             maxValue: this.pageSize(),
             current: 1,
@@ -25,18 +26,11 @@ class Phones extends React.Component {
             sortName: 'Sorting',
             minPrice: 0,
             maxPrice: 0,
-            brands: [
-                "Apple",
-                "Honor",
-                "Huawei",
-                "Samsung",
-                "Xiaomi",
-            ],
+            brands: [],
             appliedBrands: [],
             appliedPrice: [],
             sortKey: '',
             sortCheckArrowUp: undefined,
-            showItemAddResult: false,
         };
     }
 
@@ -56,26 +50,26 @@ class Phones extends React.Component {
     };
 
     applyFilters = () => {
-        axios.get('/api/products/').then(response => {
-            const phones = response.data;
+        axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
+            const products = response.data;
 
-            let result = phones.filter(phone =>
-                phone.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
+            let result = products.filter(product =>
+                product.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
             );
 
             if (this.state.appliedBrands.length !== 0) {
-                result = result.filter(phone =>
-                    this.state.appliedBrands.indexOf(phone.brand) !== -1
+                result = result.filter(product =>
+                    this.state.appliedBrands.indexOf(product.brand) !== -1
                 );
             }
             if (this.state.minPrice > 0) {
-                result = result.filter(phone =>
-                    phone.price >= this.state.minPrice
+                result = result.filter(product =>
+                    product.price >= this.state.minPrice
                 )
             }
             if (this.state.maxPrice > 0) {
-                result = result.filter(phone =>
-                    phone.price <= this.state.maxPrice
+                result = result.filter(product =>
+                    product.price <= this.state.maxPrice
                 )
             }
 
@@ -83,43 +77,59 @@ class Phones extends React.Component {
                 switch (this.state.sortKey) {
                     case '1':
                         result = result.sort((a, b) => a.popularity - b.popularity);
-                        this.setState({sortName: 'By popularity',
-                        sortCheckArrowUp: true})
+                        this.setState({
+                            sortName: 'By popularity',
+                            sortCheckArrowUp: true
+                        })
                         break;
                     case '2':
                         result = result.sort((a, b) => b.popularity - a.popularity);
-                        this.setState({sortName: 'By popularity',
-                            sortCheckArrowUp: false})
+                        this.setState({
+                            sortName: 'By popularity',
+                            sortCheckArrowUp: false
+                        })
                         break;
                     case '3':
                         result = result.sort((a, b) => a.rating - b.rating);
-                        this.setState({sortName: 'By rating',
-                            sortCheckArrowUp: true})
+                        this.setState({
+                            sortName: 'By rating',
+                            sortCheckArrowUp: true
+                        })
                         break;
                     case '4':
                         result = result.sort((a, b) => b.rating - a.rating);
-                        this.setState({sortName: 'By rating',
-                            sortCheckArrowUp: false})
+                        this.setState({
+                            sortName: 'By rating',
+                            sortCheckArrowUp: false
+                        })
                         break;
                     case '5':
                         result = result.sort((a, b) => a.price - b.price);
-                        this.setState({sortName: 'By price',
-                            sortCheckArrowUp: true})
+                        this.setState({
+                            sortName: 'By price',
+                            sortCheckArrowUp: true
+                        })
                         break;
                     case '6':
                         result = result.sort((a, b) => b.price - a.price);
-                        this.setState({sortName: 'By price',
-                            sortCheckArrowUp: false})
+                        this.setState({
+                            sortName: 'By price',
+                            sortCheckArrowUp: false
+                        })
                         break;
                     case '7':
                         result = result.sort((a, b) => a.name.localeCompare(b.name));
-                        this.setState({sortName: 'By name',
-                            sortCheckArrowUp: true})
+                        this.setState({
+                            sortName: 'By name',
+                            sortCheckArrowUp: true
+                        })
                         break;
                     case '8':
                         result = result.sort((a, b) => b.name.localeCompare(a.name));
-                        this.setState({sortName: 'By name',
-                            sortCheckArrowUp: false})
+                        this.setState({
+                            sortName: 'By name',
+                            sortCheckArrowUp: false
+                        })
                         break;
                     case '9':
                         this.setState({sortName: 'Sorting'});
@@ -127,7 +137,7 @@ class Phones extends React.Component {
                     default:
                 }
             }
-            this.setState({phones: result});
+            this.setState({products: result});
         });
     }
 
@@ -160,39 +170,55 @@ class Phones extends React.Component {
         this.applyFilters();
     }
 
-    componentDidMount() {
-        axios.get('/api/products/').then(response => {
-            const phones = response.data;
-            this.setState({phones});
+    fetchProducts = () => {
+        axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
+            const products = response.data;
+            const brands = [];
+            products.forEach(product => {
+                if (brands.indexOf(product.brand) === -1) {
+                    brands.push(product.brand);
+                }
+            })
+            this.setState({brands: brands});
+            this.setState({products});
         })
     }
 
+    componentDidMount() {
+        this.fetchProducts();
+    }
+
+    componentDidUpdate(prevProps) {
+        if (this.props.match.params.category !== prevProps.match.params.category) {
+            this.fetchProducts();
+        }
+    }
 
     render() {
 
-        const renderPhones = this.state.phones.slice(this.state.minValue, this.state.maxValue).map((phone) => {
+        const renderProducts = this.state.products.slice(this.state.minValue, this.state.maxValue).map((product) => {
             return (
                 <Card hoverable
-                      key={phone.id}
+                      key={product.id}
                       className="myCard"
                       cover={
-                          <Link to={"/phones/" + phone.id}>
-                              <img alt={phone.name}
-                                   src={phone.img}
+                          <Link to={"/productdetails/" + product.id}>
+                              <img alt={product.name}
+                                   src={product.img}
                               />
                           </Link>
                       }>
                     <Meta
-                        title={phone.name}
-                        description={phone.config}
+                        title={product.name}
+                        description={product.config}
                     />
                     <div className="priceCart">
-                        <div className="price">{phone.price} RUB</div>
-                            <div className="cart">
-                               <span onClick={() => this.props.addToCart(phone.id, phone.name)}>
-                                   <ShoppingCartOutlined />
+                        <div className="price">{product.price} RUB</div>
+                        <div className="cart">
+                               <span onClick={() => this.props.addToCart(product.id, product.name)}>
+                                   <ShoppingCartOutlined/>
                                </span>
-                            </div>
+                        </div>
                     </div>
                 </Card>
             )
@@ -235,6 +261,7 @@ class Phones extends React.Component {
             <div>
                 <div className="filterSearch">
                     <div className="sorting">
+                        <div className="checkboxesName"> Brands: </div>
                         <div className="checkboxes">
                             {this.state.brands.map(brand => {
                                 return (
@@ -244,16 +271,16 @@ class Phones extends React.Component {
                         </div>
                         <div className="pricer">
                             <div className="priceText">
-                                Price:
+                                <strong>Price:</strong>
                             </div>
                             <div className="prices">
                                 <div className="priceFilter"><InputNumber min={0} id={"1"} size={"small"}
-                                                                    placeholder="Minimum"
-                                                                    onBlur={this.handleChangePrice}/></div>
+                                                                          placeholder="Minimum"
+                                                                          onBlur={this.handleChangePrice}/></div>
                                 <div><MinusOutlined/></div>
                                 <div className="priceFilter"><InputNumber min={0} id={"2"} size={"small"}
-                                                                    placeholder="Maximum"
-                                                                    onBlur={this.handleChangePrice}/></div>
+                                                                          placeholder="Maximum"
+                                                                          onBlur={this.handleChangePrice}/></div>
                             </div>
                         </div>
                     </div>
@@ -264,7 +291,7 @@ class Phones extends React.Component {
                     </div>
                     <div className="sorting">
                         <Dropdown overlay={menu} trigger='click'>
-                            <Button className = "sortButton" size={"large"}>
+                            <Button className="sortButton" size={"large"}>
                                 <div className="btnName">
                                     <div>{this.state.sortName} {(this.state.sortName !== 'Sorting') ?
                                         this.state.sortCheckArrowUp ? <ArrowUpOutlined/> : <ArrowDownOutlined/>
@@ -276,14 +303,14 @@ class Phones extends React.Component {
                     </div>
                 </div>
                 <div className="cardWrapper">
-                    {renderPhones}
+                    {renderProducts}
                 </div>
                 <div className="pagination">
                     <Pagination
                         current={this.state.current}
                         defaultPageSize={this.pageSize()}
                         onChange={this.handleChange}
-                        total={this.state.phones.length}
+                        total={this.state.products.length}
                     />
                 </div>
             </div>
@@ -294,4 +321,4 @@ class Phones extends React.Component {
 }
 
 
-export default Phones
+export default Products

@@ -75,8 +75,8 @@ public class BasketController {
         Basket basket = sessionBean.getBasket();
         if (basket != null) {
             basketRepository.delete(basket);
+            sessionBean.setBasket(null);
         }
-        sessionBean.setBasket(null);
     }
 
     @DeleteMapping("/removeitem/{id}")

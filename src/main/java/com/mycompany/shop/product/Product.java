@@ -30,6 +30,8 @@ public class Product {
 
     private String brand;
 
+    private String category;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<Image> images = new HashSet<>();
 
@@ -37,7 +39,7 @@ public class Product {
     private Set<TechSpec> techSpec = new HashSet<>();
 
     public Product(String name, Integer rating, Integer popularity, String config, Integer price,
-                   String img, String description, String brand) {
+                   String img, String description, String brand, String category) {
         this.name = name;
         this.rating = rating;
         this.popularity = popularity;
@@ -46,10 +48,11 @@ public class Product {
         this.img = img;
         this.description = description;
         this.brand = brand;
+        this.category = category;
     }
 
     public Product(Long id, String name, Integer rating, Integer popularity, String config, Integer price, String img,
-                   String description, String brand) {
+                   String description, String brand, String category) {
         this.id = id;
         this.name = name;
         this.rating = rating;
@@ -59,6 +62,7 @@ public class Product {
         this.img = img;
         this.description = description;
         this.brand = brand;
+        this.category = category;
     }
 
     public Product() {
@@ -138,6 +142,14 @@ public class Product {
 
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public void setImages(Set<Image> images) {
