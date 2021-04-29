@@ -57,6 +57,7 @@ class Products extends React.Component {
                 product.name.toLowerCase().includes(this.state.searchTerm.toLowerCase())
             );
 
+
             if (this.state.appliedBrands.length !== 0) {
                 result = result.filter(product =>
                     this.state.appliedBrands.indexOf(product.brand) !== -1
@@ -138,6 +139,7 @@ class Products extends React.Component {
                 }
             }
             this.setState({products: result});
+            this.setFirstPage();
         });
     }
 
@@ -170,6 +172,14 @@ class Products extends React.Component {
         this.applyFilters();
     }
 
+    setFirstPage = () => {
+        this.setState({
+            minValue: 0,
+            maxValue: this.pageSize(),
+            current : 1,
+        })
+    }
+
     fetchProducts = () => {
         axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
             const products = response.data;
@@ -181,6 +191,7 @@ class Products extends React.Component {
             })
             this.setState({brands: brands});
             this.setState({products});
+            this.setFirstPage();
         })
     }
 
@@ -193,6 +204,7 @@ class Products extends React.Component {
             this.fetchProducts();
         }
     }
+
 
     render() {
 
