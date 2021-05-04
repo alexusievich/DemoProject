@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from "antd";
+import {Button, Result} from "antd";
 import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import '../styles/Basket.css'
 import '../styles/NotFoundPage.css'
@@ -64,18 +64,11 @@ class Basket extends React.Component {
                 }
 
                 {!(this.props.basket) &&
-                <div className="notfound">
-                    <div className="error">
-                        <div className="text">The shopping cart is empty right now <ShoppingOutlined/></div>
-                    </div>
-                    <div className="button">
-                        <Link to="/">
-                            <Button type="primary" shape="round" size="large">
-                                Return to main page
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
+                <Result
+                    icon={<ShoppingOutlined/>}
+                    title="The shopping cart is empty right now!"
+                    extra={<Button type="primary" style={{borderRadius: '40px'}}><Link to={"/"}>Back Home</Link></Button>}
+                />
                 }
             </div>
         )

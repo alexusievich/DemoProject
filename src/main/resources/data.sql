@@ -957,3 +957,7 @@ values ( 10198, 'Color', 'Transparent', 10036 );
 
 insert into tech_spec
 values ( 10199, 'Material', 'Silicone', 10036 );
+
+
+insert into user
+values ( 1, '$2y$12$oUxJihOOdLAMlfQRriRNk.bTmxaTSpulfeQH41Vurg1OhRqjkl6nm' , 'User');

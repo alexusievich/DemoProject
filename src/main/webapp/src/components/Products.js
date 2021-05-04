@@ -28,7 +28,6 @@ class Products extends React.Component {
             maxPrice: 0,
             brands: [],
             appliedBrands: [],
-            appliedPrice: [],
             sortKey: '',
             sortCheckArrowUp: undefined,
         };
@@ -192,6 +191,14 @@ class Products extends React.Component {
             this.setState({brands: brands});
             this.setState({products});
             this.setFirstPage();
+            this.setState({
+                searchTerm: '',
+                sortName: 'Sorting',
+                minPrice: 0,
+                maxPrice: 0,
+                appliedBrands: [],
+                sortKey: '',
+            })
         })
     }
 
