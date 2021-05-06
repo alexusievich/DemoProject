@@ -16,7 +16,7 @@ public class Product {
 
     private String name;
 
-    private Integer rating;
+    private Double rating;
 
     private Integer popularity;
 
@@ -38,7 +38,7 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     private Set<TechSpec> techSpec = new HashSet<>();
 
-    public Product(String name, Integer rating, Integer popularity, String config, Integer price,
+    public Product(String name, Double rating, Integer popularity, String config, Integer price,
                    String img, String description, String brand, String category) {
         this.name = name;
         this.rating = rating;
@@ -51,7 +51,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(Long id, String name, Integer rating, Integer popularity, String config, Integer price, String img,
+    public Product(Long id, String name, Double rating, Integer popularity, String config, Integer price, String img,
                    String description, String brand, String category) {
         this.id = id;
         this.name = name;
@@ -84,11 +84,11 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getRating() {
+    public Double getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(Double rating) {
         this.rating = rating;
     }
 

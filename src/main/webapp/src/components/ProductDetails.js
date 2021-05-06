@@ -17,7 +17,7 @@ class ProductDetails extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        axios.get('/api/products/' + id).then(response => {
+        axios.get('/api/public/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
             if (Cookie.getCookie('phoneIds') === '') {
@@ -86,13 +86,13 @@ class ProductDetails extends React.Component {
                             {this.state.phoneDetails.name} {this.state.phoneDetails.config}
                         </div>
                         <div className="rating">
-                            {this.state.phoneDetails.rating} <StarFilled style={{color: "#1890ff"}}/>
+                            <StarFilled style={{color: "#1890ff"}}/> {this.state.phoneDetails.rating}
                         </div>
                         <div className="description">
                             {this.state.phoneDetails.description}
                         </div>
                         <div className="pricee">
-                            {this.state.phoneDetails.price} RUB
+                            {this.state.phoneDetails.price/1000} 000 RUB
                         </div>
                         <div className="cartt">
                             <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"

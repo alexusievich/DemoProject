@@ -35,7 +35,7 @@ public class ShopApplicationTests {
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4 , 3, "Android mobile phone",
+        long id = createTestProduct("Samsung", 4.0 , 3, "Android mobile phone",
                 20000, "href", "description", "Samsung", "phone").getId();
 
         mockMvc.perform(
@@ -43,7 +43,7 @@ public class ShopApplicationTests {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value("Samsung"))
-                .andExpect(jsonPath("$.rating").value(4))
+                .andExpect(jsonPath("$.rating").value(4.0))
                 .andExpect(jsonPath("$.popularity").value(3))
                 .andExpect(jsonPath("$.config").value("Android mobile phone"))
                 .andExpect(jsonPath("$.price").value(20000))
@@ -53,7 +53,7 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.category").value("phone"));
     }
 
-    private Product createTestProduct(String name, Integer rating, Integer popularity,
+    private Product createTestProduct(String name, Double rating, Integer popularity,
                                       String config, Integer price, String img, String description, String brand, String category) {
         Product product = new Product(name, rating, popularity, config, price, img, description, brand, category);
         return repository.save(product);

@@ -12,11 +12,12 @@ import ProductDetails from "./components/ProductDetails";
 import NotFoundPage from './components/NotFoundPage';
 import Basket from './components/Basket';
 import AuthorizationSuccess from "./components/AuthorizationSuccess";
-
 import {Redirect} from "react-router";
 import axios from "axios";
 import LoginForm from "./components/LoginForm";
 import RegistrationForm from "./components/RegistrationForm";
+import UserProfile from "./components/UserProfile";
+import Cookie from "./components/Cookie";
 
 const {Header, Footer, Content} = Layout;
 
@@ -27,72 +28,136 @@ class App extends React.Component {
         this.state = {
             basket: null,
             currentUser: null,
+            user: null,
         }
     }
 
-
     componentDidMount() {
-        axios.get('/api/basket').then(response => {
-            const basket = response.data;
-            this.setState({basket});
-        })
+        const userId = this.getUserId();
+        userId !== ''?
+            axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
+                const basket = response.data;
+                this.setState({basket});
+                console.log("YEs");
+            })
+            :
+            axios.get('/api/public/basket/unregistered').then(response => {
+                const basket = response.data;
+                this.setState({basket});
+                console.log("No");
+            })
+        let user = "";
+        user = Cookie.getCookie("user");
+        if (user !== "") {
+            this.setState({currentUser: JSON.parse(user)})
+        }
+        axios.get("/api/userinfo/" + userId).then(response => {
+                const user = response.data;
+                this.setState({user});
+            }
+        )
     };
+
+    getBasket = (response, name) => {
+        const basket = response.data;
+        this.setState({basket});
+        notification.open({
+            top: 70,
+            message: `The ${name} successfully added to cart!`,
+            duration: 1.5,
+            icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+        });
+    }
 
 
     addToCart = (id, name) => {
-        axios.post("/api/basket", {id: id}).then(response => {
-                const basket = response.data;
-                this.setState({basket});
-                notification.open({
-                    top: 70,
-                    message: `The ${name} successfully added to cart!`,
-                    duration: 1.5,
-                    icon: <CheckCircleOutlined style={{ color: '#108ee9', fontSize: 30}} />,
-                });
-            }
-        );
+        const userId = this.getUserId();
+        userId ?
+            axios.post("/api/public/basket", {id: id, userId: userId}).then(
+                response => {
+                    this.getBasket(response, name);
+                }
+            )
+            :
+            axios.post("/api/public/basket/unregistered", {id: id})
+                .then(response => {
+                        this.getBasket(response, name);
+                    }
+                );
     }
 
     clearBasket = () => {
-        axios.delete("/api/basket/clear").then(response => {
+        axios.delete("/api/public/basket/clear").then(response => {
             this.setState({basket: null});
         });
     }
 
     removeItem = (id) => {
-        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
-                axios.get('/api/basket').then(response => {
-                    const basket = response.data;
-                    this.setState({basket});
-                });
+        const userId = this.getUserId();
+        axios.delete(`/api/public/basket/removeitem/${id}`).then(response => {
+                userId ?
+                    axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
+                        const basket = response.data;
+                        this.setState({basket});
+                    })
+                    :
+                    axios.get('/api/public/basket/unregistered').then(response => {
+                        const basket = response.data;
+                        this.setState({basket});
+                    })
             }
         );
     }
 
     logOut = () => {
-        axios.post("/api/auth/logout").then(response => {
+        axios.post("/api/public/auth/logout").then(response => {
             notification.open({
                 top: 70,
-                message: `${this.state.currentUser}, you have successfully logged out of your account!`,
+                message: `${this.state.currentUser.username}, you have successfully logged out of your account!`,
                 duration: 2.5,
-                icon: <LogoutOutlined style={{ color: '#108ee9', fontSize: 30}} />,
+                icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             })
-            this.setState({currentUser : null});
+            this.setState({user: null});
+            this.setState({currentUser: null});
+            Cookie.deleteCookie("user");
         });
+        axios.delete("/api/public/basket/logout").then(response => {
+                this.setState({basket: null});
+            }
+        );
     }
 
     submitForm = (username, password) => {
-            axios.post("/api/auth/login", {username: username, password: password}).then(response => {
-                this.setState({currentUser: response.data});
-                notification.open({
-                    top: 70,
-                    message: `${this.state.currentUser}, you have successfully logged in to your account!`,
-                    duration: 2.5,
-                    icon: <LoginOutlined style={{ color: '#108ee9', fontSize: 30}} />,
-                });
-            }).catch(error => {
-                message.error("Invalid username or password!");
+        axios.post("/api/public/auth/login", {username: username, password: password}).then(response => {
+            this.setState({currentUser: response.data});
+            if (this.state.currentUser) {
+                Cookie.setCookie("user", JSON.stringify(this.state.currentUser));
+            }
+            notification.open({
+                top: 70,
+                message: `${this.state.currentUser.username}, you have successfully logged in to your account!`,
+                duration: 2.5,
+                icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+            });
+            const userId = this.getUserId();
+            axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
+                const basket = response.data;
+                this.setState({basket});
             })
+            axios.get("/api/userinfo/" + userId).then(response => {
+                    const user = response.data;
+                    this.setState({user});
+                }
+            )
+        }).catch(error => {
+            message.error("Invalid username or password!");
+        })
+    }
+
+    getUserId = () => {
+        let userId = '';
+        if (Cookie.getCookie("user") !== '') {userId = JSON.parse(Cookie.getCookie("user")).id;}
+        return userId;
     }
 
     render() {
@@ -101,7 +166,7 @@ class App extends React.Component {
             <Layout className="mainLayout">
                 <Header>
                     <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}
-                    currentUser={this.state.currentUser} logOut={this.logOut}/>
+                               currentUser={this.state.currentUser?.username} logOut={this.logOut}/>
                 </Header>
                 <Content>
                     <Switch>
@@ -113,11 +178,13 @@ class App extends React.Component {
                         <Route exact path="/404" component={NotFoundPage}/>
                         <Route exact path="/basket" render={(props) =>
                             (<Basket {...props} basket={this.state.basket}
-                            clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
-                            <Route exact path="/login" render={(props) =>
-                                (<LoginForm {...props} submitForm={this.submitForm}/>)}/>
-                                <Route exact path="/register" component={RegistrationForm} />
-                            <Route exact path="/success" component={AuthorizationSuccess}/>
+                                     clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
+                        <Route exact path="/login" render={(props) =>
+                            (<LoginForm {...props} submitForm={this.submitForm}/>)}/>
+                        <Route exact path="/register" component={RegistrationForm}/>
+                        <Route exact path="/success" component={AuthorizationSuccess}/>
+                        <Route exact path="/info" render={(props) =>
+                            (<UserProfile {...props} user={this.state.user}/> )}/>
                         <Route>
                             <Redirect to="/404"/>
                         </Route>

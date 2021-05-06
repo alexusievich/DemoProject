@@ -1,6 +1,7 @@
 package com.mycompany.shop.basket;
 
 import com.mycompany.shop.item.Item;
+import com.mycompany.shop.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +15,9 @@ public class Basket {
     private Long id;
 
     private Integer totalPrice = 0;
+
+
+    private Long userId;
 
     @OneToMany
     private List<Item> items = new ArrayList<>();
@@ -40,6 +44,15 @@ public class Basket {
     public void recalculateTotalPrice() {
         this.totalPrice = 0;
         items.forEach(item -> this.totalPrice += item.getProduct().getPrice());
+    }
+
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public List<Item> getItems() {

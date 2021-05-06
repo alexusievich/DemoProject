@@ -30,7 +30,7 @@ class Basket extends React.Component {
                         </div>
                     </div>
                     <div className="itemPrice">
-                        {phone.product.price} RUB
+                        {phone.product.price/1000} 000 RUB
                     </div>
                     <div className="itemRemove">
                         <Button type="primary" shape="round" size="large"
@@ -49,7 +49,7 @@ class Basket extends React.Component {
                 <div>
                     <div className="basketTitle">
                         <div className="basketName">Shopping cart - {this.props.basket.items.length} items</div>
-                        <div className="basketTotal">Total: {this.props.basket.totalPrice / 1000}.000 RUB</div>
+                        <div className="basketTotal">Total: {this.props.basket.totalPrice / 1000} 000 RUB</div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
                                     onClick={this.props.clearBasket}>

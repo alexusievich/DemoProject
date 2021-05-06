@@ -22,9 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().httpBasic().disable().csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .antMatchers("/api/userinfo/**").authenticated()
+                .antMatchers("/api/public/**").permitAll()
                 .antMatchers(   "/h2-console/**").permitAll()
-                .and().headers().frameOptions().sameOrigin();;
+                .anyRequest().authenticated()
+                .and().headers().frameOptions().sameOrigin();
     }
 
     @Override

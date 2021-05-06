@@ -3,12 +3,18 @@
     margin: 20px auto;
     font-size: 30px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
+.basketTotal {
+    text-align: right;
+    width: 45%;
+}
+
 .basketClear {
+    width: 25%;
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -58,7 +64,8 @@
 }
 
 .itemRemove {
+    display: flex;
+    justify-content: center;
     text-align: right;
     width: 25%;
-    padding-right: 40px;
 }

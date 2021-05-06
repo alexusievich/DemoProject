@@ -4,12 +4,12 @@ import axios from "axios";
 
 class RegistrationForm extends React.Component {
 
-    submitForm = (username, password) => {
-                axios.post("/api/auth/create", {username: username, password: password}).then(response => {
-                    this.props.history.push("/success");
-                }).catch(error => {
-                    message.error(error.response.data);
-                })
+    submitForm = (username, password, email) => {
+        axios.post("/api/public/auth/create", {username: username, password: password, email: email}).then(response => {
+            this.props.history.push("/success");
+        }).catch(error => {
+            message.error(error.response.data);
+        })
     }
 
     render() {
@@ -31,7 +31,15 @@ class RegistrationForm extends React.Component {
 
 
         const onFinish = (values) => {
-            this.submitForm(values.username, values.password)
+            const emailRegex = new RegExp('([a-zA-Z0-9][\\w.-]{0,20}[a-zA-Z0-9]{1})@([a-zA-Z0-9]{1}[a-zA-Z0-9-]*[a-zA-Z0-9]{1}[.])+(ru|com|org|net)');
+            if (emailRegex.test(values.email)) {
+                values.password === values.passwordagain ?
+                    this.submitForm(values.username, values.password, values.email)
+                    :
+                    message.error("Passwords must match!")
+            } else {
+                message.error("Invalid e-mail address!")
+            }
         };
 
         const onFinishFailed = (errorInfo) => {
@@ -73,6 +81,33 @@ class RegistrationForm extends React.Component {
                     ]}
                 >
                     <Input.Password/>
+                </Form.Item>
+
+                <Form.Item
+                    label="Re-enter password"
+                    name="passwordagain"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your password again!',
+                        },
+                    ]}
+                >
+                    <Input.Password/>
+                </Form.Item>
+
+
+                <Form.Item
+                    label="E-mail"
+                    name="email"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your e-mail!',
+                        },
+                    ]}
+                >
+                    <Input/>
                 </Form.Item>
 
 

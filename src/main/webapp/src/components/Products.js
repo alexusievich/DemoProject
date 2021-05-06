@@ -24,8 +24,8 @@ class Products extends React.Component {
             current: 1,
             searchTerm: '',
             sortName: 'Sorting',
-            minPrice: 0,
-            maxPrice: 0,
+            minPrice: undefined,
+            maxPrice: undefined,
             brands: [],
             appliedBrands: [],
             sortKey: '',
@@ -49,7 +49,7 @@ class Products extends React.Component {
     };
 
     applyFilters = () => {
-        axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
+        axios.get('/api/public/products', {params: {category: this.props.match.params.category}}).then(response => {
             const products = response.data;
 
             let result = products.filter(product =>
@@ -180,7 +180,7 @@ class Products extends React.Component {
     }
 
     fetchProducts = () => {
-        axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
+        axios.get('/api/public/products', {params: {category: this.props.match.params.category}}).then(response => {
             const products = response.data;
             const brands = [];
             products.forEach(product => {
@@ -194,8 +194,8 @@ class Products extends React.Component {
             this.setState({
                 searchTerm: '',
                 sortName: 'Sorting',
-                minPrice: 0,
-                maxPrice: 0,
+                minPrice: undefined,
+                maxPrice: undefined,
                 appliedBrands: [],
                 sortKey: '',
             })
@@ -232,7 +232,7 @@ class Products extends React.Component {
                         description={product.config}
                     />
                     <div className="priceCart">
-                        <div className="price">{product.price} RUB</div>
+                        <div className="price">{product.price/1000} 000 RUB</div>
                         <div className="cart">
                                <span onClick={() => this.props.addToCart(product.id, product.name)}>
                                    <ShoppingCartOutlined/>
@@ -284,7 +284,7 @@ class Products extends React.Component {
                         <div className="checkboxes">
                             {this.state.brands.map(brand => {
                                 return (
-                                    <Checkbox value={brand} onChange={this.onBrandChange}>{brand}</Checkbox>
+                                    <Checkbox value={brand} checked={this.state.appliedBrands.indexOf(brand) !== -1} onChange={this.onBrandChange}>{brand}</Checkbox>
                                 )
                             })}
                         </div>
@@ -294,10 +294,12 @@ class Products extends React.Component {
                             </div>
                             <div className="prices">
                                 <div className="priceFilter"><InputNumber min={0} id={"1"} size={"small"}
+                                                                          value={this.state.minPrice}
                                                                           placeholder="Minimum"
                                                                           onBlur={this.handleChangePrice}/></div>
                                 <div><MinusOutlined/></div>
                                 <div className="priceFilter"><InputNumber min={0} id={"2"} size={"small"}
+                                                                          value={this.state.maxPrice }
                                                                           placeholder="Maximum"
                                                                           onBlur={this.handleChangePrice}/></div>
                             </div>

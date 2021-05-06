@@ -36,6 +36,7 @@ class AppHeader extends React.Component {
                              style={{float: 'right', fontSize: '120%'}}>
                         {!this.props.currentUser && <Menu.Item key="sign">
                             <Link to={"/login"}>Sign in</Link></Menu.Item>}
+                        {this.props.currentUser && <Menu.Item key="email"><Link to={"/info/"}>Profile</Link></Menu.Item>}
                         {this.props.currentUser && <Menu.Item key="logout" onClick={this.props.logOut}>Log Out</Menu.Item>}
                         {!this.props.currentUser && <Menu.Item key="register">
                             <Link to={"/register"}>Create Account</Link></Menu.Item>}

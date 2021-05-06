@@ -1,7 +1,5 @@
 package com.mycompany.shop.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,9 +16,17 @@ public class User {
 
     private String password;
 
-    public User(String username, String password) {
+    private String email;
+
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
+    }
+
+    public User(Long id, String username) {
+        this.id = id;
+        this.username = username;
     }
 
     public User() {
@@ -51,12 +57,12 @@ public class User {
         this.password = password;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+    public String getEmail() {
+        return email;
     }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }

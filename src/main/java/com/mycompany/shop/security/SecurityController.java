@@ -1,5 +1,6 @@
 package com.mycompany.shop.security;
 
+import com.mycompany.shop.basket.BasketRepository;
 import com.mycompany.shop.security.userdetails.UserDetailsImpl;
 import com.mycompany.shop.user.User;
 import com.mycompany.shop.user.UserRepository;
@@ -16,11 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/public/auth")
 public class SecurityController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    BasketRepository basketRepository;
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -37,7 +41,9 @@ public class SecurityController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        return ResponseEntity.ok(userDetails.getUsername());
+        User authenticatedUser = new User(userDetails.getId(), userDetails.getUsername());
+
+        return ResponseEntity.ok(authenticatedUser);
     }
 
     @PostMapping("/logout")
@@ -55,10 +61,13 @@ public class SecurityController {
             User newUser = new User();
             newUser.setUsername(user.getUsername());
             newUser.setPassword(passwordEncoder.encode(user.getPassword()));
+            newUser.setEmail(user.getEmail());
             userRepository.save(newUser);
             return ResponseEntity.ok(newUser.getUsername());
         }
     }
+
+
 
 
 
