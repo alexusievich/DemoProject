@@ -18,7 +18,7 @@ class UserProfile extends React.Component {
                           key={this.props.user.id}
                           className="profileCard"
                           cover={
-                              <img alt={"picture"}
+                              <img alt={"userAvatar"}
                                    src={"https://vdostavka.ru/wp-content/uploads/2019/05/no-avatar.png"}
                               />
                           }>
