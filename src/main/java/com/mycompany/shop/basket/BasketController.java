@@ -122,7 +122,6 @@ public class BasketController {
             itemRepository.save(item);
             basket.getItems().add(item);
             basket.recalculateTotalPrice();
-            basket = basketRepository.save(basket);
             sessionBean.setBasket(basket);
             return ResponseEntity.ok(basket);
         } else {
