@@ -1,7 +1,6 @@
 package com.mycompany.shop.basket;
 
 import com.mycompany.shop.item.Item;
-import com.mycompany.shop.user.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,10 +18,14 @@ public class Basket {
 
     private Long userId;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<>();
 
     public Basket() {
+    }
+
+    public Basket(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {

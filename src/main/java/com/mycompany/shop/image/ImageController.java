@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/public/images")
+@RequestMapping("/api/images")
 public class ImageController {
 
     private ProductRepository productRepository;

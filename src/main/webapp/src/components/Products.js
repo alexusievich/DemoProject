@@ -180,7 +180,7 @@ class Products extends React.Component {
     }
 
     fetchProducts = () => {
-        axios.get('/api/public/products', {params: {category: this.props.match.params.category}}).then(response => {
+        axios.get('/api/products', {params: {category: this.props.match.params.category}}).then(response => {
             const products = response.data;
             const brands = [];
             products.forEach(product => {
@@ -232,7 +232,7 @@ class Products extends React.Component {
                         description={product.config}
                     />
                     <div className="priceCart">
-                        <div className="price">{product.price > 1000 ? product.price/1000 + "000": product.price} RUB</div>
+                        <div className="price">{product.price > 1000 ? product.price/1000 + " 000" : product.price} RUB</div>
                         <div className="cart">
                                <span onClick={() => this.props.addToCart(product.id, product.name)}>
                                    <ShoppingCartOutlined/>

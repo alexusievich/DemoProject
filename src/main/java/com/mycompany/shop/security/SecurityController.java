@@ -1,9 +1,12 @@
 package com.mycompany.shop.security;
 
+import com.mycompany.shop.basket.Basket;
 import com.mycompany.shop.basket.BasketRepository;
+import com.mycompany.shop.basket.BasketSessionBean;
 import com.mycompany.shop.security.userdetails.UserDetailsImpl;
 import com.mycompany.shop.user.User;
 import com.mycompany.shop.user.UserRepository;
+import com.mycompany.shop.user.UserSessionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/public/auth")
+@RequestMapping("/api/auth")
 public class SecurityController {
 
     @Autowired
@@ -32,6 +35,12 @@ public class SecurityController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    BasketSessionBean basketSessionBean;
+
+    @Autowired
+    UserSessionBean userSessionBean;
+
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody User user) {
         Authentication authentication = authenticationManager.authenticate(
@@ -43,11 +52,25 @@ public class SecurityController {
 
         User authenticatedUser = new User(userDetails.getId(), userDetails.getUsername());
 
+        userSessionBean.setUser(authenticatedUser);
+
+        if (basketRepository.findBasketByUserId(userDetails.getId()).isPresent()) {
+            Basket basket = basketRepository.findBasketByUserId(userDetails.getId()).get();
+            basketSessionBean.setBasket(basket);
+        } else {
+            basketSessionBean.setBasket(null);
+        }
+
         return ResponseEntity.ok(authenticatedUser);
     }
 
     @PostMapping("/logout")
     public void logout() {
+        Basket basket = basketSessionBean.getBasket();
+        if (basket != null) {
+            basketSessionBean.setBasket(null);
+        }
+        userSessionBean.setUser(null);
         SecurityContextHolder.clearContext();
     }
 

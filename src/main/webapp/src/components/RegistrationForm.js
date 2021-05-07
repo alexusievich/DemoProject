@@ -5,7 +5,7 @@ import axios from "axios";
 class RegistrationForm extends React.Component {
 
     submitForm = (username, password, email) => {
-        axios.post("/api/public/auth/create", {username: username, password: password, email: email}).then(response => {
+        axios.post("/api/auth/create", {username: username, password: password, email: email}).then(response => {
             this.props.history.push("/success");
         }).catch(error => {
             message.error(error.response.data);

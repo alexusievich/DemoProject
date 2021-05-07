@@ -1,6 +1,5 @@
 package com.mycompany.shop.user;
 
-import com.mycompany.shop.product.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class UserController {
         Optional<User> optionalUser = userRepository.findById(id);
 
         if (optionalUser.isEmpty()) {
-            throw new ProductNotFoundException("The user with id: " + id + " is not found");
+            throw new UserNotFoundException("The user with id: " + id + " is not found");
         }
 
         return  ResponseEntity.ok(optionalUser.get());

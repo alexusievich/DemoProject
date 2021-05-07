@@ -27,7 +27,7 @@ class RecentProducts extends React.Component {
 
         ids.reverse().forEach(id => {
             if (id !== '') {
-                axios.get('/api/public/products/' + id).then(response => {
+                axios.get('/api/products/' + id).then(response => {
                     const phone = response.data;
                     this.setState(prevState => ({
                         phones: [...prevState.phones, phone]

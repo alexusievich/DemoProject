@@ -17,7 +17,7 @@ class ProductDetails extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id;
-        axios.get('/api/public/products/' + id).then(response => {
+        axios.get('/api/products/' + id).then(response => {
             const phoneDetails = response.data;
             this.setState({phoneDetails});
             if (Cookie.getCookie('phoneIds') === '') {

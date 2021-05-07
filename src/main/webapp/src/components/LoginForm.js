@@ -13,7 +13,7 @@ class LoginForm extends React.Component {
     }
 
     submitForm = (username, password) => {
-        axios.post("/api/public/auth/login", {username: username, password: password}).then(response => {
+        axios.post("/api/auth/login", {username: username, password: password}).then(response => {
             this.props.submitForm(username,password);
             this.props.history.push("/");
         }).catch(error => {

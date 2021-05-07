@@ -17,7 +17,6 @@ import axios from "axios";
 import LoginForm from "./components/LoginForm";
 import RegistrationForm from "./components/RegistrationForm";
 import UserProfile from "./components/UserProfile";
-import Cookie from "./components/Cookie";
 
 const {Header, Footer, Content} = Layout;
 
@@ -33,23 +32,11 @@ class App extends React.Component {
     }
 
     componentDidMount() {
-        const userId = this.getUserId();
-        userId !== ''?
-            axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
-                const basket = response.data;
-                this.setState({basket});
-            })
-            :
-            axios.get('/api/public/basket/unregistered').then(response => {
-                const basket = response.data;
-                this.setState({basket});
-            })
-        let user = "";
-        user = Cookie.getCookie("user");
-        if (user !== "") {
-            this.setState({currentUser: JSON.parse(user)})
-        }
-        axios.get("/api/userinfo/" + userId).then(response => {
+        axios.get('/api/basket').then(response => {
+            const basket = response.data;
+            this.setState({basket});
+        })
+        axios.get("/api/userinfo/" + this.state.currentUser?.id).then(response => {
                 const user = response.data;
                 this.setState({user});
             }
@@ -69,46 +56,31 @@ class App extends React.Component {
 
 
     addToCart = (id, name) => {
-        const userId = this.getUserId();
-        userId ?
-            axios.post("/api/public/basket", {id: id, userId: userId}).then(
-                response => {
-                    this.getBasket(response, name);
-                }
-            )
-            :
-            axios.post("/api/public/basket/unregistered", {id: id})
-                .then(response => {
-                        this.getBasket(response, name);
-                    }
-                );
+        axios.post("/api/basket", {id: id}).then(
+            response => {
+                this.getBasket(response, name);
+            }
+        )
     }
 
     clearBasket = () => {
-        axios.delete("/api/public/basket/clear").then(response => {
+        axios.delete("/api/basket/clear").then(response => {
             this.setState({basket: null});
         });
     }
 
     removeItem = (id) => {
-        const userId = this.getUserId();
-        axios.delete(`/api/public/basket/removeitem/${id}`).then(response => {
-                userId ?
-                    axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
-                        const basket = response.data;
-                        this.setState({basket});
-                    })
-                    :
-                    axios.get('/api/public/basket/unregistered').then(response => {
-                        const basket = response.data;
-                        this.setState({basket});
-                    })
+        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
+                axios.get('/api/basket').then(response => {
+                    const basket = response.data;
+                    this.setState({basket});
+                })
             }
         );
     }
 
     logOut = () => {
-        axios.post("/api/public/auth/logout").then(response => {
+        axios.post("/api/auth/logout").then(response => {
             notification.open({
                 top: 70,
                 message: `${this.state.currentUser.username}, you have successfully logged out of your account!`,
@@ -117,32 +89,24 @@ class App extends React.Component {
             })
             this.setState({user: null});
             this.setState({currentUser: null});
-            Cookie.deleteCookie("user");
+            this.setState({basket: null});
         });
-        axios.delete("/api/public/basket/logout").then(response => {
-                this.setState({basket: null});
-            }
-        );
     }
 
     submitForm = (username, password) => {
-        axios.post("/api/public/auth/login", {username: username, password: password}).then(response => {
+        axios.post("/api/auth/login", {username: username, password: password}).then(response => {
             this.setState({currentUser: response.data});
-            if (this.state.currentUser) {
-                Cookie.setCookie("user", JSON.stringify(this.state.currentUser));
-            }
             notification.open({
                 top: 70,
                 message: `${this.state.currentUser.username}, you have successfully logged in to your account!`,
                 duration: 2.5,
                 icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             });
-            const userId = this.getUserId();
-            axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
+            axios.get('/api/basket').then(response => {
                 const basket = response.data;
                 this.setState({basket});
             })
-            axios.get("/api/userinfo/" + userId).then(response => {
+            axios.get("/api/userinfo/" + this.state.currentUser.id).then(response => {
                     const user = response.data;
                     this.setState({user});
                 }
@@ -150,12 +114,6 @@ class App extends React.Component {
         }).catch(error => {
             message.error("Invalid username or password!");
         })
-    }
-
-    getUserId = () => {
-        let userId = '';
-        if (Cookie.getCookie("user") !== '') {userId = JSON.parse(Cookie.getCookie("user")).id;}
-        return userId;
     }
 
     render() {
@@ -182,7 +140,7 @@ class App extends React.Component {
                         <Route exact path="/register" component={RegistrationForm}/>
                         <Route exact path="/success" component={AuthorizationSuccess}/>
                         <Route exact path="/info" render={(props) =>
-                            (<UserProfile {...props} user={this.state.user}/> )}/>
+                            (<UserProfile {...props} user={this.state.user}/>)}/>
                         <Route>
                             <Redirect to="/404"/>
                         </Route>

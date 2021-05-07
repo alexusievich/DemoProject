@@ -32,10 +32,10 @@ public class Product {
 
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
     private Set<Image> images = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
     private Set<TechSpec> techSpec = new HashSet<>();
 
     public Product(String name, Double rating, Integer popularity, String config, Integer price,
