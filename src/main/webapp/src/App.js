@@ -38,13 +38,11 @@ class App extends React.Component {
             axios.get('/api/public/basket', {params: {userId: userId}}).then(response => {
                 const basket = response.data;
                 this.setState({basket});
-                console.log("YEs");
             })
             :
             axios.get('/api/public/basket/unregistered').then(response => {
                 const basket = response.data;
                 this.setState({basket});
-                console.log("No");
             })
         let user = "";
         user = Cookie.getCookie("user");
