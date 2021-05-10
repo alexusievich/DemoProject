@@ -36,7 +36,7 @@ class App extends React.Component {
             const basket = response.data;
             this.setState({basket});
         })
-        axios.get("/api/userinfo/" + this.state.currentUser?.id).then(response => {
+        this.state.currentUser && axios.get("/api/userinfo/" + this.state.currentUser.id).then(response => {
                 const user = response.data;
                 this.setState({user});
             }
