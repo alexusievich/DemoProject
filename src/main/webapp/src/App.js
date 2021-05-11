@@ -26,39 +26,36 @@ class App extends React.Component {
         super(props);
         this.state = {
             basket: null,
-            currentUser: null,
             user: null,
         }
     }
 
     componentDidMount() {
+        this.getBasketAndUserInfo();
+    };
+
+    getBasketAndUserInfo = () => {
         axios.get('/api/basket').then(response => {
             const basket = response.data;
             this.setState({basket});
         })
-        this.state.currentUser && axios.get("/api/userinfo/" + this.state.currentUser.id).then(response => {
-                const user = response.data;
-                this.setState({user});
-            }
-        )
-    };
-
-    getBasket = (response, name) => {
-        const basket = response.data;
-        this.setState({basket});
-        notification.open({
-            top: 70,
-            message: `The ${name} successfully added to cart!`,
-            duration: 1.5,
-            icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
-        });
+        axios.get("/api/userinfo").then(response => {
+            const user = response.data;
+            this.setState({user});
+        })
     }
-
 
     addToCart = (id, name) => {
         axios.post("/api/basket", {id: id}).then(
             response => {
-                this.getBasket(response, name);
+                const basket = response.data;
+                this.setState({basket});
+                notification.open({
+                    top: 70,
+                    message: `The ${name} successfully added to cart!`,
+                    duration: 1.5,
+                    icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+                });
             }
         )
     }
@@ -83,34 +80,26 @@ class App extends React.Component {
         axios.post("/api/auth/logout").then(response => {
             notification.open({
                 top: 70,
-                message: `${this.state.currentUser.username}, you have successfully logged out of your account!`,
+                message: `${this.state.user.username}, you have successfully logged out of your account!`,
                 duration: 2.5,
                 icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             })
             this.setState({user: null});
-            this.setState({currentUser: null});
             this.setState({basket: null});
         });
     }
 
     submitForm = (username, password) => {
         axios.post("/api/auth/login", {username: username, password: password}).then(response => {
-            this.setState({currentUser: response.data});
+            const user = response.data;
+            this.setState({user});
             notification.open({
                 top: 70,
-                message: `${this.state.currentUser.username}, you have successfully logged in to your account!`,
+                message: `${this.state.user.username}, you have successfully logged in to your account!`,
                 duration: 2.5,
                 icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             });
-            axios.get('/api/basket').then(response => {
-                const basket = response.data;
-                this.setState({basket});
-            })
-            axios.get("/api/userinfo/" + this.state.currentUser.id).then(response => {
-                    const user = response.data;
-                    this.setState({user});
-                }
-            )
+           this.getBasketAndUserInfo();
         }).catch(error => {
             message.error("Invalid username or password!");
         })
@@ -122,7 +111,7 @@ class App extends React.Component {
             <Layout className="mainLayout">
                 <Header>
                     <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}
-                               currentUser={this.state.currentUser?.username} logOut={this.logOut}/>
+                               currentUser={this.state.user?.username} logOut={this.logOut}/>
                 </Header>
                 <Content>
                     <Switch>
@@ -150,10 +139,9 @@ class App extends React.Component {
                     <AppFooter/>
                 </Footer>
             </Layout>
-
         );
-    }
 
+    }
 
 }
 

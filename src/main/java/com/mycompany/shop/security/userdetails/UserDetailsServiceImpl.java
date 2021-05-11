@@ -1,6 +1,5 @@
 package com.mycompany.shop.security.userdetails;
 
-import com.mycompany.shop.security.userdetails.UserDetailsImpl;
 import com.mycompany.shop.user.User;
 import com.mycompany.shop.user.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
-@Service("userDetailsServiceImpl")
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired

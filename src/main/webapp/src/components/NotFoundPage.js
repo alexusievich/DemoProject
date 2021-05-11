@@ -3,7 +3,6 @@ import '../styles/NotFoundPage.css'
 import {Button, Result} from "antd";
 import {Link} from 'react-router-dom'
 
-
 class NotFoundPage extends React.Component {
     render() {
         return (

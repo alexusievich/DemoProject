@@ -4,6 +4,7 @@ import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import '../styles/Basket.css'
 import '../styles/NotFoundPage.css'
 import {Link} from "react-router-dom";
+import NumberFormat from 'react-number-format'
 
 class Basket extends React.Component {
 
@@ -30,7 +31,7 @@ class Basket extends React.Component {
                         </div>
                     </div>
                     <div className="itemPrice">
-                        {phone.product.price > 1000 ? phone.product.price/1000 + " 000" : phone.product.price} RUB
+                        <NumberFormat value={phone.product.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
                     </div>
                     <div className="itemRemove">
                         <Button type="primary" shape="round" size="large"
@@ -50,7 +51,7 @@ class Basket extends React.Component {
                     <div className="basketTitle">
                         <div className="basketName">Shopping cart - {this.props.basket.items.length} items</div>
                         <div className="basketTotal">
-                            Total: {Math.trunc(this.props.basket.totalPrice / 1000)} {this.props.basket.totalPrice % 1000 === 0 ? "000" : this.props.basket.totalPrice % 1000} RUB
+                            Total: <NumberFormat value={this.props.basket.totalPrice} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
                         </div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"

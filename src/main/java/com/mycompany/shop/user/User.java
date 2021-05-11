@@ -1,9 +1,6 @@
 package com.mycompany.shop.user;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class User {
@@ -12,6 +9,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
@@ -24,14 +22,18 @@ public class User {
         this.email = email;
     }
 
+    public User(Long id, String username, String email) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+    }
+
     public User(Long id, String username) {
         this.id = id;
         this.username = username;
     }
 
-    public User() {
-
-    }
+    public User() {}
 
     public Long getId() {
         return id;

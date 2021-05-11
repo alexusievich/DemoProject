@@ -58,45 +58,27 @@ public class BasketController {
     @PostMapping
     public ResponseEntity<Basket> addToBasket(@RequestBody CreateBasketRequest createBasketRequest) {
         Basket basket;
-        if (userSessionBean.getUser() != null) {
-            Long userId = userSessionBean.getUser().getId();
-            Optional<Product> existingProduct = productRepository.findById(createBasketRequest.getId());
-            if (existingProduct.isPresent()) {
-                if (basketRepository.findBasketByUserId(userId).isEmpty()) {
-                    basket = new Basket();
-                    basket.setUserId(userId);
-                } else {
-                    basket = basketRepository.findBasketByUserId(userId).get();
+        Optional<Product> existingProduct = productRepository.findById(createBasketRequest.getId());
+        if (existingProduct.isPresent()) {
+            if (basketSessionBean.getBasket() == null) {
+                basket = new Basket();
+                if (userSessionBean.getUser() != null) {
+                    basket.setUserId(userSessionBean.getUser().getId());
                 }
-                Item item = new Item();
-                item.setProduct(existingProduct.get());
-                itemRepository.save(item);
-                basket.getItems().add(item);
-                basket.recalculateTotalPrice();
-                basket = basketRepository.save(basket);
-                basketSessionBean.setBasket(basket);
             } else {
-                throw new ProductNotFoundException("The product with id: " + createBasketRequest.getId() + " is not found");
+                basket = basketSessionBean.getBasket();
             }
+            Item item = new Item();
+            item.setProduct(existingProduct.get());
+            itemRepository.save(item);
+            basket.getItems().add(item);
+            basket.recalculateTotalPrice();
+            basket = basketRepository.save(basket);
+            basketSessionBean.setBasket(basket);
+            return ResponseEntity.ok(basket);
         } else {
-            Optional<Product> existingProduct = productRepository.findById(createBasketRequest.getId());
-            if (existingProduct.isPresent()) {
-                if (basketSessionBean.getBasket() == null) {
-                    basket = new Basket();
-                } else {
-                    basket = basketSessionBean.getBasket();
-                }
-                Item item = new Item();
-                item.setProduct(existingProduct.get());
-                itemRepository.save(item);
-                basket.getItems().add(item);
-                basket.recalculateTotalPrice();
-                basketSessionBean.setBasket(basket);
-            } else {
-                throw new ProductNotFoundException("The product with id: " + createBasketRequest.getId() + " is not found");
-            }
+            throw new ProductNotFoundException("The product with id: " + createBasketRequest.getId() + " is not found");
         }
-        return ResponseEntity.ok(basket);
     }
 
     @DeleteMapping("/clear")

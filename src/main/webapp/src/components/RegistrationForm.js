@@ -29,7 +29,6 @@ class RegistrationForm extends React.Component {
             },
         };
 
-
         const onFinish = (values) => {
             const emailRegex = new RegExp('([a-zA-Z0-9][\\w.-]{0,20}[a-zA-Z0-9]{1})@([a-zA-Z0-9]{1}[a-zA-Z0-9-]*[a-zA-Z0-9]{1}[.])+(ru|com|org|net)');
             if (emailRegex.test(values.email)) {
@@ -45,7 +44,6 @@ class RegistrationForm extends React.Component {
         const onFinishFailed = (errorInfo) => {
             console.log('Failed:', errorInfo);
         };
-
 
         return (
             <Form
@@ -96,7 +94,6 @@ class RegistrationForm extends React.Component {
                     <Input.Password/>
                 </Form.Item>
 
-
                 <Form.Item
                     label="E-mail"
                     name="email"
@@ -109,7 +106,6 @@ class RegistrationForm extends React.Component {
                 >
                     <Input/>
                 </Form.Item>
-
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit" style={{borderRadius: '40px'}}>

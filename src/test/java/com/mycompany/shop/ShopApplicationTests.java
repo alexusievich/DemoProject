@@ -13,6 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 
+import java.math.BigDecimal;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -35,7 +37,7 @@ public class ShopApplicationTests {
     @Test
     public void getByIdTest() throws Exception {
 
-        long id = createTestProduct("Samsung", 4.0 , 3, "Android mobile phone",
+        long id = createTestProduct("Samsung", BigDecimal.valueOf(4.0), 3, "Android mobile phone",
                 20000, "href", "description", "Samsung", "phone").getId();
 
         mockMvc.perform(
@@ -53,7 +55,7 @@ public class ShopApplicationTests {
                 .andExpect(jsonPath("$.category").value("phone"));
     }
 
-    private Product createTestProduct(String name, Double rating, Integer popularity,
+    private Product createTestProduct(String name, BigDecimal rating, Integer popularity,
                                       String config, Integer price, String img, String description, String brand, String category) {
         Product product = new Product(name, rating, popularity, config, price, img, description, brand, category);
         return repository.save(product);

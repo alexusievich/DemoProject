@@ -2,7 +2,6 @@ import React from 'react';
 import '../App.css';
 import {FacebookOutlined, InstagramOutlined, TwitterOutlined, PhoneOutlined, SendOutlined} from "@ant-design/icons";
 
-
 class AppFooter extends React.Component{
 
     render() {

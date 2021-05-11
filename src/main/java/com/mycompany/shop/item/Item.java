@@ -10,7 +10,7 @@ public class Item {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Product product;
 
     public Item() {}

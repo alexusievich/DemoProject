@@ -15,7 +15,6 @@ public class Basket {
 
     private Integer totalPrice = 0;
 
-
     private Long userId;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -48,7 +47,6 @@ public class Basket {
         this.totalPrice = 0;
         items.forEach(item -> this.totalPrice += item.getProduct().getPrice());
     }
-
 
     public Long getUserId() {
         return userId;

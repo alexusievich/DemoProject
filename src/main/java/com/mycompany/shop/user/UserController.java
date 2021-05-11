@@ -13,16 +13,23 @@ public class UserController {
     @Autowired
     UserRepository userRepository;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> retrieveProduct(@PathVariable long id) {
+    @Autowired
+    UserSessionBean userSessionBean;
 
-        Optional<User> optionalUser = userRepository.findById(id);
+    @GetMapping()
+    public ResponseEntity<User> retrieveProduct() {
 
-        if (optionalUser.isEmpty()) {
-            throw new UserNotFoundException("The user with id: " + id + " is not found");
+        Long userId = userSessionBean.getUser().getId();
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user;
+
+        if (optionalUser.isPresent()) {
+            user = new User(optionalUser.get().getId(), optionalUser.get().getUsername(), optionalUser.get().getEmail());
+        } else {
+            throw new UserNotFoundException("The user with id: " + userId + " is not found");
         }
 
-        return  ResponseEntity.ok(optionalUser.get());
+        return  ResponseEntity.ok(user);
     }
 
 }
