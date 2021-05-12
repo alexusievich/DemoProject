@@ -4,6 +4,7 @@ import com.mycompany.shop.image.Image;
 import com.mycompany.shop.techspec.TechSpec;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ public class Product {
 
     private String name;
 
-    private Integer rating;
+    private BigDecimal rating;
 
     private Integer popularity;
 
@@ -32,13 +33,13 @@ public class Product {
 
     private String category;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
     private Set<Image> images = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product", fetch = FetchType.EAGER)
     private Set<TechSpec> techSpec = new HashSet<>();
 
-    public Product(String name, Integer rating, Integer popularity, String config, Integer price,
+    public Product(String name, BigDecimal rating, Integer popularity, String config, Integer price,
                    String img, String description, String brand, String category) {
         this.name = name;
         this.rating = rating;
@@ -51,7 +52,7 @@ public class Product {
         this.category = category;
     }
 
-    public Product(Long id, String name, Integer rating, Integer popularity, String config, Integer price, String img,
+    public Product(Long id, String name, BigDecimal rating, Integer popularity, String config, Integer price, String img,
                    String description, String brand, String category) {
         this.id = id;
         this.name = name;
@@ -84,11 +85,11 @@ public class Product {
         this.name = name;
     }
 
-    public Integer getRating() {
+    public BigDecimal getRating() {
         return rating;
     }
 
-    public void setRating(Integer rating) {
+    public void setRating(BigDecimal rating) {
         this.rating = rating;
     }
 

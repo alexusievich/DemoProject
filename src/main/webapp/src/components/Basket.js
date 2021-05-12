@@ -1,9 +1,10 @@
 import React from "react";
-import {Button} from "antd";
+import {Button, Result} from "antd";
 import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import '../styles/Basket.css'
 import '../styles/NotFoundPage.css'
 import {Link} from "react-router-dom";
+import NumberFormat from 'react-number-format'
 
 class Basket extends React.Component {
 
@@ -30,7 +31,7 @@ class Basket extends React.Component {
                         </div>
                     </div>
                     <div className="itemPrice">
-                        {phone.product.price} RUB
+                        <NumberFormat value={phone.product.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
                     </div>
                     <div className="itemRemove">
                         <Button type="primary" shape="round" size="large"
@@ -49,7 +50,9 @@ class Basket extends React.Component {
                 <div>
                     <div className="basketTitle">
                         <div className="basketName">Shopping cart - {this.props.basket.items.length} items</div>
-                        <div className="basketTotal">Total: {this.props.basket.totalPrice / 1000}.000 RUB</div>
+                        <div className="basketTotal">
+                            Total: <NumberFormat value={this.props.basket.totalPrice} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
+                        </div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
                                     onClick={this.props.clearBasket}>
@@ -64,18 +67,11 @@ class Basket extends React.Component {
                 }
 
                 {!(this.props.basket) &&
-                <div className="notfound">
-                    <div className="error">
-                        <div className="text">The shopping cart is empty right now <ShoppingOutlined/></div>
-                    </div>
-                    <div className="button">
-                        <Link to="/">
-                            <Button type="primary" shape="round" size="large">
-                                Return to main page
-                            </Button>
-                        </Link>
-                    </div>
-                </div>
+                <Result
+                    icon={<ShoppingOutlined/>}
+                    title="The shopping cart is empty right now!"
+                    extra={<Button type="primary" style={{borderRadius: '40px'}}><Link to={"/"}>Back Home</Link></Button>}
+                />
                 }
             </div>
         )

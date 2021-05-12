@@ -5,6 +5,8 @@ import com.mycompany.shop.item.ItemRepository;
 import com.mycompany.shop.product.Product;
 import com.mycompany.shop.product.ProductNotFoundException;
 import com.mycompany.shop.product.ProductRepository;
+import com.mycompany.shop.user.UserRepository;
+import com.mycompany.shop.user.UserSessionBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 public class BasketController {
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     BasketRepository basketRepository;
 
     @Autowired
@@ -28,7 +33,10 @@ public class BasketController {
     ItemRepository itemRepository;
 
     @Autowired
-    BasketSessionBean sessionBean;
+    BasketSessionBean basketSessionBean;
+
+    @Autowired
+    UserSessionBean userSessionBean;
 
     static class CreateBasketRequest {
         Long id;
@@ -44,18 +52,21 @@ public class BasketController {
 
     @GetMapping
     public ResponseEntity<Basket> getBasket() {
-        return ResponseEntity.ok(sessionBean.getBasket());
+        return ResponseEntity.ok(basketSessionBean.getBasket());
     }
 
     @PostMapping
     public ResponseEntity<Basket> addToBasket(@RequestBody CreateBasketRequest createBasketRequest) {
+        Basket basket;
         Optional<Product> existingProduct = productRepository.findById(createBasketRequest.getId());
         if (existingProduct.isPresent()) {
-            Basket basket;
-            if (sessionBean.getBasket() == null) {
+            if (basketSessionBean.getBasket() == null) {
                 basket = new Basket();
+                if (userSessionBean.getUser() != null) {
+                    basket.setUserId(userSessionBean.getUser().getId());
+                }
             } else {
-                basket = sessionBean.getBasket();
+                basket = basketSessionBean.getBasket();
             }
             Item item = new Item();
             item.setProduct(existingProduct.get());
@@ -63,7 +74,7 @@ public class BasketController {
             basket.getItems().add(item);
             basket.recalculateTotalPrice();
             basket = basketRepository.save(basket);
-            sessionBean.setBasket(basket);
+            basketSessionBean.setBasket(basket);
             return ResponseEntity.ok(basket);
         } else {
             throw new ProductNotFoundException("The product with id: " + createBasketRequest.getId() + " is not found");
@@ -72,27 +83,27 @@ public class BasketController {
 
     @DeleteMapping("/clear")
     public void clearBasket() {
-        Basket basket = sessionBean.getBasket();
+        Basket basket = basketSessionBean.getBasket();
         if (basket != null) {
             basketRepository.delete(basket);
-            sessionBean.setBasket(null);
+            basketSessionBean.setBasket(null);
         }
     }
 
     @DeleteMapping("/removeitem/{id}")
     public ResponseEntity<Basket> removeItem(@PathVariable long id) {
-        Basket basket = sessionBean.getBasket();
+        Basket basket = basketSessionBean.getBasket();
         List<Item> items = basket.getItems();
         items = items.stream().filter(item1 -> item1.getId() != id).collect(Collectors.toList());
         if (items.size() == 0) {
             basketRepository.delete(basket);
-            sessionBean.setBasket(null);
+            basketSessionBean.setBasket(null);
         } else {
             basket.setItems(items);
             basket.recalculateTotalPrice();
             basketRepository.save(basket);
         }
-        return ResponseEntity.ok(sessionBean.getBasket());
+        return ResponseEntity.ok(basketSessionBean.getBasket());
     }
 
 }

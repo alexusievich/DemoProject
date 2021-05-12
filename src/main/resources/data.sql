@@ -1,110 +1,110 @@
 insert into product
-values(1001, 'Samsung', 'phones','128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4);
+values(1001, 'Samsung', 'phones','128 GB Gray', 'The lineup comprises three devices, with the Galaxy S21 being the least expensive with a smaller screen size. In contrast to the Galaxy S20+, the S21+ is very similar to the S21 spec-wise, with the exception of a larger display, higher battery capacity.' ,'https://images.samsung.com/is/image/samsung/p6pim/ru/galaxy-s21/gallery/ru-galaxy-s21-5g-g991-sm-g991bzagser-368806301?$684_547_PNG$', 'Samsung Galaxy S21', 3, 60000, 4.4);
 
 insert into product
-values(1002, 'Apple', 'phones', '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/343/x343751fba0fee3c215c23a21edf95b83.png,q1605099576.pagespeed.ic.H7MHgemQwv.webp', 'Apple iPhone 12', 5, 70000, 5);
+values(1002, 'Apple', 'phones', '128 GB Blue', '5G speed. A14 Bionic, the fastest chip in a smartphone. An edge-to-edge OLED display. Ceramic Shield with four times better drop performance. And Night mode on every camera. iPhone 12 has it all — in two perfect sizes.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/343/x343751fba0fee3c215c23a21edf95b83.png,q1605099576.pagespeed.ic.H7MHgemQwv.webp', 'Apple iPhone 12', 5, 70000, 4.9);
 
 insert into product
-values(1003, 'Honor', 'phones', '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4);
+values(1003, 'Honor', 'phones', '128 GB White', 'The Honor 20 sports an eye-catching design and has a very compact form factor, which makes it very easy to hold the phone in palms, but the glossy rear panel is a fingerprint magnet. The side-mounted fingerprint sensor is extremely fast. ', 'https://www.hihonor.com/content/dam/honor/by/product-list/smartphone/honor-20/honor20-listimage-icelandic-white-v.png', 'Honor 20', 3, 20000, 4.2);
 
 insert into product
-values (1004, 'Xiaomi', 'phones', '64 GB Gray', 'Redmi 9 smartphone was launched on 27th August 2020. The phone comes with a 6.53-inch touchscreen display with a resolution of 720x1600 pixels and an aspect ratio of 20:9. Redmi 9 is powered by an octa-core MediaTek Helio G35 processor.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/800/redmi-9-Grey.png', 'Xiaomi Redmi 9', 2, 20000, 3);
+values (1004, 'Xiaomi', 'phones', '64 GB Gray', 'Redmi 9 smartphone was launched on 27th August 2020. The phone comes with a 6.53-inch touchscreen display with a resolution of 720x1600 pixels and an aspect ratio of 20:9. Redmi 9 is powered by an octa-core MediaTek Helio G35 processor.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/800/redmi-9-Grey.png', 'Xiaomi Redmi 9', 2, 20000, 4.0);
 
 insert into product
-values(1005, 'Huawei', 'phones', '128 GB Black', 'The cutting-edge Kirin 990 5G chipset changes your experience of speed. The Ultra Vision Leica Triple Camera with upgraded AI capability revolutionizes the way of photography. Embrace the power of images and videos and let them speak for you.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/p40pro/huawei-p40-pro-black-1-800x800.png', 'Huawei P40', 3, 40000, 4);
+values(1005, 'Huawei', 'phones', '128 GB Black', 'The cutting-edge Kirin 990 5G chipset changes your experience of speed. The Ultra Vision Leica Triple Camera with upgraded AI capability revolutionizes the way of photography. Embrace the power of images and videos and let them speak for you.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/p40pro/huawei-p40-pro-black-1-800x800.png', 'Huawei P40', 3, 40000, 4.5);
 
 insert into product
-values(1006, 'Apple', 'phones', '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'Apple iPhone 11', 4, 50000, 5);
+values(1006, 'Apple', 'phones', '64 GB Black', 'The iPhone 11 is available in six colors. A notch is at the front for the TrueDepth camera system and speaker, similar to its predecessor, the iPhone XR. The Apple logo is now centered on the back of the device with no text, a change from previous models.', 'https://best-magazin.com/image/cache/catalog/product/Apple%20iPhone%2011%202019/smartfon-iphone11-black-800x800.png', 'Apple iPhone 11', 4, 50000, 4.4);
 
 insert into product
-values(1007, 'Huawei', 'phones', '128 GB Green', 'Huawei P40 Lite smartphone runs on Android v10 (Q) operating system. The phone is powered by Octa core processor. The smartphone has a IPS LCD display, it has a resolution of 1080 x 2340 pixels and 403 ppi pixel density.', 'https://m.onlinetrade.ru/img/items/m/smartfon_huawei_p40_lite_crush_green_1315359_1.png', 'HUAWEI P40 lite', 3, 20000, 4);
+values(1007, 'Huawei', 'phones', '128 GB Green', 'Huawei P40 Lite smartphone runs on Android v10 (Q) operating system. The phone is powered by Octa core processor. The smartphone has a IPS LCD display, it has a resolution of 1080 x 2340 pixels and 403 ppi pixel density.', 'https://m.onlinetrade.ru/img/items/m/smartfon_huawei_p40_lite_crush_green_1315359_1.png', 'HUAWEI P40 lite', 3, 20000, 3.9);
 
 insert into product
-values(1008, 'Samsung', 'phones', '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://dvsota.ru/uploads/media/product/0001/60/thumb_59225_product_big.png', 'Samsung Galaxy S21 Ultra', 3, 100000, 4);
+values(1008, 'Samsung', 'phones', '12/256 GB Black', 'Designed with a unique contour-cut camera to create a revolution in photography — letting you capture 8K video and snap epic stills. And with Galaxy''s fastest chipset, strongest glass, 5G and an all-day battery, Ultra easily lives up to its name.', 'https://dvsota.ru/uploads/media/product/0001/60/thumb_59225_product_big.png', 'Samsung Galaxy S21 Ultra', 3, 100000, 4.6);
 
 insert into product
-values(1009, 'Xiaomi', 'phones', '128 GB Silver', '108MP/64MP AI triple camera. 144Hz AdaptiveSync display with TrueColor. 144Hz ultra-high refresh rate can show up to 144 frames per second. Qualcomm® Snapdragon™ 865 with 5G. 5000 mAh (typ) battery with 33W fast charging.', 'https://i01.appmifile.com/webfile/globalimg/Cindy/J3SSilvery.png', 'Xiaomi Mi 10T', 3, 40000, 4);
+values(1009, 'Xiaomi', 'phones', '128 GB Silver', '108MP/64MP AI triple camera. 144Hz AdaptiveSync display with TrueColor. 144Hz ultra-high refresh rate can show up to 144 frames per second. Qualcomm® Snapdragon™ 865 with 5G. 5000 mAh (typ) battery with 33W fast charging.', 'https://i01.appmifile.com/webfile/globalimg/Cindy/J3SSilvery.png', 'Xiaomi Mi 10T', 3, 40000, 4.6);
 
 insert into product
-values (10010, 'Apple', 'phones', '512 GB Graphite', '5G goes Pro. A14 Bionic rockets past every other smartphone chip. The Pro camera system takes low-light photography to the next level — with an even bigger jump on iPhone 12 Pro Max. And Ceramic Shield delivers four times better drop performance. ', 'https://spb-mobil.ru/wp-content/uploads/2019/09/11-black-720x720.png', 'Apple iPhone 12 Pro Max', 4, 120000, 5);
+values (10010, 'Apple', 'phones', '512 GB Graphite', '5G goes Pro. A14 Bionic rockets past every other smartphone chip. The Pro camera system takes low-light photography to the next level — with an even bigger jump on iPhone 12 Pro Max. And Ceramic Shield delivers four times better drop performance. ', 'https://spb-mobil.ru/wp-content/uploads/2019/09/11-black-720x720.png', 'Apple iPhone 12 Pro Max', 4, 120000, 5.0);
 
 insert into product
-values(10011, 'Honor', 'phones', '128 Green', 'Honor 30 is all set to introduce the HiSilicon Kirin 985 5G processor which is an upgraded version that was released last year. The smartphone comes with a 6.53 inches OLED capacitive touchscreen and 1080 x 2400 pixels resolution.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/honor30/green/honor-30-green-1-800x800.png', 'Honor 30', 4, 30000, 4);
+values(10011, 'Honor', 'phones', '128 Green', 'Honor 30 is all set to introduce the HiSilicon Kirin 985 5G processor which is an upgraded version that was released last year. The smartphone comes with a 6.53 inches OLED capacitive touchscreen and 1080 x 2400 pixels resolution.', 'https://smart-lite.ru/image/cache/catalog/products/huawei/honor30/green/honor-30-green-1-800x800.png', 'Honor 30', 4, 30000, 4.3);
 
 insert into product
-values(10012, 'Huawei', 'phones', '256 GB Blue', 'Speak for yourself with the Ultra Vision Leica Quad Camera by capturing photos and videos anytime and anywhere you want. Revolutionize your experience of speed and power with the cutting-edge Kirin 990 5G Chipset.', 'https://ogo1.ru/upload/iblock/3db/3db0ea8967bf3edcf08c765ae3a528d8.png', 'Huawei P40 Pro', 2, 60000, 4);
+values(10012, 'Huawei', 'phones', '256 GB Blue', 'Speak for yourself with the Ultra Vision Leica Quad Camera by capturing photos and videos anytime and anywhere you want. Revolutionize your experience of speed and power with the cutting-edge Kirin 990 5G Chipset.', 'https://ogo1.ru/upload/iblock/3db/3db0ea8967bf3edcf08c765ae3a528d8.png', 'Huawei P40 Pro', 2, 60000, 4.2);
 
 insert into product
-values ( 10013, 'Xiaomi', 'phones', '128 GB Blue', 'Xiaomi Poco X3 has a 6.67-inch IPS LCD display, having a screen resolution of 1080 x 2400 pixels. The smartphone has a pixel density of 395ppi and a refresh rate of 120Hz. Further, its display is protected by Corning Gorilla Glass v5.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/poco-x3-nfc-blue.png', 'Xiaomi Poco X3', 4, 22000, 5);
+values ( 10013, 'Xiaomi', 'phones', '128 GB Blue', 'Xiaomi Poco X3 has a 6.67-inch IPS LCD display, having a screen resolution of 1080 x 2400 pixels. The smartphone has a pixel density of 395ppi and a refresh rate of 120Hz. Further, its display is protected by Corning Gorilla Glass v5.', 'https://i01.appmifile.com/webfile/globalimg/gaoruijia/poco-x3-nfc-blue.png', 'Xiaomi Poco X3', 4, 22000, 4.7);
 
 insert into product
-values ( 10014, 'Samsung', 'phones', '64 GB Black', 'Samsung Galaxy A51 smartphone was launched on 8th April 2020. The phone comes with a 6.50-inch touchscreen display.Samsung Galaxy A21 comes with 3GB of RAM. The Samsung Galaxy A21 runs Android 10 and is powered by a 4000mAh non-removable battery.', 'https://cdn.shopify.com/s/files/1/0051/8301/2928/products/samsung_a21_dual_reformatted_8118ce86-b5b8-4334-a892-059881b4c3e5_330x.png?v=1608300420','Samsung Galaxy A51', 4, 19000, 3);
+values ( 10014, 'Samsung', 'phones', '64 GB Black', 'Samsung Galaxy A51 smartphone was launched on 8th April 2020. The phone comes with a 6.50-inch touchscreen display.Samsung Galaxy A21 comes with 3GB of RAM. The Samsung Galaxy A21 runs Android 10 and is powered by a 4000mAh non-removable battery.', 'https://cdn.shopify.com/s/files/1/0051/8301/2928/products/samsung_a21_dual_reformatted_8118ce86-b5b8-4334-a892-059881b4c3e5_330x.png?v=1608300420','Samsung Galaxy A51', 4, 19000, 3.9);
 
 insert into product
-values ( 10015, 'Motorola', 'phones', '128 GB Blue', 'The phone comes with a 6.80-inch touchscreen display. Motorola Moto G9 Plus is powered by a 2.2GHz octa-core Qualcomm Snapdragon 730G processor. It comes with 4GB of RAM.', 'https://motorolaru.vtexassets.com/arquivos/ids/155504/moto-g9-plus-pdp-render-3xk2ujckj.png?v=637357637449930000','Motorola G9 Plus', 4, 18000, 5);
+values ( 10015, 'Motorola', 'phones', '128 GB Blue', 'The phone comes with a 6.80-inch touchscreen display. Motorola Moto G9 Plus is powered by a 2.2GHz octa-core Qualcomm Snapdragon 730G processor. It comes with 4GB of RAM.', 'https://motorolaru.vtexassets.com/arquivos/ids/155504/moto-g9-plus-pdp-render-3xk2ujckj.png?v=637357637449930000','Motorola G9 Plus', 4, 18000, 4.2);
 
 insert into product
-values ( 10016, 'Apple', 'phones', '64 GB Red', 'The original iPhone SE was a budget 4-inch iPhone before being discontinued in 2018, but Apple revived the name in April 2020 with a new 4.7-inch model that looks like an iPhone 8 with internals similar to those of the iPhone 11', 'https://i4you.ru/image/cache/catalog/0.%20iPhone/24.%20iPhone%20SE%202020/SE%202020%20red%203-500x600.png','Apple iPhone SE 2020', 3, 39000, 4);
+values ( 10016, 'Apple', 'phones', '64 GB Red', 'The original iPhone SE was a budget 4-inch iPhone before being discontinued in 2018, but Apple revived the name in April 2020 with a new 4.7-inch model that looks like an iPhone 8 with internals similar to those of the iPhone 11', 'https://i4you.ru/image/cache/catalog/0.%20iPhone/24.%20iPhone%20SE%202020/SE%202020%20red%203-500x600.png','Apple iPhone SE 2020', 3, 39000, 4.4);
 
 insert into product
-values (10017, 'Apple', 'tablets', '32 GB Black Wifi', 'The eighth-generation iPad is a tablet computer developed and marketed by Apple Inc. as the successor to the 7th-generation iPad. It features the same 10.2-inch Retina display, with the SoC upgraded to the Apple A12 Bionic processor.', 'https://root-nation.com/wp-content/uploads/2020/12/ipad-air-2019-1.png', 'Apple iPad 2020', 3, 30000, 4);
+values (10017, 'Apple', 'tablets', '32 GB Black Wifi', 'The eighth-generation iPad is a tablet computer developed and marketed by Apple Inc. as the successor to the 7th-generation iPad. It features the same 10.2-inch Retina display, with the SoC upgraded to the Apple A12 Bionic processor.', 'https://root-nation.com/wp-content/uploads/2020/12/ipad-air-2019-1.png', 'Apple iPad 2020', 3, 30000, 4.5);
 
 insert into product
-values ( 10018, 'Samsung', 'tablets', '128 GB Black' , 'Introducing the 5G-enabled tablet, the Galaxy S7. The razor-sharp display, and long-lasting battery are just the beginning. Add the redesigned S pen and the optional keyboard and you''ve got a tablet that lets you play harder and work smarter.', 'https://static.beeline.ru/shop/media/goods/334x434/4983b377-d0eb-4cfe-b3bb-ac87a47a23e9.png','Samsung Galaxy Tab S7', 3, 58000, 3);
+values ( 10018, 'Samsung', 'tablets', '128 GB Black' , 'Introducing the 5G-enabled tablet, the Galaxy S7. The razor-sharp display, and long-lasting battery are just the beginning. Add the redesigned S pen and the optional keyboard and you''ve got a tablet that lets you play harder and work smarter.', 'https://static.beeline.ru/shop/media/goods/334x434/4983b377-d0eb-4cfe-b3bb-ac87a47a23e9.png','Samsung Galaxy Tab S7', 3, 58000, 4.7);
 
 insert into product
-values ( 10019, 'Huawei', 'tablets', '32 GB Gray', 'Huawei MediaPad M5 lite tablet was launched in September 2019. The tablet comes with a 10.10-inch touchscreen display with a resolution of 1920x1200 pixels at a pixel density of 224 pixels per inch (ppi).', 'https://altrep.shop.megafon.ru/images/goods/1124/112481_p_20.png','Huawei MediaPad M5 Lite', 4, 16000, 5);
+values ( 10019, 'Huawei', 'tablets', '32 GB Gray', 'Huawei MediaPad M5 lite tablet was launched in September 2019. The tablet comes with a 10.10-inch touchscreen display with a resolution of 1920x1200 pixels at a pixel density of 224 pixels per inch (ppi).', 'https://altrep.shop.megafon.ru/images/goods/1124/112481_p_20.png','Huawei MediaPad M5 Lite', 4, 16000, 4.6);
 
 insert into product
-values ( 10020, 'Lenovo', 'tablets', '128 GB Gray', 'This tablet is to entertain the whole family. Ensuring safe browsing thanks to the parental controls and built-in eye-care protection technology. Take advantage of the convenience of the smart charging station, plus the Google Assistant’s Ambient Mode.', 'https://images.mltrade.ru/images/photo/e/m/1/1210677-077068-15.jpg','Lenovo Tab M10 Plus', 5, 18000, 4);
+values ( 10020, 'Lenovo', 'tablets', '128 GB Gray', 'This tablet is to entertain the whole family. Ensuring safe browsing thanks to the parental controls and built-in eye-care protection technology. Take advantage of the convenience of the smart charging station, plus the Google Assistant’s Ambient Mode.', 'https://images.mltrade.ru/images/photo/e/m/1/1210677-077068-15.jpg','Lenovo Tab M10 Plus', 5, 18000, 4.1);
 
 insert into product
-values ( 10021, 'Huawei' , 'tablets', '32 GB Blue' , 'The tablet comes with a 8.00-inch touchscreen display with a resolution of 800x1260 pixels. Huawei MatePad T8 is powered by an octa-core MediaTek MTK8768 processor. The Huawei MatePad T8 comes with 2GB of RAM and is powered by a 5100mAh battery.', 'https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/tablets/matepad-t-8/list-image.png','Huawei MatePad T8', 5, 11000, 4);
+values ( 10021, 'Huawei' , 'tablets', '32 GB Blue' , 'The tablet comes with a 8.00-inch touchscreen display with a resolution of 800x1260 pixels. Huawei MatePad T8 is powered by an octa-core MediaTek MTK8768 processor. The Huawei MatePad T8 comes with 2GB of RAM and is powered by a 5100mAh battery.', 'https://consumer.huawei.com/content/dam/huawei-cbg-site/common/mkt/pdp/tablets/matepad-t-8/list-image.png','Huawei MatePad T8', 5, 11000, 3.9);
 
 insert into product
-values ( 10022, 'Apple' , 'tablets', '64 GB Space gray' , 'iPad Air with A14 Bionic, Apple’s most advanced chip. The most powerful iPad Air ever features new all-screen design with larger 10.9-inch display, new 12MP rear camera, next-generation Touch ID sensor, and more.', 'https://imarket-ndm.ru/upload/iblock/12c/12c3826253221989937db189c4d9331b.png','Apple iPad Air 2020', 3, 55000, 4);
+values ( 10022, 'Apple' , 'tablets', '64 GB Space gray' , 'iPad Air with A14 Bionic, Apple’s most advanced chip. The most powerful iPad Air ever features new all-screen design with larger 10.9-inch display, new 12MP rear camera, next-generation Touch ID sensor, and more.', 'https://imarket-ndm.ru/upload/iblock/12c/12c3826253221989937db189c4d9331b.png','Apple iPad Air 2020', 3, 55000, 4.6);
 
 insert into product
-values ( 10023, 'Lenovo' , 'tablets', '64 GB Dark gray' , 'The Lenovo Yoga Smart Tab with the Google Assistant builds on the Yoga Tab’s multimode kickstand design and great entertainment features—including an FHD IPS display and dual JBL® stereo speakers—and adds the power of a portable smart home hub.', 'https://psrefstuff.lenovo.com/syspool//Sys/Image/Lenovo_Tablets/Yoga_Smart_Tab/Yoga_Smart_Tab_CT1_01.png','Lenovo Yoga Smart Tab', 4, 20000, 4);
+values ( 10023, 'Lenovo' , 'tablets', '64 GB Dark gray' , 'The Lenovo Yoga Smart Tab with the Google Assistant builds on the Yoga Tab’s multimode kickstand design and great entertainment features—including an FHD IPS display and dual JBL® stereo speakers—and adds the power of a portable smart home hub.', 'https://psrefstuff.lenovo.com/syspool//Sys/Image/Lenovo_Tablets/Yoga_Smart_Tab/Yoga_Smart_Tab_CT1_01.png','Lenovo Yoga Smart Tab', 4, 20000, 3.8);
 
 insert into product
-values ( 10024, 'Samsung' , 'tablets', '64 GB Cyan' , 'The Samsung Galaxy Tab S6 Lite comes with a 10.40-inch touchscreen display with a resolution of 2000x1200 pixels. It is powered by a 1.7GHz octa-core processor. It comes with 4GB of RAM. This tablet is a good choice for people doing note-taking or art. ', 'https://images.samsung.com/is/image/samsung/ie-galaxy-tab-s6-lite-sm-p610nzaabtu-frontwithspengray-thumb-232027569?$LazyLoad_Home_IMG$','Samsung Tab S6 Lite', 3, 24000,5);
+values ( 10024, 'Samsung' , 'tablets', '64 GB Cyan' , 'The Samsung Galaxy Tab S6 Lite comes with a 10.40-inch touchscreen display with a resolution of 2000x1200 pixels. It is powered by a 1.7GHz octa-core processor. It comes with 4GB of RAM. This tablet is a good choice for people doing note-taking or art. ', 'https://images.samsung.com/is/image/samsung/ie-galaxy-tab-s6-lite-sm-p610nzaabtu-frontwithspengray-thumb-232027569?$LazyLoad_Home_IMG$','Samsung Tab S6 Lite', 3, 24000,4.2);
 
 insert into product
-values ( 10025, 'Huawei' , 'tablets', '128 GB Gray' , 'With the 90% screen-to-body ratio the 10.8 inch HUAWEI FullView Display offers remarkable visual experiences. Thanks to the Kirin 990 flagship chipset, MatePad Pro presents a great performance and elevated energy efficiency.', 'http://sorrang.com/wp-content/uploads/2021/02/matepad-pro-lte-500x500.png','Huawei MatePad Pro', 4, 40000, 5);
+values ( 10025, 'Huawei' , 'tablets', '128 GB Gray' , 'With the 90% screen-to-body ratio the 10.8 inch HUAWEI FullView Display offers remarkable visual experiences. Thanks to the Kirin 990 flagship chipset, MatePad Pro presents a great performance and elevated energy efficiency.', 'http://sorrang.com/wp-content/uploads/2021/02/matepad-pro-lte-500x500.png','Huawei MatePad Pro', 4, 40000, 4.6);
 
 insert into product
-values ( 10026, 'Apple' , 'tablets', '256 GB Silver Cellular' , 'The 12.9-inch iPad Pro was updated in April 2021 with a faster M1 chip, a Liquid Retina XDR mini-LED display, 5G connectivity, and more. There is also a new Magic Keyboard white color option, and the new iPad continue to work with the Apple Pencil 2.', 'https://www.electrorates.com/blogimg/Apple_iPad_Pro_12.9.png','Apple iPad Pro 12.9', 5, 110000, 4);
+values ( 10026, 'Apple' , 'tablets', '256 GB Silver Cellular' , 'The 12.9-inch iPad Pro was updated in April 2021 with a faster M1 chip, a Liquid Retina XDR mini-LED display, 5G connectivity, and more. There is also a new Magic Keyboard white color option, and the new iPad continue to work with the Apple Pencil 2.', 'https://www.electrorates.com/blogimg/Apple_iPad_Pro_12.9.png','Apple iPad Pro 12.9', 5, 110000, 4.8);
 
 insert into product
-values (10027, 'Apple', 'accessories', 'Black', 'Made from specially tanned and finished leather, the outside feels soft to the touch and develops a natural patina over time. The case quickly snaps into place and fits snugly over your iPhone without adding bulk.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/111/111ce9edb1649c6c67bd417a6d4f7428.png?1605623874', 'Apple iPhone Case', 3, 1000, 4);
+values (10027, 'Apple', 'accessories', 'Black', 'Made from specially tanned and finished leather, the outside feels soft to the touch and develops a natural patina over time. The case quickly snaps into place and fits snugly over your iPhone without adding bulk.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/111/111ce9edb1649c6c67bd417a6d4f7428.png?1605623874', 'Apple iPhone Case', 3, 1000, 4.0);
 
 insert into product
-values (10028, 'Apple', 'accessories', 'White', 'Airpods 2 have H1 chip, which enables the "magic" of the AirPods, allowing for an efficient Bluetooth connection with an increased range, longer talk time, and switching between your Mac and iOS devices.', 'https://static-sl.insales.ru/images/products/1/1325/221807917/Apple-AirPods-2019-14.png', 'Apple Airpods 2', 4, 11000, 4);
+values (10028, 'Apple', 'accessories', 'White', 'Airpods 2 have H1 chip, which enables the "magic" of the AirPods, allowing for an efficient Bluetooth connection with an increased range, longer talk time, and switching between your Mac and iOS devices.', 'https://static-sl.insales.ru/images/products/1/1325/221807917/Apple-AirPods-2019-14.png', 'Apple Airpods 2', 4, 11000, 4.5);
 
 insert into product
-values (10029, 'Samsung', 'accessories', 'White', 'The USB Type-C (or USB-C) is a fairly recent connector standard, and became available on Galaxy devices with Galaxy S8 and S8+. Its name basically refers to the physical shape of the plug.', 'https://images.samsung.com/is/image/samsung/ru-usb-typ-c-to-type-c-cable-da705-ep-da705bwrgru-frontwhite-186641065?$720_576_PNG$', 'Samsung USB Type-C', 3, 1000, 4);
+values (10029, 'Samsung', 'accessories', 'White', 'The USB Type-C (or USB-C) is a fairly recent connector standard, and became available on Galaxy devices with Galaxy S8 and S8+. Its name basically refers to the physical shape of the plug.', 'https://images.samsung.com/is/image/samsung/ru-usb-typ-c-to-type-c-cable-da705-ep-da705bwrgru-frontwhite-186641065?$720_576_PNG$', 'Samsung USB Type-C', 3, 1000, 4.3);
 
 insert into product
-values (10030, 'Xiaomi', 'accessories', 'Black', 'The Redmi AirDots 2 are powered by 7.2mm drivers and come with DSP digital noise reduction technology. The have a one-key control for multiple tasks.', 'https://static-sl.insales.ru/images/products/1/2867/373762867/Redmi_airdotsS_Xiaomi_Moscow.png', 'Xiaomi Redmi Airdots 2', 4, 2000, 4);
+values (10030, 'Xiaomi', 'accessories', 'Black', 'The Redmi AirDots 2 are powered by 7.2mm drivers and come with DSP digital noise reduction technology. The have a one-key control for multiple tasks.', 'https://static-sl.insales.ru/images/products/1/2867/373762867/Redmi_airdotsS_Xiaomi_Moscow.png', 'Xiaomi Redmi Airdots 2', 4, 2000, 4.6);
 
 insert into product
-values (10031, 'Apple', 'accessories', 'Transparent', 'Thanks to the application of a chemically strengthened Ion-Exchange process to its ultrathin Aluminosilicate glass, InvisiGlass Ultra sets a new standard for glass screen protection while delivering a flawless touchscreen experience.', 'https://mydiamonddog.com/wp-content/uploads/iphone-11-pro-max-screen-protector.png', 'Apple iPhone Glass', 5, 600, 4);
+values (10031, 'Apple', 'accessories', 'Transparent', 'Thanks to the application of a chemically strengthened Ion-Exchange process to its ultrathin Aluminosilicate glass, InvisiGlass Ultra sets a new standard for glass screen protection while delivering a flawless touchscreen experience.', 'https://mydiamonddog.com/wp-content/uploads/iphone-11-pro-max-screen-protector.png', 'Apple iPhone Glass', 5, 600, 4.2);
 
 insert into product
-values (10032, 'Samsung', 'accessories', 'Black', 'Protecting your phone from the front and back, the cover''s sophisticated design features a clear window so you can easily check notifications, answer calls or pause your music — all without touching the screen.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/dec/dec73335f4d05f7495dd4213ce0a637d.png?1613067250', 'Samsung Galaxy S21 Case', 3, 4000, 4);
+values (10032, 'Samsung', 'accessories', 'Black', 'Protecting your phone from the front and back, the cover''s sophisticated design features a clear window so you can easily check notifications, answer calls or pause your music — all without touching the screen.', 'https://1click.ru/upload/resized/500/500/75/upload/iblock/dec/dec73335f4d05f7495dd4213ce0a637d.png?1613067250', 'Samsung Galaxy S21 Case', 3, 4000, 4.4);
 
 insert into product
-values (10033, 'Huawei', 'accessories', 'Dark blue', 'The Huawei MatePad Pro leather Case is made by imported TPU, PC and PU material, gives your MatePad triple protection. The flip cover is made of selected PU leather with dot texture.', 'https://ae01.alicdn.com/kf/Hc4dd1b7ab2864f7bb078d21bf93432043/HUAWEI-MatePad-Pro.png', 'Huawei MatePad Pro Case', 3, 8000, 5);
+values (10033, 'Huawei', 'accessories', 'Dark blue', 'The Huawei MatePad Pro leather Case is made by imported TPU, PC and PU material, gives your MatePad triple protection. The flip cover is made of selected PU leather with dot texture.', 'https://ae01.alicdn.com/kf/Hc4dd1b7ab2864f7bb078d21bf93432043/HUAWEI-MatePad-Pro.png', 'Huawei MatePad Pro Case', 3, 8000, 4.7);
 
 insert into product
-values (10034, 'Apple', 'accessories', 'White', 'This USB 2.0 cable connects your iPhone, iPad, Mac, AirPods or iPod with Lightning Connector to your computer''s USB port for syncing and charging. You can connect to the Apple USB power adapter for convenient charging from a wall outlet.', 'https://static-eu.insales.ru/images/products/1/7587/214883747/84456_p_27.png', 'Apple USB-Lighting', 4, 2000, 3);
+values (10034, 'Apple', 'accessories', 'White', 'This USB 2.0 cable connects your iPhone, iPad, Mac, AirPods or iPod with Lightning Connector to your computer''s USB port for syncing and charging. You can connect to the Apple USB power adapter for convenient charging from a wall outlet.', 'https://static-eu.insales.ru/images/products/1/7587/214883747/84456_p_27.png', 'Apple USB-Lighting', 4, 2000, 3.5);
 
 insert into product
-values (10035, 'Huawei', 'accessories', 'White', 'True wireless, the Huawei Freebuds Lite sports earbuds offers stunning audio quality, dual microphones on each earbud and excellent noise reduction. Breathable, soft earplugs, specially designed for workouts provide pleasant wearing and secure fit.', 'https://enter.online/images/detailed/76/huawei_freebuds_lite_white1.png', 'Huawei FreeBuds Lite', 2, 5000, 3);
+values (10035, 'Huawei', 'accessories', 'White', 'True wireless, the Huawei Freebuds Lite sports earbuds offers stunning audio quality, dual microphones on each earbud and excellent noise reduction. Breathable, soft earplugs, specially designed for workouts provide pleasant wearing and secure fit.', 'https://enter.online/images/detailed/76/huawei_freebuds_lite_white1.png', 'Huawei FreeBuds Lite', 2, 5000, 3.9);
 
 insert into product
-values (10036, 'Honor', 'accessories', 'Transparent', 'Magnetic Absorption Design, super easy installation. Complete protection of the metal structure.Front and back tempered glass design protection. Anti-dust, shockproof and anti-scratch for your phone.', 'https://ogo1.ru/upload/iblock/143/143a9c1915d3567c9c27902cb11d0dd7.png', 'Honor P40 Lite Case', 3, 1000, 4);
+values (10036, 'Honor', 'accessories', 'Transparent', 'Magnetic Absorption Design, super easy installation. Complete protection of the metal structure.Front and back tempered glass design protection. Anti-dust, shockproof and anti-scratch for your phone.', 'https://ogo1.ru/upload/iblock/143/143a9c1915d3567c9c27902cb11d0dd7.png', 'Honor P40 Lite Case', 3, 1000, 4.0);
 
 
 
@@ -957,3 +957,10 @@ values ( 10198, 'Color', 'Transparent', 10036 );
 
 insert into tech_spec
 values ( 10199, 'Material', 'Silicone', 10036 );
+
+
+insert into user
+values ( 1, 'example@mail.ru' , '$2y$12$ArRlIw.gfPLt20JUvZvPS.D8reglfusppQ3z1moUmAcRAb27I.FZK' , 'User');
+
+insert into user
+values ( 2, 'alex@mail.ru' , '$2y$12$ugT/yco8KG0.tDukQcPJaeroFlfNiMmsNIT5C5RO4GLiTfs.i1VM2' , 'Alex');

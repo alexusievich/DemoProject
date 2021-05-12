@@ -1,13 +1,12 @@
 import React from 'react';
-import {Badge, Menu} from "antd";
-import {MenuOutlined, ShoppingCartOutlined, UserOutlined} from "@ant-design/icons";
+import {Badge, Menu, Avatar} from "antd";
+import {MenuOutlined, ShoppingCartOutlined} from "@ant-design/icons";
 import SubMenu from "antd/es/menu/SubMenu";
 import logo from '../images/logo.png';
 import {Link} from 'react-router-dom';
 import '../App.css';
 
 class AppHeader extends React.Component {
-
 
     render() {
         return (
@@ -31,9 +30,17 @@ class AppHeader extends React.Component {
                             </Badge>
                         </Link>
                     </Menu.Item>
-                    <Menu.Item key="user" style={{float: 'right'}}>
-                        <UserOutlined style={{fontSize: '120%'}}/>
-                    </Menu.Item>
+                    <SubMenu key="user" icon={this.props.currentUser && <Avatar style = {{backgroundColor: '#1890ff'}} size={40}>
+                        {this.props.currentUser }</Avatar>}
+                             title ={!this.props.currentUser && " Account"}
+                             style={{float: 'right', fontSize: '120%'}}>
+                        {!this.props.currentUser && <Menu.Item key="sign">
+                            <Link to={"/login"}>Sign in</Link></Menu.Item>}
+                        {this.props.currentUser && <Menu.Item key="email"><Link to={"/info/"}>Profile</Link></Menu.Item>}
+                        {this.props.currentUser && <Menu.Item key="logout" onClick={this.props.logOut}>Log Out</Menu.Item>}
+                        {!this.props.currentUser && <Menu.Item key="register">
+                            <Link to={"/register"}>Create Account</Link></Menu.Item>}
+                    </SubMenu>
                 </Menu>
             </div>
         )

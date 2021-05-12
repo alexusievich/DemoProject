@@ -15,10 +15,16 @@ public class Basket {
 
     private Integer totalPrice = 0;
 
-    @OneToMany
+    private Long userId;
+
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Item> items = new ArrayList<>();
 
     public Basket() {
+    }
+
+    public Basket(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -40,6 +46,14 @@ public class Basket {
     public void recalculateTotalPrice() {
         this.totalPrice = 0;
         items.forEach(item -> this.totalPrice += item.getProduct().getPrice());
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public List<Item> getItems() {

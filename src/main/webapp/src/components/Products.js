@@ -4,6 +4,7 @@ import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, InputNumber} 
 import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
 import '../styles/Products.css'
 import {Link} from "react-router-dom";
+import NumberFormat from "react-number-format";
 
 const {Meta} = Card;
 
@@ -12,7 +13,6 @@ class Products extends React.Component {
     pageSize = () => {
         return 6;
     }
-
 
     constructor(props) {
         super(props);
@@ -24,13 +24,12 @@ class Products extends React.Component {
             current: 1,
             searchTerm: '',
             sortName: 'Sorting',
-            minPrice: 0,
-            maxPrice: 0,
+            minPrice: null,
+            maxPrice: null,
             brands: [],
             appliedBrands: [],
-            appliedPrice: [],
             sortKey: '',
-            sortCheckArrowUp: undefined,
+            sortCheckArrowUp: null,
         };
     }
 
@@ -192,6 +191,14 @@ class Products extends React.Component {
             this.setState({brands: brands});
             this.setState({products});
             this.setFirstPage();
+            this.setState({
+                searchTerm: '',
+                sortName: 'Sorting',
+                minPrice: null,
+                maxPrice: null,
+                appliedBrands: [],
+                sortKey: '',
+            })
         })
     }
 
@@ -204,7 +211,6 @@ class Products extends React.Component {
             this.fetchProducts();
         }
     }
-
 
     render() {
 
@@ -225,7 +231,9 @@ class Products extends React.Component {
                         description={product.config}
                     />
                     <div className="priceCart">
-                        <div className="price">{product.price} RUB</div>
+                        <div className="price">
+                            <NumberFormat value={product.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
+                        </div>
                         <div className="cart">
                                <span onClick={() => this.props.addToCart(product.id, product.name)}>
                                    <ShoppingCartOutlined/>
@@ -235,7 +243,6 @@ class Products extends React.Component {
                 </Card>
             )
         });
-
 
         const menu = (
             <Menu>
@@ -277,7 +284,7 @@ class Products extends React.Component {
                         <div className="checkboxes">
                             {this.state.brands.map(brand => {
                                 return (
-                                    <Checkbox value={brand} onChange={this.onBrandChange}>{brand}</Checkbox>
+                                    <Checkbox value={brand} checked={this.state.appliedBrands.indexOf(brand) !== -1} onChange={this.onBrandChange}>{brand}</Checkbox>
                                 )
                             })}
                         </div>
@@ -287,10 +294,12 @@ class Products extends React.Component {
                             </div>
                             <div className="prices">
                                 <div className="priceFilter"><InputNumber min={0} id={"1"} size={"small"}
+                                                                          value={this.state.minPrice}
                                                                           placeholder="Minimum"
                                                                           onBlur={this.handleChangePrice}/></div>
                                 <div><MinusOutlined/></div>
                                 <div className="priceFilter"><InputNumber min={0} id={"2"} size={"small"}
+                                                                          value={this.state.maxPrice }
                                                                           placeholder="Maximum"
                                                                           onBlur={this.handleChangePrice}/></div>
                             </div>
@@ -331,6 +340,5 @@ class Products extends React.Component {
     }
 
 }
-
 
 export default Products

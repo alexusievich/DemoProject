@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
 import 'antd/dist/antd.css';
-import {Layout, notification} from 'antd';
+import {Layout, message, notification} from 'antd';
 import {Switch, Route} from 'react-router-dom';
-import {CheckCircleOutlined} from '@ant-design/icons'
+import {CheckCircleOutlined, LogoutOutlined, LoginOutlined} from '@ant-design/icons'
 import AppHeader from "./components/AppHeader";
 import AppFooter from "./components/AppFooter";
 import Products from "./components/Products";
@@ -11,9 +11,12 @@ import MainPage from "./components/MainPage";
 import ProductDetails from "./components/ProductDetails";
 import NotFoundPage from './components/NotFoundPage';
 import Basket from './components/Basket';
-
+import AuthorizationSuccess from "./components/AuthorizationSuccess";
 import {Redirect} from "react-router";
 import axios from "axios";
+import LoginForm from "./components/LoginForm";
+import RegistrationForm from "./components/RegistrationForm";
+import UserProfile from "./components/UserProfile";
 
 const {Header, Footer, Content} = Layout;
 
@@ -23,34 +26,43 @@ class App extends React.Component {
         super(props);
         this.state = {
             basket: null,
+            user: null,
         }
     }
 
-
     componentDidMount() {
+        this.getBasketAndUserInfo();
+    };
+
+    getBasketAndUserInfo = () => {
         axios.get('/api/basket').then(response => {
             const basket = response.data;
             this.setState({basket});
         })
-    };
+        axios.get("/api/userinfo").then(response => {
+            const user = response.data;
+            this.setState({user});
+        })
+    }
 
     addToCart = (id, name) => {
-        axios.post("/api/basket", {id: id}).then(response => {
+        axios.post("/api/basket", {id: id}).then(
+            response => {
                 const basket = response.data;
                 this.setState({basket});
                 notification.open({
                     top: 70,
                     message: `The ${name} successfully added to cart!`,
                     duration: 1.5,
-                    icon: <CheckCircleOutlined style={{ color: '#108ee9', fontSize: 30}} />,
+                    icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
                 });
             }
-        );
+        )
     }
 
     clearBasket = () => {
         axios.delete("/api/basket/clear").then(response => {
-            this.setState({basket: undefined});
+            this.setState({basket: null});
         });
     }
 
@@ -59,9 +71,38 @@ class App extends React.Component {
                 axios.get('/api/basket').then(response => {
                     const basket = response.data;
                     this.setState({basket});
-                });
+                })
             }
         );
+    }
+
+    logOut = () => {
+        axios.post("/api/auth/logout").then(response => {
+            notification.open({
+                top: 70,
+                message: `${this.state.user.username}, you have successfully logged out of your account!`,
+                duration: 2.5,
+                icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+            })
+            this.setState({user: null});
+            this.setState({basket: null});
+        });
+    }
+
+    submitForm = (username, password) => {
+        axios.post("/api/auth/login", {username: username, password: password}).then(response => {
+            const user = response.data;
+            this.setState({user});
+            notification.open({
+                top: 70,
+                message: `${this.state.user.username}, you have successfully logged in to your account!`,
+                duration: 2.5,
+                icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+            });
+           this.getBasketAndUserInfo();
+        }).catch(error => {
+            message.error("Invalid username or password!");
+        })
     }
 
     render() {
@@ -69,7 +110,8 @@ class App extends React.Component {
         return (
             <Layout className="mainLayout">
                 <Header>
-                    <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}/>
+                    <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}
+                               currentUser={this.state.user?.username} logOut={this.logOut}/>
                 </Header>
                 <Content>
                     <Switch>
@@ -81,7 +123,13 @@ class App extends React.Component {
                         <Route exact path="/404" component={NotFoundPage}/>
                         <Route exact path="/basket" render={(props) =>
                             (<Basket {...props} basket={this.state.basket}
-                            clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
+                                     clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
+                        <Route exact path="/login" render={(props) =>
+                            (<LoginForm {...props} submitForm={this.submitForm}/>)}/>
+                        <Route exact path="/register" component={RegistrationForm}/>
+                        <Route exact path="/success" component={AuthorizationSuccess}/>
+                        <Route exact path="/info" render={(props) =>
+                            (<UserProfile {...props} user={this.state.user}/>)}/>
                         <Route>
                             <Redirect to="/404"/>
                         </Route>
@@ -91,10 +139,9 @@ class App extends React.Component {
                     <AppFooter/>
                 </Footer>
             </Layout>
-
         );
-    }
 
+    }
 
 }
 

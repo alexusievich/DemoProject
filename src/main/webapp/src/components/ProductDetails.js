@@ -5,6 +5,7 @@ import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
 import '../styles/ProductDetails.css';
 import Cookie from "./Cookie";
 import productDetailsBanner from '../images/prodDetailsBanner.png'
+import NumberFormat from "react-number-format";
 
 class ProductDetails extends React.Component {
 
@@ -86,13 +87,13 @@ class ProductDetails extends React.Component {
                             {this.state.phoneDetails.name} {this.state.phoneDetails.config}
                         </div>
                         <div className="rating">
-                            {this.state.phoneDetails.rating} <StarFilled style={{color: "#1890ff"}}/>
+                            <StarFilled style={{color: "#1890ff"}}/> {this.state.phoneDetails.rating}
                         </div>
                         <div className="description">
                             {this.state.phoneDetails.description}
                         </div>
                         <div className="pricee">
-                            {this.state.phoneDetails.price} RUB
+                            <NumberFormat value={this.state.phoneDetails.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
                         </div>
                         <div className="cartt">
                             <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"
@@ -117,6 +118,5 @@ class ProductDetails extends React.Component {
         )
     };
 }
-
 
 export default ProductDetails
