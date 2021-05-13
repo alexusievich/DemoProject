@@ -1,7 +1,14 @@
 import React from 'react';
 import axios from "axios";
 import {Button, Card, Checkbox, Dropdown, Input, Menu, Pagination, InputNumber} from 'antd'
-import {ArrowDownOutlined, ArrowUpOutlined, DownOutlined, MinusOutlined, ShoppingCartOutlined} from '@ant-design/icons'
+import {
+    ArrowDownOutlined,
+    ArrowUpOutlined,
+    DownOutlined,
+    MinusOutlined,
+    ShoppingCartOutlined,
+    StarFilled
+} from '@ant-design/icons'
 import '../styles/Products.css'
 import {Link} from "react-router-dom";
 import NumberFormat from "react-number-format";
@@ -199,6 +206,8 @@ class Products extends React.Component {
                 appliedBrands: [],
                 sortKey: '',
             })
+        }).catch(error => {
+            this.props.history.push('/404');
         })
     }
 
@@ -230,6 +239,9 @@ class Products extends React.Component {
                         title={product.name}
                         description={product.config}
                     />
+                    <div className="rate">
+                        <StarFilled style={{color: "#1890ff"}}/> {product.rating}
+                    </div>
                     <div className="priceCart">
                         <div className="price">
                             <NumberFormat value={product.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>

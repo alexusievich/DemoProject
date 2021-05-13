@@ -1,5 +1,6 @@
 package com.mycompany.shop.basket;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.mycompany.shop.item.Item;
 
 import javax.persistence.*;
@@ -17,7 +18,8 @@ public class Basket {
 
     private Long userId;
 
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "basket", fetch = FetchType.EAGER)
+    @JsonManagedReference
     private List<Item> items = new ArrayList<>();
 
     public Basket() {
