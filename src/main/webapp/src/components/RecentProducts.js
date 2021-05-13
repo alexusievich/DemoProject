@@ -4,6 +4,7 @@ import {Card} from "antd";
 import {Link} from "react-router-dom";
 import '../styles/Main&RecentPages.css'
 import Cookie from "./Cookie";
+import NumberFormat from "react-number-format";
 
 const {Meta} = Card;
 
@@ -55,7 +56,7 @@ class RecentProducts extends React.Component {
                                 title={phone.name}
                                 description={phone.config}
                             />
-                            <div className="priceRecent">{phone.price} RUB</div>
+                            <div className="priceRecent"><NumberFormat value={phone.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/></div>
                         </Card>
                     </Link>
                 )
