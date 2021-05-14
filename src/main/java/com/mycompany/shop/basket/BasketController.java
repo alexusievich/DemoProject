@@ -65,15 +65,18 @@ public class BasketController {
                 if (userSessionBean.getUser() != null) {
                     basket.setUserId(userSessionBean.getUser().getId());
                 }
+                basketRepository.save(basket);
             } else {
                 basket = basketSessionBean.getBasket();
             }
             Item item = new Item();
             item.setProduct(existingProduct.get());
+            item.setBasket(basket);
             itemRepository.save(item);
-            basket.getItems().add(item);
+            List<Item> items = itemRepository.findAllByBasketId(basket.getId()).get();
+            basket.setItems(items);
             basket.recalculateTotalPrice();
-            basket = basketRepository.save(basket);
+            basketRepository.save(basket);
             basketSessionBean.setBasket(basket);
             return ResponseEntity.ok(basket);
         } else {

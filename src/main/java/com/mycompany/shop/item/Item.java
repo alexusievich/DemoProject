@@ -1,4 +1,6 @@
 package com.mycompany.shop.item;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.mycompany.shop.basket.Basket;
 import com.mycompany.shop.product.Product;
 
 import javax.persistence.*;
@@ -12,6 +14,11 @@ public class Item {
 
     @ManyToOne
     private Product product;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "basket_id", nullable = false)
+    @JsonBackReference
+    private Basket basket;
 
     public Item() {}
 
@@ -38,5 +45,13 @@ public class Item {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public Basket getBasket() {
+        return basket;
+    }
+
+    public void setBasket(Basket basket) {
+        this.basket = basket;
     }
 }

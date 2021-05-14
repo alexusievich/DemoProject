@@ -28,7 +28,13 @@ public class ProductController {
 
     @GetMapping()
     public ResponseEntity<List<Product>> retrieveAllProducts(@RequestParam("category") String category) {
-        return ResponseEntity.ok(productRepository.findAll().stream().filter(product -> product.getCategory().equals(category)).collect(Collectors.toList()));
+        List<Product> products = productRepository.findAll().stream().filter(product ->
+                product.getCategory().equals(category)).collect(Collectors.toList());
+        if (products.size() != 0) {
+            return ResponseEntity.ok(products);
+        } else {
+            throw new ProductNotFoundException("Category is invalid! No products were found!");
+        }
     }
 
     @GetMapping("/{id}")
@@ -40,6 +46,6 @@ public class ProductController {
             throw new ProductNotFoundException("The product with id: " + id + " is not found");
         }
 
-        return  ResponseEntity.ok(optionalProduct.get());
+        return ResponseEntity.ok(optionalProduct.get());
     }
 }
