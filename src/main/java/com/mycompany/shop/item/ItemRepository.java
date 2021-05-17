@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
     Optional<List<Item>> findAllByBasketId(Long basketId);
+    void deleteAllByBasketId(Long basketId);
 }
