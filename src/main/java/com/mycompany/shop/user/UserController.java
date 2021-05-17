@@ -17,7 +17,7 @@ public class UserController {
     UserSessionBean userSessionBean;
 
     @GetMapping()
-    public ResponseEntity<User> retrieveProduct() {
+    public ResponseEntity<User> retrieveUser() {
 
         Long userId = userSessionBean.getUser().getId();
         Optional<User> optionalUser = userRepository.findById(userId);
