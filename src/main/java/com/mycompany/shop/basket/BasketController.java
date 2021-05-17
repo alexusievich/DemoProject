@@ -1,6 +1,7 @@
 package com.mycompany.shop.basket;
 
 import com.mycompany.shop.item.Item;
+import com.mycompany.shop.item.ItemNotFoundException;
 import com.mycompany.shop.item.ItemRepository;
 import com.mycompany.shop.product.Product;
 import com.mycompany.shop.product.ProductNotFoundException;
@@ -96,20 +97,27 @@ public class BasketController {
         }
     }
 
+    @Transactional
     @DeleteMapping("/removeitem/{id}")
     public ResponseEntity<Basket> removeItem(@PathVariable long id) {
-        Basket basket = basketSessionBean.getBasket();
-        List<Item> items = basket.getItems();
-        items = items.stream().filter(item1 -> item1.getId() != id).collect(Collectors.toList());
-        if (items.size() == 0) {
-            basketRepository.delete(basket);
-            basketSessionBean.setBasket(null);
+        if (itemRepository.findById(id).isPresent()) {
+            Basket basket = basketSessionBean.getBasket();
+            List<Item> items = itemRepository.findAllByBasketId(basket.getId()).get();
+            items = items.stream().filter(item1 -> item1.getId() != id).collect(Collectors.toList());
+            if (items.size() == 0) {
+                itemRepository.deleteAllByBasketId(basket.getId());
+                basketRepository.delete(basket);
+                basketSessionBean.setBasket(null);
+            } else {
+                itemRepository.deleteById(id);
+                basket.setItems(items);
+                basket.recalculateTotalPrice();
+                basketRepository.save(basket);
+            }
+            return ResponseEntity.ok(basketSessionBean.getBasket());
         } else {
-            basket.setItems(items);
-            basket.recalculateTotalPrice();
-            basketRepository.save(basket);
+            throw new ItemNotFoundException("The item with id: " + id + " is not found");
         }
-        return ResponseEntity.ok(basketSessionBean.getBasket());
     }
 
 }
