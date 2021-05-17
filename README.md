@@ -7,9 +7,9 @@ their photos and technical specifications, add products to the cart,
 sort and filter them. It is also possible to register and 
 authenticate users.
 ## Quick Start
-* Firstly, download ZIP archive from the following address:
+* Firstly, clone the repository:
 ```
-https://github.com/alexusievich/FinalProject
+git clone https://github.com/alexusievich/FinalProject.git
 ```
 * Then open project with IntelliJ IDEA or another program and start the application.
 * Finally, you can see your application running on:
