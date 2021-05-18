@@ -101,7 +101,7 @@ class App extends React.Component {
             });
            this.getBasketAndUserInfo();
         }).catch(error => {
-            message.error("Invalid username or password!");
+            message.error("Invalid username or password!").then();
         })
     }
 

@@ -17,7 +17,7 @@ class LoginForm extends React.Component {
             this.props.submitForm(username,password);
             this.props.history.push("/");
         }).catch(error => {
-            message.error("Invalid username or password!");
+            message.error("Invalid username or password!").then();
         })
     }
 

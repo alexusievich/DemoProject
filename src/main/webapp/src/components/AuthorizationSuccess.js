@@ -14,7 +14,7 @@ class AuthorizationSuccess extends React.Component {
                 extra={[
                     <Button type="primary" key="console" style={{borderRadius: '40px'}}>
                         <Link to={"/"}>
-                            Return to main page
+                            Back Home
                         </Link>
                     </Button>,
                     <Button key="buy" style={{borderRadius: '40px'}}>

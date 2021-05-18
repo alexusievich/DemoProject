@@ -14,7 +14,7 @@ class UserProfile extends React.Component {
 
                 {this.props.user &&
                 <div className="card">
-                    <Card hoverable
+                    <Card
                           key={this.props.user.id}
                           className="profileCard"
                           cover={
