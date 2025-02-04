@@ -1,49 +1,44 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
-import '../styles/Main&RecentPages.css'
-import Cookie from "./Cookie";
+import '../../main-page/Main&RecentPages.css'
+import Cookie from "../../../utils/cookies/Cookie";
 import NumberFormat from "react-number-format";
 
 const {Meta} = Card;
 
-class RecentProducts extends React.Component {
+const RecentProducts = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            phones: [],
-        };
-    }
+    const [phones, setPhones] = useState([]);
 
-    componentDidMount() {
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                let ids = [];
 
-        let ids = [];
+                if (Cookie.getCookie('phoneIds')) {
+                    ids = JSON.parse(Cookie.getCookie('phoneIds'));
+                }
 
-        if (Cookie.getCookie('phoneIds')) {
-            ids = JSON.parse(Cookie.getCookie('phoneIds'));
+                for (const id of ids.reverse()) {
+                    if (id !== '') {
+                        const {response: data} = await axios.get('/api/products/' + id);
+                        setPhones(prevState => [...prevState, data]);
+                    }
+                }
+            } catch (error) {
+                console.error('Error while fetching recent product');
+            }
         }
 
+        fetchProduct();
+    }, []);
 
-        ids.reverse().forEach(id => {
-            if (id !== '') {
-                axios.get('/api/products/' + id).then(response => {
-                    const phone = response.data;
-                    this.setState(prevState => ({
-                        phones: [...prevState.phones, phone]
-                    }))
-                })
-            }
-        })
 
-    };
-
-    render() {
-
-        const renderPhones = (this.state.phones.map(phone => {
+        const phonesList = (phones.map(phone => {
                 return (
-                    <Link to={"/productdetails/" + phone.id}>
+                    <Link to={"/productdetails/" + phone.id} key={phone.id}>
                         <Card hoverable
                               key={phone.id}
                               className="recentCards"
@@ -64,21 +59,18 @@ class RecentProducts extends React.Component {
         )
 
         return (
-            <div>
-                {this.state.phones.length > 0 &&
+            <>
+                {phones.length > 0 &&
                 <div className="recentProducts">
                     <div className="text">
                         Recently viewed
                     </div>
                     <div className="wrapper">
-                        {renderPhones}
+                        {phonesList}
                     </div>
                 </div>}
-            </div>
+            </>
         )
-    }
-
 }
-
 
 export default RecentProducts

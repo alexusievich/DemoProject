@@ -2,6 +2,10 @@
     border-bottom: 0 !important;
 }
 
+.ant-layout-header {
+    padding: 0 !important;
+}
+
 .header {
     background-color: white;
 }

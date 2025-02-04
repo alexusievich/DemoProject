@@ -5,13 +5,14 @@
     justify-content: center;
     align-items: center;
     padding: 0 70px;
+    gap: 40px 100px;
+    margin: 20px 50px;
 }
 
 .myCard {
     text-align: center;
     width: 250px;
     border-radius: 5% !important;
-    margin: 20px 50px !important;
     border: 1px solid lightgray !important;
 }
 
@@ -25,7 +26,7 @@
 
 .myCard img {
     width: 200px;
-    height: 200px;
+    min-height: 200px;
     padding: 20px;
     margin: 20px;
 }
@@ -62,7 +63,7 @@
 
 .pagination {
     text-align: center;
-    padding: 20px 0px;
+    padding: 20px 0;
 }
 
 .filterSearch {

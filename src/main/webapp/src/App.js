@@ -1,148 +1,144 @@
 import './App.css';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
 import {Layout, message, notification} from 'antd';
 import {Switch, Route} from 'react-router-dom';
 import {CheckCircleOutlined, LogoutOutlined, LoginOutlined} from '@ant-design/icons'
-import AppHeader from "./components/AppHeader";
-import AppFooter from "./components/AppFooter";
-import Products from "./components/Products";
-import MainPage from "./components/MainPage";
-import ProductDetails from "./components/ProductDetails";
-import NotFoundPage from './components/NotFoundPage';
-import Basket from './components/Basket';
-import AuthorizationSuccess from "./components/AuthorizationSuccess";
+import AppHeader from "./components/header/AppHeader";
+import AppFooter from "./components/footer/AppFooter";
+import Products from "./components/product/Products";
+import MainPage from "./components/main-page/MainPage";
+import ProductDetails from "./components/product/product-details/ProductDetails";
+import NotFoundPage from './components/not-found/NotFoundPage';
+import Basket from './components/basket/Basket';
+import AuthorizationSuccess from "./components/registration/success/AuthorizationSuccess";
 import {Redirect} from "react-router";
 import axios from "axios";
-import LoginForm from "./components/LoginForm";
-import RegistrationForm from "./components/RegistrationForm";
-import UserProfile from "./components/UserProfile";
+import LoginForm from "./components/login-form/LoginForm";
+import RegistrationForm from "./components/registration/form/RegistrationForm";
+import UserProfile from "./components/user-profile/UserProfile";
 
 const {Header, Footer, Content} = Layout;
 
-class App extends React.Component {
+const App = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            basket: null,
-            user: null,
+    const [basket, setBasket] = useState();
+    const [user, setUser] = useState();
+
+    const getBasketAndUserInfo = async () => {
+        try {
+            const basketResponse = await axios.get('/api/basket');
+            setBasket(basketResponse.data)
+            const userResponse = await axios.get("/api/userinfo");
+            setUser(userResponse.data);
+        } catch (error) {
+            console.error('Error while fetching user or basket data');
         }
     }
 
-    componentDidMount() {
-        this.getBasketAndUserInfo();
-    };
+    useEffect(() => {
+        getBasketAndUserInfo();
+    }, []);
 
-    getBasketAndUserInfo = () => {
-        axios.get('/api/basket').then(response => {
-            const basket = response.data;
-            this.setState({basket});
-        })
-        axios.get("/api/userinfo").then(response => {
-            const user = response.data;
-            this.setState({user});
-        })
+    const addToCart = async (id, name) => {
+        try {
+            const {response: data} = await axios.post("/api/basket", {id: id});
+            this.setState(data);
+            notification.open({
+                top: 70,
+                message: `The ${name} successfully added to cart!`,
+                duration: 1.5,
+                icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
+            });
+        } catch (error) {
+            console.error('Error while adding to cart')
+        }
     }
 
-    addToCart = (id, name) => {
-        axios.post("/api/basket", {id: id}).then(
-            response => {
-                const basket = response.data;
-                this.setState({basket});
-                notification.open({
-                    top: 70,
-                    message: `The ${name} successfully added to cart!`,
-                    duration: 1.5,
-                    icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
-                });
-            }
-        )
+    const clearBasket = async () => {
+        try {
+           await axios.delete("/api/basket/clear");
+           setBasket(null);
+        } catch (error) {
+            console.error('Error while clearing the basket');
+        }
     }
 
-    clearBasket = () => {
-        axios.delete("/api/basket/clear").then(response => {
-            this.setState({basket: null});
-        });
+    const removeItem = async (id) => {
+        try {
+            await axios.delete(`/api/basket/removeitem/${id}`);
+            const {response: data} = await axios.get('/api/basket');
+            setBasket(data);
+        } catch (error) {
+            console.error('Error while removing item from the basket');
+        }
     }
 
-    removeItem = (id) => {
-        axios.delete(`/api/basket/removeitem/${id}`).then(response => {
-                axios.get('/api/basket').then(response => {
-                    const basket = response.data;
-                    this.setState({basket});
-                })
-            }
-        );
-    }
-
-    logOut = () => {
-        axios.post("/api/auth/logout").then(response => {
+    const logOut = async () => {
+        try {
+            await axios.post("/api/auth/logout");
             notification.open({
                 top: 70,
                 message: `${this.state.user.username}, you have successfully logged out of your account!`,
                 duration: 2.5,
                 icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
-            })
-            this.setState({user: null});
-            this.setState({basket: null});
-        });
+            });
+            setUser(null);
+            setBasket(null);
+        } catch (error) {
+            console.error('Error while logging out');
+        }
     }
 
-    submitForm = (username, password) => {
-        axios.post("/api/auth/login", {username: username, password: password}).then(response => {
-            const user = response.data;
-            this.setState({user});
+    const submitForm = async (username, password) => {
+        try {
+            const {response: data} = await axios.post("/api/auth/login", {username: username, password: password});
+            setUser(data);
             notification.open({
                 top: 70,
                 message: `${this.state.user.username}, you have successfully logged in to your account!`,
                 duration: 2.5,
                 icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             });
-           this.getBasketAndUserInfo();
-        }).catch(error => {
-            message.error("Invalid username or password!").then();
-        })
+            await getBasketAndUserInfo();
+        } catch (error) {
+            message.error("Invalid username or password!");
+        }
     }
 
-    render() {
-
-        return (
-            <Layout className="mainLayout">
-                <Header>
-                    <AppHeader numberItems={this.state.basket ? this.state.basket.items.length : 0}
-                               currentUser={this.state.user?.username} logOut={this.logOut}/>
-                </Header>
-                <Content>
-                    <Switch>
-                        <Route exact path="/" component={MainPage}/>
-                        <Route exact path="/products/:category" render={(props) =>
-                            (<Products {...props} addToCart={this.addToCart}/>)}/>
-                        <Route exact path="/productdetails/:id" render={(props) =>
-                            (<ProductDetails {...props} addToCart={this.addToCart}/>)}/>
-                        <Route exact path="/404" component={NotFoundPage}/>
-                        <Route exact path="/basket" render={(props) =>
-                            (<Basket {...props} basket={this.state.basket}
-                                     clearBasket={this.clearBasket} removeItem={this.removeItem}/>)}/>
-                        <Route exact path="/login" render={(props) =>
-                            (<LoginForm {...props} submitForm={this.submitForm}/>)}/>
-                        <Route exact path="/register" component={RegistrationForm}/>
-                        <Route exact path="/success" component={AuthorizationSuccess}/>
-                        <Route exact path="/info" render={(props) =>
-                            (<UserProfile {...props} user={this.state.user}/>)}/>
-                        <Route>
-                            <Redirect to="/404"/>
-                        </Route>
-                    </Switch>
-                </Content>
-                <Footer>
-                    <AppFooter/>
-                </Footer>
-            </Layout>
-        );
-
-    }
-
+    return (
+        <Layout className="mainLayout">
+            <Header>
+                <AppHeader numberItems={basket ? basket.items.length : 0}
+                           currentUser={user?.username} logOut={logOut}/>
+            </Header>
+            <Content>
+                <Switch>
+                    <Route exact path="/" component={MainPage}/>
+                    <Route exact path="/products/:category" render={(props) =>
+                        (<Products {...props} addToCart={addToCart}/>)}/>
+                    <Route exact path="/productdetails/:id" render={(props) =>
+                        (<ProductDetails {...props} addToCart={addToCart}/>)}/>
+                    <Route exact path="/404" component={NotFoundPage}/>
+                    <Route exact path="/basket" render={(props) =>
+                        (<Basket {...props} basket={basket}
+                                 clearBasket={clearBasket} removeItem={removeItem}/>)}/>
+                    <Route exact path="/login" render={(props) =>
+                        (<LoginForm {...props} submitForm={submitForm}/>)}/>
+                    <Route exact path="/register" component={RegistrationForm}/>
+                    <Route exact path="/success" component={AuthorizationSuccess}/>
+                    <Route exact path="/info" render={(props) =>
+                        (<UserProfile {...props} user={user}/>)}/>
+                    <Route>
+                        <Redirect to="/404"/>
+                    </Route>
+                </Switch>
+            </Content>
+            <Footer>
+                <AppFooter/>
+            </Footer>
+        </Layout>
+    );
 }
 
 export default App;
