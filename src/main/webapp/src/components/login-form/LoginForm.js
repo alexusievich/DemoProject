@@ -31,8 +31,8 @@ const LoginForm = (props) => {
     };
 
 
-    const onFinish = (values) => {
-        submitForm(values.username, values.password)
+    const onFinish = async (values) => {
+        await submitForm(values.username, values.password)
     };
 
     return (
