@@ -13,7 +13,7 @@ const RecentProducts = () => {
     const [phones, setPhones] = useState([]);
 
     useEffect(() => {
-        const fetchProduct = async () => {
+        const fetchProducts = async () => {
             try {
                 let ids = [];
 
@@ -23,8 +23,8 @@ const RecentProducts = () => {
 
                 for (const id of ids.reverse()) {
                     if (id !== '') {
-                        const {response: data} = await axios.get('/api/products/' + id);
-                        setPhones(prevState => [...prevState, data]);
+                        const response = await axios.get('/api/products/' + id);
+                        setPhones(prevState => [...prevState, response.data]);
                     }
                 }
             } catch (error) {
@@ -32,35 +32,35 @@ const RecentProducts = () => {
             }
         }
 
-        fetchProduct();
+        fetchProducts();
     }, []);
 
 
-        const phonesList = (phones.map(phone => {
-                return (
-                    <Link to={"/productdetails/" + phone.id} key={phone.id}>
-                        <Card hoverable
-                              key={phone.id}
-                              className="recentCards"
-                              cover={
-                                  <img alt={phone.name}
-                                       src={phone.img}
-                                  />
-                              }>
-                            <Meta
-                                title={phone.name}
-                                description={phone.config}
-                            />
-                            <div className="priceRecent"><NumberFormat value={phone.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/></div>
-                        </Card>
-                    </Link>
-                )
-            })
-        )
-
+    const phonesList = (phones.map(phone => {
         return (
-            <>
-                {phones.length > 0 &&
+            <Link to={"/productdetails/" + phone.id} key={phone.id}>
+                <Card hoverable
+                      key={phone.id}
+                      className="recentCards"
+                      cover={
+                          <img alt={phone.name}
+                               src={phone.img}
+                          />
+                      }>
+                    <Meta
+                        title={phone.name}
+                        description={phone.config}
+                    />
+                    <div className="priceRecent"><NumberFormat value={phone.price} displayType='text'
+                                                               thousandSeparator=' ' suffix=' RUB'/></div>
+                </Card>
+            </Link>
+        )
+    }));
+
+    return (
+        <>
+            {phones.length > 0 &&
                 <div className="recentProducts">
                     <div className="text">
                         Recently viewed
@@ -69,8 +69,8 @@ const RecentProducts = () => {
                         {phonesList}
                     </div>
                 </div>}
-            </>
-        )
+        </>
+    )
 }
 
 export default RecentProducts

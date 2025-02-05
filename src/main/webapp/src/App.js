@@ -42,8 +42,8 @@ const App = () => {
 
     const addToCart = async (id, name) => {
         try {
-            const {response: data} = await axios.post("/api/basket", {id: id});
-            this.setState(data);
+            const response = await axios.post("/api/basket", {id: id});
+            this.setState(response.data);
             notification.open({
                 top: 70,
                 message: `The ${name} successfully added to cart!`,
@@ -67,8 +67,8 @@ const App = () => {
     const removeItem = async (id) => {
         try {
             await axios.delete(`/api/basket/removeitem/${id}`);
-            const {response: data} = await axios.get('/api/basket');
-            setBasket(data);
+            const response = await axios.get('/api/basket');
+            setBasket(response.data);
         } catch (error) {
             console.error('Error while removing item from the basket');
         }
@@ -92,8 +92,8 @@ const App = () => {
 
     const submitForm = async (username, password) => {
         try {
-            const {response: data} = await axios.post("/api/auth/login", {username: username, password: password});
-            setUser(data);
+            const response = await axios.post("/api/auth/login", {username: username, password: password});
+            setUser(response.data);
             notification.open({
                 top: 70,
                 message: `${this.state.user.username}, you have successfully logged in to your account!`,
