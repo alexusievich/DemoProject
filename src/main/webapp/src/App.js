@@ -43,7 +43,7 @@ const App = () => {
     const addToCart = async (id, name) => {
         try {
             const response = await axios.post("/api/basket", {id: id});
-            this.setState(response.data);
+            setBasket(response.data);
             notification.open({
                 top: 70,
                 message: `The ${name} successfully added to cart!`,
@@ -79,7 +79,7 @@ const App = () => {
             await axios.post("/api/auth/logout");
             notification.open({
                 top: 70,
-                message: `${this.state.user.username}, you have successfully logged out of your account!`,
+                message: `${user?.username}, you have successfully logged out of your account!`,
                 duration: 2.5,
                 icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             });
@@ -96,7 +96,7 @@ const App = () => {
             setUser(response.data);
             notification.open({
                 top: 70,
-                message: `${this.state.user.username}, you have successfully logged in to your account!`,
+                message: `${user?.username}, you have successfully logged in to your account!`,
                 duration: 2.5,
                 icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
             });
