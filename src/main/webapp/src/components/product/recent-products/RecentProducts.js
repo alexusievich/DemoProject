@@ -3,7 +3,7 @@ import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
 import '../../main-page/Main&RecentPages.css'
-import Cookie from "../../../utils/cookies/Cookie";
+import Cookie from "../../../utils/cookies.utils";
 import NumberFormat from "react-number-format";
 
 const {Meta} = Card;

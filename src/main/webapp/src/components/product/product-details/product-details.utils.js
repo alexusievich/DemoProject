@@ -1,12 +1,12 @@
-import Cookie from "../../../utils/cookies/Cookie";
+import {getCookie, setCookie} from "../../../utils/cookies.utils";
 
 export function handleRecentProductsInCookies(phoneDetails) {
-    if (Cookie.getCookie('phoneIds') === '') {
+    if (getCookie('phoneIds') === '') {
         let arr = [];
         arr[0] = phoneDetails.id;
-        Cookie.setCookie('phoneIds', JSON.stringify(arr));
+        setCookie('phoneIds', JSON.stringify(arr));
     } else {
-        let arr = JSON.parse(Cookie.getCookie('phoneIds'));
+        let arr = JSON.parse(getCookie('phoneIds'));
         if (arr.length === 1) {
             if (arr[0] !== phoneDetails.id) {
                 arr[1] = phoneDetails.id;
@@ -17,6 +17,6 @@ export function handleRecentProductsInCookies(phoneDetails) {
                 arr[1] = phoneDetails.id;
             }
         }
-        Cookie.setCookie('phoneIds', JSON.stringify(arr));
+        setCookie('phoneIds', JSON.stringify(arr));
     }
 }
