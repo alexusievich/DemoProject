@@ -3,8 +3,8 @@ import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
 import '../../main-page/Main&RecentPages.css'
-import Cookie from "../../../utils/cookies.utils";
 import NumberFormat from "react-number-format";
+import {getCookie} from "../../../utils/cookies.utils";
 
 const {Meta} = Card;
 
@@ -17,8 +17,8 @@ const RecentProducts = () => {
             try {
                 let ids = [];
 
-                if (Cookie.getCookie('phoneIds')) {
-                    ids = JSON.parse(Cookie.getCookie('phoneIds'));
+                if (getCookie('phoneIds')) {
+                    ids = JSON.parse(getCookie('phoneIds'));
                 }
 
                 for (const id of ids.reverse()) {
