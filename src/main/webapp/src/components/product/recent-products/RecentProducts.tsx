@@ -10,7 +10,7 @@ const {Meta} = Card;
 
 const RecentProducts = () => {
 
-    const [phones, setPhones] = useState([]);
+    const [phones, setPhones] = useState<any>([]);
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -24,7 +24,7 @@ const RecentProducts = () => {
                 for (const id of ids.reverse()) {
                     if (id !== '') {
                         const response = await axios.get('/api/products/' + id);
-                        setPhones(prevState => [...prevState, response.data]);
+                        setPhones((prevState: any) => [...prevState, response.data]);
                     }
                 }
             } catch (error) {
@@ -36,7 +36,7 @@ const RecentProducts = () => {
     }, []);
 
 
-    const phonesList = (phones.map(phone => {
+    const phonesList = (phones.map((phone: any) => {
         return (
             <Link to={"/productdetails/" + phone.id} key={phone.id}>
                 <Card hoverable

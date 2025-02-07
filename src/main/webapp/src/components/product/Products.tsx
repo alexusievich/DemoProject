@@ -15,7 +15,7 @@ import NumberFormat from "react-number-format";
 
 const {Meta} = Card;
 
-const Products = (props) => {
+const Products = (props: any) => {
 
     const pageSize = 6;
 
@@ -25,14 +25,14 @@ const Products = (props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [searchTerm, setSearchTerm] = useState('');
     const [sortName, setSortName] = useState('Sorting');
-    const [minPrice, setMinPrice] = useState();
-    const [maxPrice, setMaxPrice] = useState();
-    const [brands, setBrands] = useState([]);
+    const [minPrice, setMinPrice] = useState(null);
+    const [maxPrice, setMaxPrice] = useState(null);
+    const [brands, setBrands] = useState<any>([]);
     const [appliedBrands, setAppliedBrands] = useState([]);
     const [sortKey, setSortKey] = useState('');
-    const [isSortCheckArrowUp, setIsSortCheckArrowUp] = useState();
+    const [isSortCheckArrowUp, setIsSortCheckArrowUp] = useState<boolean>();
 
-    const handlePageChange = value => {
+    const handlePageChange = (value: any) => {
         setCurrentPage(value);
         if (value <= 1) {
             setMinValue(0);
@@ -48,23 +48,24 @@ const Products = (props) => {
             const response = await axios.get('/api/products', {params: {category: props.match.params.category}});
             const products = response.data;
 
-            let result = products.filter(product =>
+            let result = products.filter((product: any) =>
                 product.name.toLowerCase().includes(searchTerm.toLowerCase())
             );
 
 
             if (appliedBrands.length !== 0) {
-                result = result.filter(product =>
+                result = result.filter((product: any) =>
+                    //@ts-ignore
                     appliedBrands.indexOf(product.brand) !== -1
                 );
             }
-            if (minPrice > 0) {
-                result = result.filter(product =>
+            if (minPrice && minPrice > 0) {
+                result = result.filter((product: any) =>
                     product.price >= minPrice
                 )
             }
-            if (maxPrice > 0) {
-                result = result.filter(product =>
+            if (maxPrice && maxPrice > 0) {
+                result = result.filter((product: any) =>
                     product.price <= maxPrice
                 )
             }
@@ -72,41 +73,49 @@ const Products = (props) => {
             if (sortKey !== '') {
                 switch (sortKey) {
                     case '1':
+                        //@ts-ignore
                         result = result.sort((a, b) => a.popularity - b.popularity);
                         setSortName('By popularity');
                         setIsSortCheckArrowUp(true);
                         break;
                     case '2':
+                        //@ts-ignore
                         result = result.sort((a, b) => b.popularity - a.popularity);
                         setSortName('By popularity');
                         setIsSortCheckArrowUp(false);
                         break;
                     case '3':
+                        //@ts-ignore
                         result = result.sort((a, b) => a.rating - b.rating);
                         setSortName('By rating');
                         setIsSortCheckArrowUp(true);
                         break;
                     case '4':
+                        //@ts-ignore
                         result = result.sort((a, b) => b.rating - a.rating);
                         setSortName('By rating');
                         setIsSortCheckArrowUp(false);
                         break;
                     case '5':
+                        //@ts-ignore
                         result = result.sort((a, b) => a.price - b.price);
                         setSortName('By price');
                         setIsSortCheckArrowUp(true);
                         break;
                     case '6':
+                        //@ts-ignore
                         result = result.sort((a, b) => b.price - a.price);
                         setSortName('By price');
                         setIsSortCheckArrowUp(false);
                         break;
                     case '7':
+                        //@ts-ignore
                         result = result.sort((a, b) => a.name.localeCompare(b.name));
                         setSortName('By name');
                         setIsSortCheckArrowUp(true);
                         break;
                     case '8':
+                        //@ts-ignore
                         result = result.sort((a, b) => b.name.localeCompare(a.name));
                         setSortName('By name');
                         setIsSortCheckArrowUp(false);
@@ -124,23 +133,25 @@ const Products = (props) => {
         }
     }
 
-    const handleChangeSearch = async (event) => {
+    const handleChangeSearch = async (event: any) => {
         setSearchTerm(event.target.value);
         await applyFilters();
     }
 
-    const onBrandChange = async (event) => {
+    const onBrandChange = async (event: any) => {
         const appliedBrandsArr = [...appliedBrands];
         if (event.target.checked) {
+            // @ts-ignore
             appliedBrandsArr.push(event.target.value);
         } else {
+            // @ts-ignore
             appliedBrandsArr.splice(appliedBrandsArr.indexOf(event.target.value), 1);
         }
         setAppliedBrands(appliedBrandsArr);
         await applyFilters();
     }
 
-    const handleChangePrice = async (event) => {
+    const handleChangePrice = async (event: any) => {
         if (event.target.id === '1') {
             setMinPrice(event.target.value);
         } else {
@@ -149,7 +160,7 @@ const Products = (props) => {
         await applyFilters();
     }
 
-    const handleClickSort = async (event) => {
+    const handleClickSort = async (event: any) => {
         setSortKey(event.key);
         await applyFilters();
     }
@@ -165,12 +176,12 @@ const Products = (props) => {
             try {
                 const response = await axios.get('/api/products', {params: {category: props.match.params.category}});
                 const products = response.data;
-                const brands = [];
-                products.forEach(product => {
+                const brands: any[] = [];
+                products.forEach((product: any) => {
                     if (brands.indexOf(product.brand) === -1) {
                         brands.push(product.brand);
                     }
-                })
+                });
                 setBrands(brands);
                 setProducts(products)
                 setFirstPage();
@@ -188,7 +199,7 @@ const Products = (props) => {
         fetchProducts();
     }, []);
 
-    const productsList = products.slice(minValue, maxValue).map((product) => {
+    const productsList = products.slice(minValue, maxValue).map((product: any) => {
         return (
             <Card hoverable
                   key={product.id}
@@ -259,11 +270,18 @@ const Products = (props) => {
                 <div className="sorting">
                     <div className="checkboxesName"> Brands:</div>
                     <div className="checkboxes">
+                        {/*@ts-ignore*/}
                         {brands.map((brand, index) => {
                             return (
-                                <Checkbox key={index} value={brand}
-                                          checked={appliedBrands.indexOf(brand) !== -1}
-                                          onChange={onBrandChange}>{brand}</Checkbox>
+                                <Checkbox
+                                    key={index}
+                                    value={brand}
+                                    // @ts-ignore
+                                    checked={appliedBrands.indexOf(brand) !== -1}
+                                    onChange={onBrandChange}
+                                >
+                                    {brand}
+                                </Checkbox>
                             )
                         })}
                     </div>
@@ -290,8 +308,8 @@ const Products = (props) => {
                            size={"large"}/>
                 </div>
                 <div className="sorting">
-                    <Dropdown overlay={menu} trigger='click'>
-                        <Button className="sortButton" size={"large"}>
+                    <Dropdown overlay={menu} trigger={["click"]}>
+                        <Button className="sortButton" size="large">
                             <div className="btnName">
                                 <div>{sortName} {(sortName !== 'Sorting') ?
                                     isSortCheckArrowUp ? <ArrowUpOutlined/> : <ArrowDownOutlined/>

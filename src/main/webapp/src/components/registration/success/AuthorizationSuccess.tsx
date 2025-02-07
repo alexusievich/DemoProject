@@ -26,4 +26,4 @@ const AuthorizationSuccess = () => {
     )
 }
 
-export default AuthorizationSuccess
+export default AuthorizationSuccess;

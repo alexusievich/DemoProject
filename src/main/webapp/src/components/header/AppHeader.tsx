@@ -6,7 +6,7 @@ import logo from '../../assets/images/logo.png';
 import {Link} from 'react-router-dom';
 import '../../App.css';
 
-const AppHeader = (props) => {
+const AppHeader = (props: any) => {
 
     return (
         <div className="header">

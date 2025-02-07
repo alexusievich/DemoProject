@@ -6,11 +6,11 @@ import '../not-found/NotFoundPage.css'
 import {Link} from "react-router-dom";
 import NumberFormat from 'react-number-format'
 
-const Basket = (props) => {
+const Basket = (props: any) => {
 
-    const clickItem = (id) => (props.history.push("/productdetails/" + id));
+    const clickItem = (id: any) => (props.history.push("/productdetails/" + id));
 
-    const renderItems = props.basket?.items?.map(phone => {
+    const renderItems = props.basket?.items?.map((phone: any) => {
         return (
             <div className="itemCard" key={phone.id}>
                 <div className="itemImage" onClick={() => clickItem(phone.product.id)}>
@@ -51,8 +51,8 @@ const Basket = (props) => {
                         </div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
-                                    onClick={() => props.clearBasket}>
-                                <DeleteFilled/> Clear basket
+                                    onClick={props.clearBasket}>
+                                <DeleteFilled /> Clear basket
                             </Button>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ const Basket = (props) => {
 
             {!(props.basket) &&
                 <Result
-                    icon={<ShoppingOutlined/>}
+                    icon={<ShoppingOutlined />}
                     title="The shopping cart is empty right now!"
                     extra={<Button type="primary" style={{borderRadius: '40px'}}><Link to={"/"}>Back
                         Home</Link></Button>}

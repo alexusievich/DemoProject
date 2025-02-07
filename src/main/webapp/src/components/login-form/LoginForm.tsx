@@ -3,9 +3,9 @@ import React from "react";
 import './LoginForm.css'
 import axios from "axios";
 
-const LoginForm = (props) => {
+const LoginForm = (props: any) => {
 
-    const submitForm = async (username, password) => {
+    const submitForm = async (username: any, password: any) => {
         try {
             await axios.post("/api/auth/login", {username: username, password: password});
             props.submitForm(username, password);
@@ -13,7 +13,7 @@ const LoginForm = (props) => {
         } catch (error) {
             message.error("Invalid username or password!")
         }
-    }
+    };
 
     const layout = {
         labelCol: {
@@ -31,7 +31,7 @@ const LoginForm = (props) => {
     };
 
 
-    const onFinish = async (values) => {
+    const onFinish = async (values: any) => {
         await submitForm(values.username, values.password)
     };
 
@@ -80,4 +80,4 @@ const LoginForm = (props) => {
     );
 }
 
-export default LoginForm
+export default LoginForm;

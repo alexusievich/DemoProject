@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 const {Meta} = Card;
 
-const UserProfile = (props) => {
+const UserProfile = (props: any) => {
     return (
         <div>
 

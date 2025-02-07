@@ -7,9 +7,9 @@ import productDetailsBanner from '../../../assets/images/prodDetailsBanner.png'
 import NumberFormat from "react-number-format";
 import {handleRecentProductsInCookies} from "./product-details.utils";
 
-const ProductDetails = (props) => {
+const ProductDetails = (props: any) => {
 
-    const [phoneDetails, setPhoneDetails] = useState(null);
+    const [phoneDetails, setPhoneDetails] = useState<any>({});
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -27,6 +27,7 @@ const ProductDetails = (props) => {
         fetchProducts();
     }, []);
 
+    // @ts-ignore
     const images = phoneDetails?.images?.sort((a, b) => a.id - b.id).map(image => (
             <Card key={image.id} className="image"
                   cover={
@@ -37,6 +38,7 @@ const ProductDetails = (props) => {
         )
     );
 
+    // @ts-ignore
     const techSpecs = phoneDetails?.techSpec?.sort((a, b) => a.id - b.id).map((techspec, index) => (
             <div className="techspecrow" key={index}>
                 <div className="techspecname">
