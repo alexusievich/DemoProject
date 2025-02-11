@@ -6,28 +6,28 @@ import './ProductDetails.css';
 import productDetailsBanner from '../../../assets/images/prodDetailsBanner.png'
 import NumberFormat from "react-number-format";
 import {handleRecentProductsInCookies} from "./product-details.utils";
+import {useNavigate, useParams} from "react-router-dom";
+import {AppRoutes} from "../../../models/routes/routes.enum";
 
 type ProductDetailsProps = {
-    match: any;
     addToCart: (id: any, name: any) => Promise<void>;
-    history: any;
-    location: any;
 }
 
-const ProductDetails: FC<ProductDetailsProps> = ({match, addToCart, history, location}) => {
+const ProductDetails: FC<ProductDetailsProps> = ({addToCart}) => {
+    const { id } = useParams();
+    const navigate = useNavigate();
 
     const [phoneDetails, setPhoneDetails] = useState<any>({});
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const id = match.params.id;
             try {
                 const response = await axios.get('/api/products/' + id);
                 const phoneDetails = response.data;
                 setPhoneDetails(phoneDetails);
                 handleRecentProductsInCookies(phoneDetails);
             } catch (error) {
-                history.push("/404");
+                navigate(AppRoutes.NotFound);
             }
         }
 

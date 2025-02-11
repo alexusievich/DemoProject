@@ -2,20 +2,22 @@ import {Form, Input, Button, message} from 'antd';
 import React, {FC} from "react";
 import './LoginForm.css'
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {AppRoutes} from "../../models/routes/routes.enum";
 
 type LoginFormProps = {
     submitForm: (username: any, password: any) => Promise<void>;
-    history: any;
     currentUser?: any;
 }
 
-const LoginForm: FC<LoginFormProps> = ({submitForm, history, currentUser}) => {
+const LoginForm: FC<LoginFormProps> = ({submitForm, currentUser}) => {
+    const navigate = useNavigate();
 
     const onSubmitForm = async (username: any, password: any) => {
         try {
             await axios.post("/api/auth/login", {username: username, password: password});
-            submitForm(username, password);
-            history.push("/");
+            await submitForm(username, password);
+            navigate(AppRoutes.BaseUrl);
         } catch (error) {
             message.error("Invalid username or password!")
         }

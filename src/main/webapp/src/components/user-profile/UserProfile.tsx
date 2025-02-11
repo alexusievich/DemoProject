@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {Button, Card, Result} from "antd";
 import './UserProfile.css'
 import {Link} from "react-router-dom";
+import {AppRoutes} from "../../models/routes/routes.enum";
 
 const {Meta} = Card;
 
@@ -36,7 +37,7 @@ const UserProfile: FC<UserProfileProps> = ({user}) => {
                     title="403"
                     subTitle="Sorry, you are not authorized to access this page."
                     extra={<Button type="primary" style={{borderRadius: '40px'}}>
-                        <Link to={"/"}>Back Home </Link>
+                        <Link to={AppRoutes.BaseUrl}>Back Home </Link>
                     </Button>}
                 />}
 

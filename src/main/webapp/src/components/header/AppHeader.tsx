@@ -5,6 +5,7 @@ import SubMenu from "antd/es/menu/SubMenu";
 import logo from '../../assets/images/logo.png';
 import {Link} from 'react-router-dom';
 import '../../App.css';
+import {AppRoutes, CategoriesRoutes} from "../../models/routes/routes.enum";
 
 type AppHeaderProps = {
     numberItems: number;
@@ -18,18 +19,18 @@ const AppHeader: FC<AppHeaderProps> = ({numberItems, currentUser, logOut}) => {
         <div className="header">
             <Menu mode="horizontal" triggerSubMenuAction="click">
                 <Menu.Item key="icon" style={{float: 'left'}}>
-                    <Link to="/">
+                    <Link to={AppRoutes.BaseUrl}>
                         <img src={logo} alt="logo"/>
                     </Link>
                 </Menu.Item>
                 <SubMenu key="catalog" icon={<MenuOutlined/>} title="Catalog"
                          style={{float: 'left', fontSize: '120%'}}>
-                    <Menu.Item key="phones"><Link to={"/products/phones"}>Phones</Link></Menu.Item>
-                    <Menu.Item key="tablets"><Link to={"/products/tablets"}>Tablets</Link></Menu.Item>
-                    <Menu.Item key="accessories"><Link to={"/products/accessories"}>Accessories</Link></Menu.Item>
+                    <Menu.Item key="phones"><Link to={CategoriesRoutes.Phones}>Phones</Link></Menu.Item>
+                    <Menu.Item key="tablets"><Link to={CategoriesRoutes.Tablets}>Tablets</Link></Menu.Item>
+                    <Menu.Item key="accessories"><Link to={CategoriesRoutes.Accessories}>Accessories</Link></Menu.Item>
                 </SubMenu>
                 <Menu.Item key="cart" style={{float: 'right'}}>
-                    <Link to="/basket">
+                    <Link to={AppRoutes.Basket}>
                         <Badge count={numberItems} offset={[0, 25]}>
                             <ShoppingCartOutlined className="cartLink" style={{fontSize: '120%'}}/>
                         </Badge>
@@ -41,11 +42,11 @@ const AppHeader: FC<AppHeaderProps> = ({numberItems, currentUser, logOut}) => {
                          title={!currentUser && " Account"}
                          style={{float: 'right', fontSize: '120%'}}>
                     {!currentUser && <Menu.Item key="sign">
-                        <Link to={"/login"}>Sign in</Link></Menu.Item>}
-                    {currentUser && <Menu.Item key="email"><Link to={"/info/"}>Profile</Link></Menu.Item>}
+                        <Link to={AppRoutes.Login}>Sign in</Link></Menu.Item>}
+                    {currentUser && <Menu.Item key="email"><Link to={AppRoutes.UserInfo}>Profile</Link></Menu.Item>}
                     {currentUser && <Menu.Item key="logout" onClick={logOut}>Log Out</Menu.Item>}
                     {currentUser && <Menu.Item key="register">
-                        <Link to={"/register"}>Create Account</Link></Menu.Item>}
+                        <Link to={AppRoutes.Registration}>Create Account</Link></Menu.Item>}
                 </SubMenu>
             </Menu>
         </div>

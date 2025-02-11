@@ -3,19 +3,20 @@ import {Button, Result} from "antd";
 import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import './Basket.css'
 import '../not-found/NotFoundPage.css'
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import NumberFormat from 'react-number-format'
+import {AppRoutes} from "../../models/routes/routes.enum";
 
 type BasketProps = {
     basket?: any;
-    history: any;
     clearBasket: () => Promise<void>;
     removeItem: (id: any) => Promise<void>;
 }
 
-const Basket: FC<BasketProps> = ({basket, history, clearBasket, removeItem}) => {
+const Basket: FC<BasketProps> = ({basket, clearBasket, removeItem}) => {
+    const navigate = useNavigate();
 
-    const clickItem = (id: any) => (history.push("/productdetails/" + id));
+    const clickItem = (id: any) => (navigate(AppRoutes.ProductDetails.replace(':id', id)));
 
     const renderItems = basket?.items?.map((phone: any) => {
         return (
@@ -73,7 +74,7 @@ const Basket: FC<BasketProps> = ({basket, history, clearBasket, removeItem}) => 
                 <Result
                     icon={<ShoppingOutlined/>}
                     title="The shopping cart is empty right now!"
-                    extra={<Button type="primary" style={{borderRadius: '40px'}}><Link to={"/"}>Back
+                    extra={<Button type="primary" style={{borderRadius: '40px'}}><Link to={AppRoutes.BaseUrl}>Back
                         Home</Link></Button>}
                 />
             }

@@ -10,19 +10,19 @@ import {
     StarFilled
 } from '@ant-design/icons'
 import './Products.css'
-import {Link} from "react-router-dom";
+import {Link, useParams, useNavigate} from "react-router-dom";
 import NumberFormat from "react-number-format";
+import {AppRoutes} from "../../models/routes/routes.enum";
 
 const {Meta} = Card;
 
 type ProductsProps = {
     addToCart: (id: any, name: any) => Promise<void>;
-    history: any;
-    location: any;
-    match: any;
 }
 
-const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
+const Products: FC<ProductsProps> = ({addToCart}) => {
+    const navigate = useNavigate();
+    const { category } = useParams();
 
     const pageSize = 6;
 
@@ -52,7 +52,7 @@ const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
 
     const applyFilters = async () => {
         try {
-            const response = await axios.get('/api/products', {params: {category: match.params.category}});
+            const response = await axios.get('/api/products', {params: {category}});
             const products = response.data;
 
             let result = products.filter((product: any) =>
@@ -181,7 +181,7 @@ const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('/api/products', {params: {category: match.params.category}});
+                const response = await axios.get('/api/products', {params: {category}});
                 const products = response.data;
                 const brands: any[] = [];
                 products.forEach((product: any) => {
@@ -199,7 +199,7 @@ const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
                 setAppliedBrands([]);
                 setSortKey('');
             } catch (error) {
-                history.push('/404');
+                navigate(AppRoutes.NotFound);
             }
         }
 
@@ -212,7 +212,7 @@ const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
                   key={product.id}
                   className="myCard"
                   cover={
-                      <Link to={"/productdetails/" + product.id}>
+                      <Link to={AppRoutes.ProductDetails.replace(':id', product.id)}>
                           <img alt={product.name}
                                src={product.img}
                           />

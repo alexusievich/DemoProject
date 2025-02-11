@@ -3,8 +3,9 @@ import '../../not-found/NotFoundPage.css'
 import {Button, Result} from "antd";
 import {Link} from 'react-router-dom'
 import {CheckCircleFilled} from "@ant-design/icons";
+import {AppRoutes} from "../../../models/routes/routes.enum";
 
-const AuthorizationSuccess: FC = () => {
+const RegistrationSuccess: FC = () => {
     return (
         <Result
             icon={<CheckCircleFilled style={{color: '#1890ff'}}/>}
@@ -12,12 +13,12 @@ const AuthorizationSuccess: FC = () => {
             title="The account was successfully created!"
             extra={[
                 <Button type="primary" key="console" style={{borderRadius: '40px'}}>
-                    <Link to={"/"}>
+                    <Link to={AppRoutes.BaseUrl}>
                         Back Home
                     </Link>
                 </Button>,
                 <Button key="buy" style={{borderRadius: '40px'}}>
-                    <Link to={"/login"}>
+                    <Link to={AppRoutes.Login}>
                         Sign in
                     </Link>
                 </Button>,
@@ -26,4 +27,4 @@ const AuthorizationSuccess: FC = () => {
     )
 }
 
-export default AuthorizationSuccess;
+export default RegistrationSuccess;
