@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import '../../App.css';
 import {FacebookOutlined, InstagramOutlined, TwitterOutlined, PhoneOutlined, SendOutlined} from "@ant-design/icons";
 
-const AppFooter = () => {
+const AppFooter: FC = () => {
 
     return (
         <div className="footer">

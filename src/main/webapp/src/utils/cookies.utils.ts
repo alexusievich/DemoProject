@@ -1,4 +1,4 @@
-export function getCookie(cname) {
+export function getCookie(cname: any) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);
     let ca = decodedCookie.split(';');
@@ -14,6 +14,6 @@ export function getCookie(cname) {
     return "";
 }
 
-export function setCookie(name, value) {
+export function setCookie(name: any, value: any) {
     return document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
 }

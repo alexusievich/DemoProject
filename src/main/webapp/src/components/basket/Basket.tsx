@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {Button, Result} from "antd";
 import {DeleteFilled, ShoppingOutlined} from "@ant-design/icons";
 import './Basket.css'
@@ -6,11 +6,18 @@ import '../not-found/NotFoundPage.css'
 import {Link} from "react-router-dom";
 import NumberFormat from 'react-number-format'
 
-const Basket = (props) => {
+type BasketProps = {
+    basket?: any;
+    history: any;
+    clearBasket: () => Promise<void>;
+    removeItem: (id: any) => Promise<void>;
+}
 
-    const clickItem = (id) => (props.history.push("/productdetails/" + id));
+const Basket: FC<BasketProps> = ({basket, history, clearBasket, removeItem}) => {
 
-    const renderItems = props.basket?.items?.map(phone => {
+    const clickItem = (id: any) => (history.push("/productdetails/" + id));
+
+    const renderItems = basket?.items?.map((phone: any) => {
         return (
             <div className="itemCard" key={phone.id}>
                 <div className="itemImage" onClick={() => clickItem(phone.product.id)}>
@@ -31,7 +38,7 @@ const Basket = (props) => {
                 </div>
                 <div className="itemRemove">
                     <Button type="primary" shape="round" size="large"
-                            onClick={() => props.removeItem(phone.id)}>
+                            onClick={() => removeItem(phone.id)}>
                         Remove item
                     </Button>
                 </div>
@@ -41,17 +48,17 @@ const Basket = (props) => {
 
     return (
         <>
-            {!!props.basket &&
+            {!!basket &&
                 <div>
                     <div className="basketTitle">
-                        <div className="basketName">Shopping cart - {props.basket.items.length} items</div>
+                        <div className="basketName">Shopping cart - {basket.items.length} items</div>
                         <div className="basketTotal">
-                            Total: <NumberFormat value={props.basket.totalPrice} displayType='text'
+                            Total: <NumberFormat value={basket.totalPrice} displayType='text'
                                                  thousandSeparator=' ' suffix=' RUB'/>
                         </div>
                         <div className="basketClear">
                             <Button className="clearBtn" shape="round" size="large"
-                                    onClick={() => props.clearBasket}>
+                                    onClick={clearBasket}>
                                 <DeleteFilled/> Clear basket
                             </Button>
                         </div>
@@ -62,7 +69,7 @@ const Basket = (props) => {
                 </div>
             }
 
-            {!(props.basket) &&
+            {!basket &&
                 <Result
                     icon={<ShoppingOutlined/>}
                     title="The shopping cart is empty right now!"

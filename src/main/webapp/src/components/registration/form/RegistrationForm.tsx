@@ -1,14 +1,19 @@
-import React from "react";
+import React, {FC} from "react";
 import {Button, message, Form, Input} from "antd";
 import axios from "axios";
 
-const RegistrationForm = (props) => {
+type RegistrationFormProps = {
+    history: any;
+}
 
-    const submitForm = async (username, password, email) => {
+const RegistrationForm: FC<RegistrationFormProps> = ({history}) => {
+
+    const submitForm = async (username: any, password: any, email: any) => {
         try {
             await axios.post("/api/auth/create", {username: username, password: password, email: email});
-            props.history.push("/success");
+            history.push("/success");
         } catch (error) {
+            //@ts-ignore
             message.error(error.response.data);
         }
     }
@@ -28,7 +33,7 @@ const RegistrationForm = (props) => {
         },
     };
 
-    const onFinish = (values) => {
+    const onFinish = (values: any) => {
         const emailRegex = new RegExp('([a-zA-Z0-9][\\w.-]{0,20}[a-zA-Z0-9]{1})@([a-zA-Z0-9]{1}[a-zA-Z0-9-]*[a-zA-Z0-9]{1}[.])+(ru|com|org|net)');
         if (emailRegex.test(values.email)) {
             values.password === values.passwordagain ?
@@ -40,7 +45,7 @@ const RegistrationForm = (props) => {
         }
     };
 
-    const onFinishFailed = (errorInfo) => {
+    const onFinishFailed = (errorInfo: any) => {
         console.error('Failed:', errorInfo);
     };
 
@@ -115,4 +120,4 @@ const RegistrationForm = (props) => {
     );
 }
 
-export default RegistrationForm
+export default RegistrationForm;

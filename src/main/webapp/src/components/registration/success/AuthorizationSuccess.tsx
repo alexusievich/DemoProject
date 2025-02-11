@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {FC} from 'react';
 import '../../not-found/NotFoundPage.css'
 import {Button, Result} from "antd";
 import {Link} from 'react-router-dom'
 import {CheckCircleFilled} from "@ant-design/icons";
 
-const AuthorizationSuccess = () => {
+const AuthorizationSuccess: FC = () => {
     return (
         <Result
             icon={<CheckCircleFilled style={{color: '#1890ff'}}/>}
@@ -26,4 +26,4 @@ const AuthorizationSuccess = () => {
     )
 }
 
-export default AuthorizationSuccess
+export default AuthorizationSuccess;

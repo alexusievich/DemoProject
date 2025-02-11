@@ -1,18 +1,22 @@
-import React from "react";
+import React, {FC} from "react";
 import {Button, Card, Result} from "antd";
 import './UserProfile.css'
 import {Link} from "react-router-dom";
 
 const {Meta} = Card;
 
-const UserProfile = (props) => {
+type UserProfileProps = {
+    user: any;
+}
+
+const UserProfile: FC<UserProfileProps> = ({user}) => {
     return (
         <div>
 
-            {props.user &&
+            {user &&
                 <div className="card">
                     <Card
-                        key={props.user.id}
+                        key={user.id}
                         className="profileCard"
                         cover={
                             <img alt={"userAvatar"}
@@ -20,13 +24,13 @@ const UserProfile = (props) => {
                             />
                         }>
                         <Meta
-                            title={props.user.username}
-                            description={props.user.email}
+                            title={user.username}
+                            description={user.email}
                         />
                     </Card>
                 </div>}
 
-            {props.user &&
+            {user &&
                 <Result
                     status="403"
                     title="403"

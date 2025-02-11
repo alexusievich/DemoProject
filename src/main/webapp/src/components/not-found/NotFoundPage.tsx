@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import './NotFoundPage.css'
 import {Button, Result} from "antd";
 import {Link} from 'react-router-dom'
 
-const NotFoundPage = () => {
+const NotFoundPage: FC = () => {
     return (
         <Result
             status="404"

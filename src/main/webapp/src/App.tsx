@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import 'antd/dist/antd.css';
 import {Layout, message, notification} from 'antd';
 import {Switch, Route} from 'react-router-dom';
@@ -20,10 +20,10 @@ import UserProfile from "./components/user-profile/UserProfile";
 
 const {Header, Footer, Content} = Layout;
 
-const App = () => {
+const App: FC = () => {
 
-    const [basket, setBasket] = useState();
-    const [user, setUser] = useState();
+    const [basket, setBasket] = useState(null);
+    const [user, setUser] = useState(null);
 
     const getBasketAndUserInfo = async () => {
         try {
@@ -40,12 +40,12 @@ const App = () => {
         getBasketAndUserInfo();
     }, []);
 
-    const addToCart = async (id, name) => {
+    const addToCart = async (id: any, name: any) => {
         try {
             const response = await axios.post("/api/basket", {id: id});
             setBasket(response.data);
             notification.open({
-                top: 70,
+                placement: 'topRight',
                 message: `The ${name} successfully added to cart!`,
                 duration: 1.5,
                 icon: <CheckCircleOutlined style={{color: '#108ee9', fontSize: 30}}/>,
@@ -64,7 +64,7 @@ const App = () => {
         }
     }
 
-    const removeItem = async (id) => {
+    const removeItem = async (id: any) => {
         try {
             await axios.delete(`/api/basket/removeitem/${id}`);
             const response = await axios.get('/api/basket');
@@ -78,7 +78,8 @@ const App = () => {
         try {
             await axios.post("/api/auth/logout");
             notification.open({
-                top: 70,
+                placement: 'topRight',
+                //@ts-ignore
                 message: `${user?.username}, you have successfully logged out of your account!`,
                 duration: 2.5,
                 icon: <LogoutOutlined style={{color: '#108ee9', fontSize: 30}}/>,
@@ -90,12 +91,13 @@ const App = () => {
         }
     }
 
-    const submitForm = async (username, password) => {
+    const submitForm = async (username: any, password: any) => {
         try {
             const response = await axios.post("/api/auth/login", {username: username, password: password});
             setUser(response.data);
             notification.open({
-                top: 70,
+                placement: 'topRight',
+                //@ts-ignore
                 message: `${user?.username}, you have successfully logged in to your account!`,
                 duration: 2.5,
                 icon: <LoginOutlined style={{color: '#108ee9', fontSize: 30}}/>,
@@ -109,7 +111,9 @@ const App = () => {
     return (
         <Layout className="mainLayout">
             <Header>
+                {/*@ts-ignore*/}
                 <AppHeader numberItems={basket ? basket.items.length : 0}
+                           //@ts-ignore
                            currentUser={user?.username} logOut={logOut}/>
             </Header>
             <Content>

@@ -1,6 +1,6 @@
 import {getCookie, setCookie} from "../../../utils/cookies.utils";
 
-export function handleRecentProductsInCookies(phoneDetails) {
+export function handleRecentProductsInCookies(phoneDetails: any): void {
     if (getCookie('phoneIds') === '') {
         let arr = [];
         arr[0] = phoneDetails.id;

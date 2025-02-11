@@ -1,19 +1,25 @@
 import {Form, Input, Button, message} from 'antd';
-import React from "react";
+import React, {FC} from "react";
 import './LoginForm.css'
 import axios from "axios";
 
-const LoginForm = (props) => {
+type LoginFormProps = {
+    submitForm: (username: any, password: any) => Promise<void>;
+    history: any;
+    currentUser?: any;
+}
 
-    const submitForm = async (username, password) => {
+const LoginForm: FC<LoginFormProps> = ({submitForm, history, currentUser}) => {
+
+    const onSubmitForm = async (username: any, password: any) => {
         try {
             await axios.post("/api/auth/login", {username: username, password: password});
-            props.submitForm(username, password);
-            props.history.push("/");
+            submitForm(username, password);
+            history.push("/");
         } catch (error) {
             message.error("Invalid username or password!")
         }
-    }
+    };
 
     const layout = {
         labelCol: {
@@ -31,13 +37,13 @@ const LoginForm = (props) => {
     };
 
 
-    const onFinish = async (values) => {
-        await submitForm(values.username, values.password)
+    const onFinish = async (values: any) => {
+        await onSubmitForm(values.username, values.password)
     };
 
     return (
         <div>
-            {!props.currentUser &&
+            {!currentUser &&
                 <Form
                     {...layout}
                     name="basic"
@@ -80,4 +86,4 @@ const LoginForm = (props) => {
     );
 }
 
-export default LoginForm
+export default LoginForm;
