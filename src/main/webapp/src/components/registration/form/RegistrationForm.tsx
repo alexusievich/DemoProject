@@ -1,17 +1,16 @@
 import React, {FC} from "react";
 import {Button, message, Form, Input} from "antd";
 import axios from "axios";
+import {useNavigate} from "react-router-dom";
+import {AppRoutes} from "../../../models/routes/routes.enum";
 
-type RegistrationFormProps = {
-    history: any;
-}
-
-const RegistrationForm: FC<RegistrationFormProps> = ({history}) => {
+const RegistrationForm: FC = () => {
+    const navigate = useNavigate();
 
     const submitForm = async (username: any, password: any, email: any) => {
         try {
             await axios.post("/api/auth/create", {username: username, password: password, email: email});
-            history.push("/success");
+            navigate(AppRoutes.RegistrationSuccess);
         } catch (error) {
             //@ts-ignore
             message.error(error.response.data);

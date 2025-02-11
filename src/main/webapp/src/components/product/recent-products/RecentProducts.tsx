@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import '../../main-page/Main&RecentPages.css'
 import NumberFormat from "react-number-format";
 import {getCookie} from "../../../utils/cookies.utils";
+import {AppRoutes} from "../../../models/routes/routes.enum";
 
 const {Meta} = Card;
 
@@ -38,7 +39,7 @@ const RecentProducts: FC = () => {
 
     const phonesList = (phones.map((phone: any) => {
         return (
-            <Link to={"/productdetails/" + phone.id} key={phone.id}>
+            <Link to={AppRoutes.ProductDetails.replace(':id', phone.id)} key={phone.id}>
                 <Card hoverable
                       key={phone.id}
                       className="recentCards"
