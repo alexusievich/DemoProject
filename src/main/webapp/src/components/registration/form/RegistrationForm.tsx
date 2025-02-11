@@ -1,13 +1,17 @@
-import React from "react";
+import React, {FC} from "react";
 import {Button, message, Form, Input} from "antd";
 import axios from "axios";
 
-const RegistrationForm = (props: any) => {
+type RegistrationFormProps = {
+    history: any;
+}
+
+const RegistrationForm: FC<RegistrationFormProps> = ({history}) => {
 
     const submitForm = async (username: any, password: any, email: any) => {
         try {
             await axios.post("/api/auth/create", {username: username, password: password, email: email});
-            props.history.push("/success");
+            history.push("/success");
         } catch (error) {
             //@ts-ignore
             message.error(error.response.data);

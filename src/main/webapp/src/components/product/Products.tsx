@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import axios from "axios";
 import {Button, Card, Checkbox, Dropdown, Input, InputNumber, Menu, Pagination} from 'antd'
 import {
@@ -15,7 +15,14 @@ import NumberFormat from "react-number-format";
 
 const {Meta} = Card;
 
-const Products = (props: any) => {
+type ProductsProps = {
+    addToCart: (id: any, name: any) => Promise<void>;
+    history: any;
+    location: any;
+    match: any;
+}
+
+const Products: FC<ProductsProps> = ({addToCart, history, location, match}) => {
 
     const pageSize = 6;
 
@@ -45,7 +52,7 @@ const Products = (props: any) => {
 
     const applyFilters = async () => {
         try {
-            const response = await axios.get('/api/products', {params: {category: props.match.params.category}});
+            const response = await axios.get('/api/products', {params: {category: match.params.category}});
             const products = response.data;
 
             let result = products.filter((product: any) =>
@@ -174,7 +181,7 @@ const Products = (props: any) => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('/api/products', {params: {category: props.match.params.category}});
+                const response = await axios.get('/api/products', {params: {category: match.params.category}});
                 const products = response.data;
                 const brands: any[] = [];
                 products.forEach((product: any) => {
@@ -192,7 +199,7 @@ const Products = (props: any) => {
                 setAppliedBrands([]);
                 setSortKey('');
             } catch (error) {
-                props.history.push('/404');
+                history.push('/404');
             }
         }
 
@@ -223,7 +230,7 @@ const Products = (props: any) => {
                         <NumberFormat value={product.price} displayType='text' thousandSeparator=' ' suffix=' RUB'/>
                     </div>
                     <div className="cart">
-                               <span onClick={() => props.addToCart(product.id, product.name)}>
+                               <span onClick={() => addToCart(product.id, product.name)}>
                                    <ShoppingCartOutlined/>
                                </span>
                     </div>

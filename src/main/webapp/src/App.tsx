@@ -1,5 +1,5 @@
 import './App.css';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import 'antd/dist/antd.css';
 import {Layout, message, notification} from 'antd';
 import {Switch, Route} from 'react-router-dom';
@@ -20,7 +20,7 @@ import UserProfile from "./components/user-profile/UserProfile";
 
 const {Header, Footer, Content} = Layout;
 
-const App = () => {
+const App: FC = () => {
 
     const [basket, setBasket] = useState(null);
     const [user, setUser] = useState(null);

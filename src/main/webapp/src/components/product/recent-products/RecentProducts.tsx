@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, FC} from 'react'
 import axios from "axios";
 import {Card} from "antd";
 import {Link} from "react-router-dom";
@@ -8,7 +8,7 @@ import {getCookie} from "../../../utils/cookies.utils";
 
 const {Meta} = Card;
 
-const RecentProducts = () => {
+const RecentProducts: FC = () => {
 
     const [phones, setPhones] = useState<any>([]);
 

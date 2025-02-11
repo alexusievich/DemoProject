@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC} from 'react';
 import axios from "axios";
 import {Card, Carousel, Button} from "antd";
 import {StarFilled, ShoppingCartOutlined} from "@ant-design/icons";
@@ -7,20 +7,27 @@ import productDetailsBanner from '../../../assets/images/prodDetailsBanner.png'
 import NumberFormat from "react-number-format";
 import {handleRecentProductsInCookies} from "./product-details.utils";
 
-const ProductDetails = (props: any) => {
+type ProductDetailsProps = {
+    match: any;
+    addToCart: (id: any, name: any) => Promise<void>;
+    history: any;
+    location: any;
+}
+
+const ProductDetails: FC<ProductDetailsProps> = ({match, addToCart, history, location}) => {
 
     const [phoneDetails, setPhoneDetails] = useState<any>({});
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const id = props.match.params.id;
+            const id = match.params.id;
             try {
                 const response = await axios.get('/api/products/' + id);
                 const phoneDetails = response.data;
                 setPhoneDetails(phoneDetails);
                 handleRecentProductsInCookies(phoneDetails);
             } catch (error) {
-                props.history.push("/404");
+                history.push("/404");
             }
         }
 
@@ -76,7 +83,7 @@ const ProductDetails = (props: any) => {
                         </div>
                         <div className="cartt">
                             <Button type="primary" shape="round" icon={<ShoppingCartOutlined/>} size="large"
-                                    onClick={() => props.addToCart(phoneDetails.id, phoneDetails.name)}>
+                                    onClick={() => addToCart(phoneDetails.id, phoneDetails.name)}>
                                 Add to cart
                             </Button>
                         </div>
